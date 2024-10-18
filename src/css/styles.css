@@ -1,1 +1,14 @@
 /* ĐÂY LÀ FILE CSS TOÀN CỤC */
+* {
+    text-align: center;
+}
+
+.text-bold {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: bold;
+}
+
+.text-normal {
+    font-family: Lora, serif;
+    font-weight: normal;
+}
