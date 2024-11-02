@@ -1,0 +1,15 @@
+.navbar-brand {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 1.5rem;
+  }
+  .hotline {
+    font-size: 0.7rem;
+    font-style: italic;
+  }
+  .nav-item .nav-link {
+    color: #000000;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+  {a}
+ 
