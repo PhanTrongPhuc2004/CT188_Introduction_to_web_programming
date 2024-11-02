@@ -1,0 +1,41 @@
+
+*{
+    text-align: left;
+}
+.cart-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cart-totals {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+}
+
+.btn-checkout {
+    background-color: #ff6b6b;
+    color: white;
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+.product-title {
+    font-weight: bold;
+}
+
+.product-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+
+.fw-bold, th{
+    font-size: 20px;
+    white-space: nowrap;
+    margin: 5px;
+}
+
