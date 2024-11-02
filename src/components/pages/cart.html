@@ -9,15 +9,95 @@
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/components/header_footer.css">
     <script src="../../js/components/main.js"></script>
+    <link rel="stylesheet" href="../../css/components/cart.css">
+   
 </head>
 
 <body>
     <header id="header"></header>
     <main id="main">
-        <div>
-            <h1>Đây là trang giỏ hàng</h1>
-        </div>
+        <div class="container my-5">
+            <h1 class="cart-title mb-5">Giỏ hàng</h1>
+            <div class="row">
+                <!-- Product Items -->
+                <div class="col-lg-8">
+                    <!-- First Product -->
+                    <div class="d-flex border border-2 rounded-3 pb-3 mb-3">
+                        <img src="../../../Data/Images/1/15/1.jpg" alt="Dịch vụ 1" class="product-img me-3">
+                        <div class="flex-grow-1">
+                            <h5 class="product-title">Dịch vụ 1</h5>
+                            <p>10 000đ</p>
+                            <p>Phong cách châu Âu sang trọng.</p>
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-outline-secondary btn-sm me-2">-</button>
+                                <input type="text" value="3" class="form-control form-control-sm text-center"
+                                    style="width: 50px;">
+                                <button class="btn btn-outline-secondary btn-sm ms-2">+</button>
+                                <a href="#" class="text-danger ms-auto">Xóa đơn hàng</a>
+                            </div>
+                        </div>
+                        <div class="text-start">
+                            <p class="fw-bold">30 000đ</p>
+                        </div>
+                    </div>
+                    <!-- Second Product -->
+                    <div class="d-flex border border-2 rounded-3 pb-3 mb-3">
+                        <img src="../../../Data/Images/1/1/1.jpg" alt="" class="product-img me-3">
+                        <div class="flex-grow-1">
+                            <h5 class="product-title">Dịch vụ 2</h5>
+                            <p>20 000đ</p>
+                            <p>Tiệc Cưới Lãng Mạn Với Sắc Hồng Tinh Tế.</p>
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-outline-secondary btn-sm me-2">-</button>
+                                <input type="text" value="3" class="form-control form-control-sm text-center"
+                                    style="width: 50px;">
+                                <button class="btn btn-outline-secondary btn-sm ms-2">+</button>
+                                <a href="#" class="text-danger ms-auto">Xóa đơn hàng</a>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <p class="fw-bold">60 000đ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart Totals -->
+                <div class="col-lg-4">
+                    <div class="cart-totals">
+                        <h4>Hóa đơn</h4>
+                        <div class="mb-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dịch vụ 1</td>
+                                        <td>3</td>
+                                        <td>30 000đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dịch vụ 2</td>
+                                        <td>3</td>
+                                        <td>60 000đ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <p>Tổng hóa đơn</p>
+                            <p>90 000đ</p>
+                        </div>
+                        <button class="btn btn-checkout mt-3">Thanh toán</button>
+                    </div>
+                </div>
+            </div>
     </main>
     <footer id="footer"></footer>
 </body>
