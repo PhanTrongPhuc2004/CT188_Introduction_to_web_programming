@@ -4,12 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeddingPlanning</title>
+    <title>Wedding Planning - Đơn hàng</title>
     <link rel="stylesheet" href="../../../bootstrap-5.0.2-dist/css/bootstrap.min.css">
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css">
     <script src="../../js/components/main.js"></script>
+
+    <!-- my code -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <style>
+        .order-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .order-card h5 {
+            font-weight: bold;
+        }
+        .order-status {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .view-details-btn {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,8 +41,58 @@
         <div>
             <h1>Đây là trang đơn hàng</h1>
         </div>
+        <div class="container mt-5">
+            <h2 class="mb-4">Danh sách đơn hàng</h2>
+    
+            <!-- Đơn hàng 1 -->
+            <div class="order-card">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Mã đơn hàng: #12345</h5>
+                        <p>Ngày đặt: 20/10/2024</p>
+                        <p>Tổng tiền: 15,000,000 VND</p>
+                        <p class="order-status text-success">Trạng thái: Đã giao hàng</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <a href="#" class="btn view-details-btn">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Đơn hàng 2 -->
+            <div class="order-card">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Mã đơn hàng: #67890</h5>
+                        <p>Ngày đặt: 15/10/2024</p>
+                        <p>Tổng tiền: 12,000,000 VND</p>
+                        <p class="order-status text-warning">Trạng thái: Đang xử lý</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <a href="#" class="btn view-details-btn">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Đơn hàng 3 -->
+            <div class="order-card">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Mã đơn hàng: #11122</h5>
+                        <p>Ngày đặt: 10/10/2024</p>
+                        <p>Tổng tiền: 9,500,000 VND</p>
+                        <p class="order-status text-danger">Trạng thái: Đã hủy</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <a href="#" class="btn view-details-btn">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> -->
+
     </main>
     <footer id="footer"></footer>
 </body>
 
-</html>
