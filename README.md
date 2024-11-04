@@ -13,7 +13,7 @@ Cảm ơn bạn đã quan tâm đến dự án của chúng tôi.
 
 ### **Công nghệ sử dụng:**
 
-* **Frontend:** HTML, css và JavaScript.
+* **Frontend:** HTML, CSS và JavaScript.
 * **Data:** Lưu trữ tại các file json trong thư mục Data.
 * **Các Framework/Thư viện:** Bootstrap 5, Jquery.
 
