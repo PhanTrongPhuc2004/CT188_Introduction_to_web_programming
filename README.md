@@ -57,7 +57,7 @@ _vì đây là dự án làm việc chung qua github nên có thể gặp lỗi/
    * **4.1** Components
         * **4.1.1** common: thư mục chứa phần header, footer để các components (pages) import dùng chung.
         * **4.1.2** pages: thư mục chứa các file HTML của từng components (pages).
-   * 4.2 css
+   * **4.2** css
         * **4.2.1** style.css: là file css global dùng chung cho tất cả các components.
         * **4.2.2** components: nơi chứa các file css của từng các components.
    * **4.3** js
