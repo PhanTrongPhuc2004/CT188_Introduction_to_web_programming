@@ -1,50 +1,60 @@
 // File header.js là chuyển đổi từ file header.html thành 1 biến js để chèn vào các trang khác (chỉ cần copy bên header.html rồi dán qua đây thôi)
 const headerHTML = `
-  <header style="background-color: rgba(0, 0, 0, 0.05);">
+<header > 
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeddingPlanning</title>
+    <link rel="stylesheet" href="/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script src="/jquery-3.7.1/jquery-3.7.1.min.js"></script>
+    <script src="/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <link rel="stylesheet" href="/src/css/components/header.css">
     <base href="/">
   </head>
   <body>
-    <h1>THUÊ NƠI TỔ CHỨC TIỆC CƯỚI</h1>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/src/components/pages/shop.html">Shop</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/src/components/pages/detail.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/src/components/pages/contact.html">Contact</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Account
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/src/components/pages/infor.html">
+          <img src="/Data/Logo/logo1.jpg" class="img-fluid" alt="logo" width="100px">
+          <div class="d-flex flex-column">
+              <a class="navbar-brand" href="/src/components/pages/infor.html">
+                  WeddingPlanning 
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/src/components/pages/login.html">Log in</a></li>
-                  <li><a class="dropdown-item" href="#">Log out</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="/src/components/pages/account.html">Manage</a></li>
-                </ul>
-              </li>
-            </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+                <span class="hotline text-start">Hotline: 0911 522 929</span>
+        </a>
           </div>
+          
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/index.html">TRANG CHỦ</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                MENU
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/src/components/pages/shop.html">DỊCH VỤ</a></li>
+                <li><a class="dropdown-item" href="/src/components/pages/cart.html">GIỎ HÀNG</a></li>
+                <li><a class="dropdown-item" href="/src/components/pages/order.html">ĐƠN HÀNG</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/src/components/pages/contact.html">LIÊN HỆ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/src/components/pages/account.html">TÀI KHOẢN</a>
+            </li>
+          </ul>
         </div>
-      </nav>
-    <hr>
+      </div>
+    </nav>
+
   </body>
 </header>
 `;
