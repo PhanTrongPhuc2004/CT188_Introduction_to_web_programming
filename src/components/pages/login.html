@@ -9,19 +9,38 @@
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/components/dangnhap.css">
+
 </head>
 
 <body>
     <header id="header"></header>
     <main id="main">
-        <div>
-            <h1>Đây là trang đăng nhập</h1>
+        <div id="wrapper">
+            <form action="" id="form-login">
+                <h1 class="form-heading">Đăng Nhập</h1>
+                <div class="form-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" class="form-input" placeholder="Nhập địa chỉ email hoặc số điện thoại">
+                </div>
+                <div class="form-group">
+                    <i class="fa-solid fa-key"></i>
+                    <input type="password" class="form-input" placeholder="Vui lòng nhập mật khẩu">
+                    <div id="eye" class="open">
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="forgot">
+                    Bạn quên <a href="">mật khẩu?</a>
+                </div>
+                <input type="submit" value="Đăng nhập" class="form-submit">
+                <a href="../../components/pages/register.html"><input type="submit" value="Đăng ký" class="form-submit-subscribe"></a>
+            </form>
         </div>
     </main>
     <footer id="footer"></footer>
-    <script src="../../components/common/header.js"></script>
-    <script src="../../components/common/footer.js"></script>
-    <script src="../../js/components/main.js"></script>
 </body>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="../../js/components/namePage.js"></script>
 </html>
