@@ -179,6 +179,186 @@ const products = [
             "Data/Images/3/1/5.jpg",
             "Data/Images/3/1/6.jpg"   
         ]
+    },
+    {
+        "id": 7,
+        "ten": "Nhà hàng F",
+        "loaiDiaDiem": "Nhà hàng",
+        "diaChi": "Đường abc",
+        "kichThuoc": 5000,
+        "tienIch": [
+            "bãi đỗ xe",
+            "wifi",
+            "nhà bếp",
+            "sân khấu"
+        ],
+        "gioMoCua": "7:00 - 23:00",
+        "danhGia": 4.5,
+        "soLuongDanhGia": 100,
+        "soDienThoai": "0123456789",
+        "email": "abc@gmail.com",
+        "moTa": "Mô tả chi tiết về địa điểm, tiện ích, không gian",
+        "gia": 15000000,
+        "sucChua": 500,
+        "anhBia": "Data/Images/4/1/1.jpg",
+        "anh": [
+            "Data/Images/3/1/1.jpg",
+            "Data/Images/3/1/2.jpg",
+            "Data/Images/3/1/3.jpg",
+            "Data/Images/3/1/4.jpg",
+            "Data/Images/3/1/5.jpg",
+            "Data/Images/3/1/6.jpg"   
+        ]
+    },
+    {
+        "id": 8,
+        "ten": "Nhà hàng F",
+        "loaiDiaDiem": "Nhà hàng",
+        "diaChi": "Đường abc",
+        "kichThuoc": 5000,
+        "tienIch": [
+            "bãi đỗ xe",
+            "wifi",
+            "nhà bếp",
+            "sân khấu"
+        ],
+        "gioMoCua": "7:00 - 23:00",
+        "danhGia": 4.5,
+        "soLuongDanhGia": 100,
+        "soDienThoai": "0123456789",
+        "email": "abc@gmail.com",
+        "moTa": "Mô tả chi tiết về địa điểm, tiện ích, không gian",
+        "gia": 15000000,
+        "sucChua": 500,
+        "anhBia": "Data/Images/4/1/1.jpg",
+        "anh": [
+            "Data/Images/3/1/1.jpg",
+            "Data/Images/3/1/2.jpg",
+            "Data/Images/3/1/3.jpg",
+            "Data/Images/3/1/4.jpg",
+            "Data/Images/3/1/5.jpg",
+            "Data/Images/3/1/6.jpg"   
+        ]
+    },
+    {
+        "id": 9,
+        "ten": "Nhà hàng F",
+        "loaiDiaDiem": "Nhà hàng",
+        "diaChi": "Đường abc",
+        "kichThuoc": 5000,
+        "tienIch": [
+            "bãi đỗ xe",
+            "wifi",
+            "nhà bếp",
+            "sân khấu"
+        ],
+        "gioMoCua": "7:00 - 23:00",
+        "danhGia": 4.5,
+        "soLuongDanhGia": 100,
+        "soDienThoai": "0123456789",
+        "email": "abc@gmail.com",
+        "moTa": "Mô tả chi tiết về địa điểm, tiện ích, không gian",
+        "gia": 15000000,
+        "sucChua": 500,
+        "anhBia": "Data/Images/4/1/1.jpg",
+        "anh": [
+            "Data/Images/3/1/1.jpg",
+            "Data/Images/3/1/2.jpg",
+            "Data/Images/3/1/3.jpg",
+            "Data/Images/3/1/4.jpg",
+            "Data/Images/3/1/5.jpg",
+            "Data/Images/3/1/6.jpg"   
+        ]
+    },
+    {
+        "id": 10,
+        "ten": "Nhà hàng F",
+        "loaiDiaDiem": "Nhà hàng",
+        "diaChi": "Đường abc",
+        "kichThuoc": 5000,
+        "tienIch": [
+            "bãi đỗ xe",
+            "wifi",
+            "nhà bếp",
+            "sân khấu"
+        ],
+        "gioMoCua": "7:00 - 23:00",
+        "danhGia": 4.5,
+        "soLuongDanhGia": 100,
+        "soDienThoai": "0123456789",
+        "email": "abc@gmail.com",
+        "moTa": "Mô tả chi tiết về địa điểm, tiện ích, không gian",
+        "gia": 15000000,
+        "sucChua": 500,
+        "anhBia": "Data/Images/4/1/1.jpg",
+        "anh": [
+            "Data/Images/3/1/1.jpg",
+            "Data/Images/3/1/2.jpg",
+            "Data/Images/3/1/3.jpg",
+            "Data/Images/3/1/4.jpg",
+            "Data/Images/3/1/5.jpg",
+            "Data/Images/3/1/6.jpg"   
+        ]
+    },
+    {
+        "id": 11,
+        "ten": "Nhà hàng F",
+        "loaiDiaDiem": "Nhà hàng",
+        "diaChi": "Đường abc",
+        "kichThuoc": 5000,
+        "tienIch": [
+            "bãi đỗ xe",
+            "wifi",
+            "nhà bếp",
+            "sân khấu"
+        ],
+        "gioMoCua": "7:00 - 23:00",
+        "danhGia": 4.5,
+        "soLuongDanhGia": 100,
+        "soDienThoai": "0123456789",
+        "email": "abc@gmail.com",
+        "moTa": "Mô tả chi tiết về địa điểm, tiện ích, không gian",
+        "gia": 15000000,
+        "sucChua": 500,
+        "anhBia": "Data/Images/4/1/1.jpg",
+        "anh": [
+            "Data/Images/3/1/1.jpg",
+            "Data/Images/3/1/2.jpg",
+            "Data/Images/3/1/3.jpg",
+            "Data/Images/3/1/4.jpg",
+            "Data/Images/3/1/5.jpg",
+            "Data/Images/3/1/6.jpg"   
+        ]
+    },
+    {
+        "id": 12,
+        "ten": "Nhà hàng F",
+        "loaiDiaDiem": "Nhà hàng",
+        "diaChi": "Đường abc",
+        "kichThuoc": 5000,
+        "tienIch": [
+            "bãi đỗ xe",
+            "wifi",
+            "nhà bếp",
+            "sân khấu"
+        ],
+        "gioMoCua": "7:00 - 23:00",
+        "danhGia": 4.5,
+        "soLuongDanhGia": 100,
+        "soDienThoai": "0123456789",
+        "email": "abc@gmail.com",
+        "moTa": "Mô tả chi tiết về địa điểm, tiện ích, không gian",
+        "gia": 15000000,
+        "sucChua": 500,
+        "anhBia": "Data/Images/4/1/1.jpg",
+        "anh": [
+            "Data/Images/3/1/1.jpg",
+            "Data/Images/3/1/2.jpg",
+            "Data/Images/3/1/3.jpg",
+            "Data/Images/3/1/4.jpg",
+            "Data/Images/3/1/5.jpg",
+            "Data/Images/3/1/6.jpg"   
+        ]
     }
 ];
 
