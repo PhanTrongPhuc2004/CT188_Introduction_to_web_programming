@@ -1,5 +1,5 @@
 .navbar-brand {
-    font-family: 'Brush Script MT', cursive;
+ 
     font-size: 1.5rem;
   }
   .hotline {
@@ -11,5 +11,35 @@
     font-weight: bold;
     margin-right: 20px;
   }
-
- 
+  .weddingplanning{
+    font-size: 30px;
+    color:#9C7656;
+    text-decoration-line: none;
+  }
+  .weddingplanning:hover{
+    color:#4C4C4C;
+    transition-duration: 0.7s;
+  }
+.set-icon{
+  margin-top: 5px;
+}
+ .set-icon a{
+  color: inherit;
+  text-decoration: none;
+ }
+ .divider {
+  width: 1px;
+  height: 20px; /* chiều cao đường gạch */
+  background-color: #ccc; /* màu của đường gạch */
+  margin: 0px -3px; /* khoảng cách giữa các icon và đường gạch */
+  margin-bottom: -5px;
+  display: inline-block;
+}
+.btn-giohang, .btn-donhang{
+  color:#9C7656;
+  border: none;
+  background-color: white;
+}
+ .btn-giohang:hover, .btn-donhang:hover{
+  background-color:#9f9084;
+ }

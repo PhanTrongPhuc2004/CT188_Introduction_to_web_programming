@@ -17,11 +17,18 @@
         <div>
             <h1>Đây là trang chi tiết sản phẩm</h1>
         </div>
+        <div class="product-detail"></div>
     </main>
     <footer id="footer"></footer>
     <script src="../../components/common/header.js"></script>
     <script src="../../components/common/footer.js"></script>
+    <script src="../../../Data/products.js"></script>
     <script src="../../js/components/main.js"></script>
+    <script>
+        let id = localStorage.getItem("productId");
+        const container = document.getElementById('product-detail');
+        alert('ID product: '+id)
+    </script>
 </body>
 
 </html>
