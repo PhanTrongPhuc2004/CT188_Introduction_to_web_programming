@@ -1,28 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeddingPlanning</title>
-    <link rel="stylesheet" href="../../../bootstrap-5.0.2-dist/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
+    <link rel="Icon" href="/Data/Icon/Contact/Contact_2.png" />
+    <link
+      rel="stylesheet"
+      href="../../../bootstrap-5.0.2-dist/css/bootstrap.min.css"
+    />
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../../css/styles.css">
-   
-</head>
+    <link rel="stylesheet" href="../../css/styles.css" />
+  </head>
 
-<body>
-    <header id="header"></header>
+  <body>
+    <!-- <header id="header"></header> -->
+
     <main id="main">
-        <div>
-            <h1>Đây là trang liên hệ</h1>
+      <div class="container mt-4">
+        <h2>Thông tin liên hệ</h2>
+        <p>Điện thoại: 0123456789</p>
+        <p>Email: example@weddingplanning.com</p>
+        <p>Địa chỉ: Số 1, Đường ABC, Quận XYZ</p>
+
+        <h3>Gửi câu hỏi hoặc yêu cầu</h3>
+        <form>
+          <div class="mb-3">
+            <label for="name" class="form-label">Họ và tên</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Nhập họ và tên"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Nhập email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Lời nhắn</label>
+            <textarea
+              class="form-control"
+              id="message"
+              rows="4"
+              placeholder="Nhập lời nhắn"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Gửi</button>
+        </form>
+        <!-- Bản đồ chỉ đường -->
+        <h4 class="mt-5">Chỉ đường đến công ty</h4>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe
+            class="embed-responsive-item"
+            src="https://www.google.com/maps/embed?pb=..."
+          ></iframe>
         </div>
+      </div>
     </main>
+
     <footer id="footer"></footer>
+
     <script src="../../components/common/header.js"></script>
     <script src="../../components/common/footer.js"></script>
     <script src="../../js/components/main.js"></script>
-</body>
-
+  </body>
 </html>

@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập</title>
     <link rel="stylesheet" href="../../../bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <!-- <link rel="stylesheet" href="../../css/components/dangnhap.css"> -->
     <style>
         body {
             background-color: silver;
@@ -89,6 +88,7 @@
             padding-top: 7px;
             padding-right: 5px;
             font-size: 14px;
+            padding-bottom: 6px;
         }
     </style>
 </head>
@@ -97,35 +97,41 @@
     <header id="header"></header>
     <main id="main">
         <div id="wrapper">
-            <form action="" id="form-login">
-                <h1 class="form-heading">Đăng Nhập</h1>
-                <div class="form-group">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" class="form-input" placeholder="Nhập địa chỉ email hoặc số điện thoại">
-                </div>
-                <div class="form-group">
-                    <i class="fa-solid fa-key"></i>
-                    <input type="password" class="form-input" placeholder="Vui lòng nhập mật khẩu">
-                    <div id="eye" class="open">
-                        <i class="fa-regular fa-eye"></i>
+            <div id="form-login">
+                <form id="login-form">
+                    <h1 class="form-heading">Đăng Nhập</h1>
+                    <div class="form-group">
+                        <i class="bi bi-person"></i>
+                        <input id="loginUsername" type="text" class="form-input" placeholder="Nhập địa chỉ email">
                     </div>
+                    <div class="form-group">
+                        <i class="bi bi-key"></i>
+                        <input id="loginPassword" type="password" class="form-input" placeholder="Vui lòng nhập mật khẩu">
+                        <div id="eye" class="open">
+                            <i class="bi bi-eye"></i>
+                        </div>
+                    </div>
+                    <div class="forgot">
+                        Bạn quên <a href="">mật khẩu?</a>
+                    </div>
+                    <input type="submit" value="Đăng nhập" class="form-submit">
+                    <div id="error-message" style="color: red; text-align: center; margin-top: 10px;"></div>
+                </form>
+                <div>
+                    <button class="form-submit-subscribe" id="sign-up-button"
+                        onclick="window.location.href='http://127.0.0.1:5500/src/components/pages/register.html'">Đăng
+                        ký
+                    </button>
                 </div>
-                <div class="forgot">
-                    Bạn quên <a href="">mật khẩu?</a>
-                </div>
-                <input type="submit" value="Đăng nhập" class="form-submit">
-                <a href="../../components/pages/register.html"><input type="submit" value="Đăng ký"
-                        class="form-submit-subscribe"></a>
-            </form>
+            </div>
         </div>
     </main>
-    <footer id="footer">
-    </footer>
+    <footer id="footer"></footer>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="../../js/components/namePage.js"></script>
 <script src="../../components/common/header.js"></script>
 <script src="../../components/common/footer.js"></script>
 <script src="../../js/components/main.js"></script>
-
 </html>

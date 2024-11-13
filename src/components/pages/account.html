@@ -1,27 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeddingPlanning</title>
-    <link rel="stylesheet" href="../../../bootstrap-5.0.2-dist/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account</title>
+    <link rel="Icon" href="/Data/Icon/Account/Account_3.png" />
+    <link
+      rel="stylesheet"
+      href="../../../bootstrap-5.0.2-dist/css/bootstrap.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../../css/styles.css">
-</head>
+    <link rel="stylesheet" href="../../css/styles.css" />
+  </head>
+  <body>
+    <!-- <header id="header"></header> -->
+    <main class="d-flex">
+      <!-- Sidebar -->
+      <div
+        id="sidebar"
+        class="bg-light border-right"
+        style="width: 250px; height: 100vh"
+      >
+        <h5 class="p-3">Tài khoản</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a href="#profileSection" class="nav-link active" id="profileLink"
+              >Hồ sơ</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#addressSection" class="nav-link" id="addressLink"
+              >Địa chỉ</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="#changePasswordSection"
+              class="nav-link"
+              id="changePasswordLink"
+              >Đổi mật khẩu</a
+            >
+          </li>
+        </ul>
+      </div>
 
-<body>
-    <header id="header"></header>
-    <main id="main">
-        <div>
-            <h1>Đây là trang thông tin tài khoản</h1>
-        </div>
+      <!-- Main Content -->
+      <div id="mainContent" class="flex-fill p-4">
+        <!-- Hồ sơ -->
+        <section id="profileSection" class="content-section active">
+          <h2>Thông tin tài khoản</h2>
+          <form id="accountForm" autocomplete="on">
+            <div class="mb-3">
+              <label for="userName" class="form-label">Tên đăng nhập</label>
+              <input
+                type="text"
+                class="form-control"
+                id="userName"
+                size="20"
+                maxlength="20"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Họ và tên</label>
+              <input type="text" class="form-control" id="fullName" />
+            </div>
+
+            <div class="mb-3">
+              <label for="birthDate" class="form-label">Ngày sinh</label>
+              <div class="d-flex">
+                <!-- Dropdown cho Ngày -->
+                <select
+                  id="birthDay"
+                  class="form-select me-2"
+                  aria-label="Chọn ngày"
+                >
+                  <option selected disabled>Ngày</option>
+                </select>
+
+                <!-- Dropdown cho Tháng -->
+                <select
+                  id="birthMonth"
+                  class="form-select me-2"
+                  aria-label="Chọn tháng"
+                >
+                  <option selected disabled>Tháng</option>
+                </select>
+
+                <!-- Dropdown cho Năm -->
+                <select
+                  id="birthYear"
+                  class="form-select"
+                  aria-label="Chọn năm"
+                >
+                  <option selected disabled>Năm</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Nhập địa chỉ email"
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">Số điện thoại</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                placeholder="Nhập số điện thoại"
+                inputmode="numeric"
+                pattern="^0 [3-9]\d{8}$"
+                maxlength="10"
+              />
+            </div>
+
+            <button
+              type="button"
+              id="updateAccountInfo"
+              class="btn btn-primary"
+            >
+              Cập nhật thông tin
+            </button>
+          </form>
+
+          <!-- Thông báo lỗi hồ sơ -->
+          <div id="messageProfile" class="mt-3"></div>
+        </section>
+
+        <!-- Địa chỉ -->
+        <section id="addressSection" class="content-section d-none">
+          <h2>Địa chỉ liên lạc</h2>
+          <form id="addressForm" autocomplete="on">
+            <!-- Tỉnh/Thành phố -->
+            <div class="mb-3">
+              <label for="province" class="form-label">Tỉnh/Thành phố</label>
+              <select id="province" class="form-select" required>
+                <option value="" selected disabled>Chọn Tỉnh/Thành phố</option>
+              </select>
+            </div>
+
+            <!-- Quận/Huyện -->
+            <div class="mb-3">
+              <label for="district" class="form-label">Quận/Huyện</label>
+              <select id="district" class="form-select" required>
+                <option value="" selected disabled>Chọn Quận/Huyện</option>
+              </select>
+            </div>
+
+            <!-- Phường/Xã -->
+            <div class="mb-3">
+              <label for="ward" class="form-label">Phường/Xã</label>
+              <select id="ward" class="form-select" required>
+                <option value="" selected disabled>Chọn Phường/Xã</option>
+              </select>
+            </div>
+
+            <!-- Số nhà -->
+            <div class="mb-3">
+              <label for="houseNumber" class="form-label">Số nhà</label>
+              <input
+                type="text"
+                class="form-control"
+                id="houseNumber"
+                placeholder="Nhập số nhà"
+                title="Chỉ cần nhập số nhà"
+                maxlength="10"
+              />
+            </div>
+
+            <!-- Tên đường -->
+            <div class="mb-3">
+              <label for="streetName" class="form-label">Tên đường</label>
+              <input
+                type="text"
+                class="form-control"
+                id="streetName"
+                placeholder="Nhập tên đường"
+                title="Chỉ cần nhập tên đường"
+              />
+            </div>
+
+            <button
+              type="button"
+              id="updateAddressInfo"
+              class="btn btn-primary"
+            >
+              Cập nhật địa chỉ
+            </button>
+          </form>
+
+          <!-- Thông báo lỗi địa chỉ -->
+          <div id="messageAddress" class="mt-3"></div>
+        </section>
+
+        <!-- Đổi mật khẩu -->
+        <section id="changePasswordSection" class="content-section d-none">
+          <h2>Đổi mật khẩu</h2>
+          <form id="changePasswordForm">
+            <!-- Mật khẩu hiện tại -->
+            <div class="mb-3 position-relative">
+              <label for="password" class="form-label">Mật khẩu hiện tại</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Nhập mật khẩu hiện tại"
+              />
+              <i
+                class="bi bi-eye-slash position-absolute top-50 end-0 translate-middle-y me-3"
+                id="togglePassword"
+                style="cursor: pointer"
+              ></i>
+            </div>
+
+            <!-- Mật khẩu mới -->
+            <div class="mb-3 position-relative">
+              <label for="newPassword" class="form-label">Mật khẩu mới</label>
+              <input
+                type="password"
+                class="form-control"
+                id="newPassword"
+                placeholder="Nhập mật khẩu mới"
+              />
+              <i
+                class="bi bi-eye-slash position-absolute top-50 end-0 translate-middle-y me-3"
+                id="toggleNewPassword"
+                style="cursor: pointer"
+              ></i>
+            </div>
+
+            <!-- Xác nhận mật khẩu mới -->
+            <div class="mb-3 position-relative">
+              <label for="confirmPassword" class="form-label"
+                >Xác nhận mật khẩu mới</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                placeholder="Xác nhận mật khẩu mới"
+              />
+              <i
+                class="bi bi-eye-slash position-absolute top-50 end-0 translate-middle-y me-3"
+                id="toggleConfirmPassword"
+                style="cursor: pointer"
+              ></i>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Cập nhật mật khẩu
+            </button>
+          </form>
+
+          <!-- Thông báo lỗi mật khẩu -->
+          <div id="messagePassword" class="mt-3"></div>
+        </section>
+      </div>
     </main>
+
     <footer id="footer"></footer>
+
     <script src="../../components/common/header.js"></script>
     <script src="../../components/common/footer.js"></script>
     <script src="../../js/components/main.js"></script>
-</body>
-
+    <script src="../../js/components/account.js"></script>
+  </body>
 </html>
