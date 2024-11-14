@@ -1,3 +1,5 @@
+// File header.js là chuyển đổi từ file header.html thành 1 biến js để chèn vào các trang khác (chỉ cần copy bên header.html rồi dán qua đây thôi)
+const header_nologinHTML = `
 <header>
 
     <head>
@@ -44,6 +46,11 @@
                 <a class="nav-link" href="../pages/detail.html">CHI TIẾT SẢN PHẨM</a>
               </li>
             </li>
+            
+            
+            <li class="nav-item">
+              <a class="nav-link" href="../pages/infor.html">GIỚI THIỆU</a>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -51,27 +58,16 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li class="nav-item">
-                    <a class="nav-link" href="/src/components/pages/contact.html">LIÊN HỆ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="../pages/infor.html">GIỚI THIỆU</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="../pages/account.html">TÀI KHOẢN</a>
-                  </li>
+                  <a class="nav-link" href="/src/components/pages/login.html">ĐĂNG NHẬP</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/src/components/pages/register.html">ĐĂNG KÝ</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/src/components/pages/contact.html">LIÊN HỆ</a>
+                </li>
               </ul>
             </li>
-            
-            <li class="set-icon">
-                <button class="btn-giohang">
-                  <a href="/src/components/pages/cart.html"><i class="bi bi-cart"></i></a>
-                </button>
-                <span class="divider"></span>
-                <!-- Icon đơn hàng -->
-                <button class="btn-donhang">
-                  <a href="/src/components/pages/orderManagement.html"><i class="bi bi-receipt"></i></a>
-                </button>
-              </li>
           </ul>
   
         </div>
@@ -79,3 +75,4 @@
       </nav>
     </body>
   </header>
+`;
