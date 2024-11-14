@@ -9,7 +9,7 @@
         "email": "admin@gmail.com",
         "matKhau": "admin123",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "avatar.jpg",
+        "anhDaiDien": "Data/Images/Avatar/2/1.jpg",
         "ngayDangKy": "2024-10-15",
         "trangThai": "Hoạt động",
         "lanDangNhapCuoi": "2024-10-15 10:30:00",
@@ -38,9 +38,9 @@
         "email": "b@gmail.com",
         "matKhau": "b@gmail.com",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "Data/Images/Avatar/1/A=1.jpg",
+        "anhDaiDien": "Data/Images/Avatar/2/2.jpg",
         "ngayDangKy": "2023-11-22",
-        "trangThai": "hoạt động",
+        "trangThai": "Hoạt động",
         "lanDangNhapCuoi": "2023-11-22 10:30:00",
         "danhSachYeuThich": [
             {
@@ -67,9 +67,9 @@
         "email": "c@gmail.com",
         "matKhau": "c@gmail.com",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "avatar.jpg",
+        "anhDaiDien": "Data/Images/Avatar/2/3.jpg",
         "ngayDangKy": "2023-11-22",
-        "trangThai": "hoạt động",
+        "trangThai": "Hoạt động",
         "lanDangNhapCuoi": "2023-11-22 10:30:00",
         "danhSachYeuThich": [
             {
@@ -96,9 +96,9 @@
         "email": "d@gmail.com",
         "matKhau": "d@gmail.com",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "avatar.jpg",
+        "anhDaiDien": "Data/Images/Avatar/2/4.webp",
         "ngayDangKy": "2023-11-22",
-        "trangThai": "hoạt động",
+        "trangThai": "Hoạt động",
         "lanDangNhapCuoi": "2023-11-22 10:30:00",
         "danhSachYeuThich": [
             {
@@ -125,9 +125,9 @@
         "email": "e@gmail.com",
         "matKhau": "e@gmail.com",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "avatar.jpg",
+        "anhDaiDien": "Data/Images/Avatar/2/5.jpg",
         "ngayDangKy": "2023-11-22",
-        "trangThai": "hoạt động",
+        "trangThai": "Hoạt động",
         "lanDangNhapCuoi": "2023-11-22 10:30:00",
         "danhSachYeuThich": [
             {
