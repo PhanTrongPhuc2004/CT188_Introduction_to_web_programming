@@ -22,7 +22,7 @@
     width: 100%;
 }
 
-.product-title {
+.product-title { 
     font-weight: bold;
 }
 
@@ -38,4 +38,5 @@
     white-space: nowrap;
     margin: 5px;
 }
+
 

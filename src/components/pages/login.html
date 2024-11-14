@@ -1,25 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeddingPlanning</title>
+    <title>Đăng Nhập</title>
     <link rel="stylesheet" href="../../../bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css">
-    <script src="../../js/components/main.js"></script>
+    <style>
+        body {
+            background-color: silver;
+        }
+
+        #wrapper {
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #form-login {
+            max-width: 400px;
+            background: rgba(0, 0, 0, 0.8);
+            flex-grow: 1;
+            padding: 30px 30px 40px;
+            box-shadow: 2px 2px 17px 4px rgba(247, 245, 245, 0.8);
+        }
+
+        .form-heading {
+            font-size: 25px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            border-bottom: 1px solid #fff;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .form-input {
+            background: transparent;
+            border: 0;
+            outline: 0;
+            color: #f5f5f5;
+            flex-grow: 1;
+        }
+
+        #eye i {
+            padding: 0px;
+            cursor: pointer;
+        }
+
+        .forgot {
+            text-align: center;
+            color: #fff;
+        }
+
+        .form-submit,
+        .form-submit-subscribe {
+            background: #d8d7ce;
+            border: 1px solid #f5f5f5;
+            width: 100%;
+            color: black;
+            text-transform: uppercase;
+            padding: 8px;
+            margin-top: 20px;
+        }
+
+        .form-submit-subscribe {
+            background: transparent;
+            color: #fff;
+        }
+
+        .form-submit:hover,
+        .form-submit-subscribe:hover {
+            border: 1px solid #ee1313;
+        }
+
+        .form-group i {
+            color: #f5f5f5;
+            padding-top: 7px;
+            padding-right: 5px;
+            font-size: 14px;
+            padding-bottom: 6px;
+        }
+    </style>
 </head>
 
 <body>
     <header id="header"></header>
     <main id="main">
-        <div>
-            <h1>Đây là trang đăng nhập</h1>
+        <div id="wrapper">
+            <div id="form-login">
+                <form id="login-form">
+                    <h1 class="form-heading">Đăng Nhập</h1>
+                    <div class="form-group">
+                        <i class="bi bi-person"></i>
+                        <input id="loginUsername" type="text" class="form-input" placeholder="Nhập địa chỉ email">
+                    </div>
+                    <div class="form-group">
+                        <i class="bi bi-key"></i>
+                        <input id="loginPassword" type="password" class="form-input" placeholder="Vui lòng nhập mật khẩu">
+                        <div id="eye" class="open">
+                            <i class="bi bi-eye"></i>
+                        </div>
+                    </div>
+                    <div class="forgot">
+                        Bạn quên <a href="">mật khẩu?</a>
+                    </div>
+                    <input type="submit" value="Đăng nhập" class="form-submit">
+                    <div id="error-message" style="color: red; text-align: center; margin-top: 10px;"></div>
+                </form>
+                <div>
+                    <button class="form-submit-subscribe" id="sign-up-button"
+                        onclick="window.location.href='http://127.0.0.1:5500/src/components/pages/register.html'">Đăng
+                        ký
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
     <footer id="footer"></footer>
 </body>
 
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="../../js/components/namePage.js"></script>
+<script src="../../components/common/header.js"></script>
+<script src="../../components/common/footer.js"></script>
+<script src="../../js/components/main.js"></script>
 </html>
