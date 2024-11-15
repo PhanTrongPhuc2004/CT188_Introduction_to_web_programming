@@ -1,0 +1,105 @@
+body {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: bold;
+    top: 0px;
+    display: grid;
+    grid-template-areas:
+        "header-cell"
+        "main-cell"
+        "footer-cell";
+    margin: 0px auto 0px;
+    border: 1px;
+    padding: 0px 5px 0px;
+    min-width: 1024px;
+    font-size: 1.2em;
+}
+
+header {
+    grid-area: header-cell;
+    margin: 10px;
+    border: 1px solid #ccc7c8;
+    background-color: #fff;
+    border-radius: 5px;
+    height: 100px;
+}
+
+main {
+    text-align: center;
+    margin: auto;
+    display: grid;
+    grid-area: main-cell;
+    /* border: 1px solid #ccc7c8; */
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0px 5px 0px;
+    /* text-align: center; */
+}
+h1 h2 {
+    text-align: center;
+}
+/* Phần css cho chuyển ảnh đầu trang chủ */
+.slider {
+    width: auto;
+    height: auto;
+    overflow: hidden;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+.flickity-button {
+    position: absolute;
+    top: 60%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: blue;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 1000px;
+    border: 1px solid blue;
+    transform: translateY(-50%);
+    text-decoration: none;
+}
+.flickity-prev-next-button.previous {
+    left: 10%; /* Điều chỉnh khoảng cách từ mép trái */
+}
+
+.flickity-prev-next-button.next {
+    right: 10%; /* Điều chỉnh khoảng cách từ mép phải */
+}
+.previous:hover,
+.next:hover {
+    background-color: blue;
+    color: #fff;
+}
+
+/* Phần css vài địa điểm nổi bật */
+.container {
+    display: flex;
+}
+.image-container {
+    position: relative;
+    width: 800px; /* Điều chỉnh chiều rộng */
+    height: 400px; /* Điều chỉnh chiều cao */
+    margin: 20px auto;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 24px;
+    /* background: rgba(0, 0, 0, 0.5); */
+    padding: 10px;
+}

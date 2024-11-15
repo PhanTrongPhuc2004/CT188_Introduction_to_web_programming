@@ -9,23 +9,45 @@ const footerElement = document.getElementById('footer');
 footerElement.innerHTML = footerHTML;
 
 // Lấy dữ liệu từ file products.js vào
-const container = document.getElementById('product-container');
-products.forEach(product => {
-    const card = document.createElement('div');
-    card.classList.add('col-md-4');
+// const container = document.getElementById('product-container');
+// products.forEach(product => {
+//   const card = document.createElement('div');
+//   card.classList.add('col-md-4');
 
-    const cardContent = `
-      <div class="card">
-        <img src="./${product.anhBia}" class="card-img-top" alt="${product.ten}">
-        <div class="card-body">
-          <h5 class="card-title">${product.ten}</h5>
-          <p class="card-text">${product.moTa}</p>
-          <p class="card-text">Giá: ${product.gia} VNĐ</p>
-          <button class="btn btn-primary">Xem chi tiết</button>
-        </div>
-      </div>
-    `;
+//   const cardContent = `
+//       <div class="card">
+//         <img src="./${product.anhBia}" class="card-img-top" alt="${product.ten}">
+//         <div class="card-body">
+//           <h5 class="card-title">${product.ten}</h5>
+//           <p class="card-text">${product.moTa}</p>
+//           <p class="card-text">Giá: ${product.gia} VNĐ</p>
+//           <button class="btn btn-primary">Xem chi tiết</button>
+//         </div>
+//       </div>
+//     `;
 
-    card.innerHTML = cardContent;
-    container.appendChild(card);
-});
+//   card.innerHTML = cardContent;
+//   container.appendChild(card);
+// });
+
+// Phần js cho chuyển ảnh đầu trang chủ
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function
+  showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("slide");
+
+  if (n > slides.length) { slideIndex = 1 }
+  if (n < 1) { slideIndex = slides.length }
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+
+  }
+  slides[slideIndex - 1].style.display = "block";
+}
