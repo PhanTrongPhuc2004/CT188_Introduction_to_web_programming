@@ -14,6 +14,7 @@
     <!-- my code -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="/Data/user.js"></script>
     <style>
         body {
             padding-top: 100px;
@@ -199,23 +200,19 @@
 
 
         <script>
+            // Khởi tạo dữ liệu sản phẩm từ localStorage hoặc từ product.js
+            let userData = JSON.parse(localStorage.getItem('users')) || users;
+            // Lưu dữ liệu vào localStorage nếu chưa có
+            if (!localStorage.getItem('users')) {
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+
             // Hàm loadUsers để tải dữ liệu và hiển thị trên bảng
             async function loadUsers() {
-                try {
-                    const response = await fetch('../../../Data/user.json'); // Đường dẫn thực tế
-                    const users = await response.json();
-
-                    // Phần lấy dữ liệu từ localStorage khi thêm người dùng
-                    // Lấy dữ liệu từ localStorage
-                    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-                    // Hợp nhất dữ liệu người dùng từ file JSON với dữ liệu từ localStorage
-                    const allUsers = [...users, ...storedUsers];
-
                     const userTableBody = document.getElementById("userTableBody");
                     userTableBody.innerHTML = ""; // Xóa dữ liệu cũ
 
-                    allUsers.forEach(user => {
+                    userData.forEach(user => {
                         const row = document.createElement("tr");
                         const statusClass = user.trangThai.toLowerCase() === "hoạt động" ? "status-active" : "status-inactive";
 
@@ -242,53 +239,36 @@
                             `;
                         userTableBody.appendChild(row);
                     });
-                } catch (error) {
-                    console.error('Error loading users:', error);
-                }
             }
 
             // Hàm xem chi tiết người dùng
             function viewDetails(userId) {
+                // Tìm người dùng có id khớp
+                // kiểu dữ liệu trong mảng userData với thuộc tính id đang là dạng chuỗi => chuyển về dạng số để so sánh tuyệt đối
+                const user = userData.find(u => parseInt(u.id) === userId);
 
-                fetch('../../../Data/user.json')
-                    .then(response => response.json())
-                    .then(usersFromJson => {
-                        // Lấy dữ liệu từ localStorage
-                        const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+                if (user) {
+                    // Điền thông tin người dùng vào modal
+                    document.getElementById("detailId").textContent = user.id;
+                    document.getElementById("detailAvatar").src = user.anhDaiDien;
+                    document.getElementById("detailName").textContent = user.ten;
+                    document.getElementById("detailGender").textContent = user.gioiTinh;
+                    document.getElementById("detailDob").textContent = user.ngaySinh;
+                    document.getElementById("detailAddress").textContent = user.diaChi;
+                    document.getElementById("detailRole").textContent = user.vaiTro;
+                    document.getElementById("detailEmail").textContent = user.email;
+                    document.getElementById("detailPhone").textContent = user.soDienThoai;
+                    document.getElementById("detailRegistrationDate").textContent = user.ngayDangKy;
+                    document.getElementById("detailLastLogin").textContent = user.lanDangNhapCuoi;
+                    document.getElementById("detailStatus").textContent = user.trangThai;
 
-                        // Hợp nhất dữ liệu từ JSON và localStorage
-                        const allUsers = [...usersFromJson, ...storedUsers];
-
-                        // Tìm người dùng có id khớp
-                        // kiểu dữ liệu trong mảng allUsers sau khi hợp nhất với storedUsers với thuộc tính id đang là dạng chuỗi => chuyển về dạng số để so sánh tuyệt đối
-                        const user = allUsers.find(u => parseInt(u.id) === userId);
-
-
-                        if (user) {
-                            // Điền thông tin người dùng vào modal
-                            document.getElementById("detailId").textContent = user.id;
-                            document.getElementById("detailAvatar").src = user.anhDaiDien;
-                            document.getElementById("detailName").textContent = user.ten;
-                            document.getElementById("detailGender").textContent = user.gioiTinh;
-                            document.getElementById("detailDob").textContent = user.ngaySinh;
-                            document.getElementById("detailAddress").textContent = user.diaChi;
-                            document.getElementById("detailRole").textContent = user.vaiTro;
-                            document.getElementById("detailEmail").textContent = user.email;
-                            document.getElementById("detailPhone").textContent = user.soDienThoai;
-                            document.getElementById("detailRegistrationDate").textContent = user.ngayDangKy;
-                            document.getElementById("detailLastLogin").textContent = user.lanDangNhapCuoi;
-                            document.getElementById("detailStatus").textContent = user.trangThai;
-
-                            // Hiển thị modal
-                            // Tạo đối tượng Modal
-                            const userDetailsModal = new bootstrap.Modal(document.getElementById('userDetailsModal'));
-                            // Hiển thị modal
-                            userDetailsModal.show();
-                        }
-                    })
-                    .catch(error => console.error('Error fetching user details:', error));
+                    // Hiển thị modal
+                    // Tạo đối tượng Modal
+                    const userDetailsModal = new bootstrap.Modal(document.getElementById('userDetailsModal'));
+                    // Hiển thị modal
+                    userDetailsModal.show();
+                }
             }
-
             // Hàm tìm kiếm người dùng
             function filterUser() {
                 const filterText = document.getElementById("filterInput").value.toLowerCase();  // chuyển về chữ thường
@@ -299,7 +279,6 @@
                     row.style.display = (userId.includes(filterText) || userName.includes(filterText)) ? "" : "none";   // hiển thị hàng hoặc ẩn hàng
                 });
             }
-
             // Bắt sự kiện khi nhấn Enter để tìm kiếm người dùng
             document.getElementById("filterInput").addEventListener("keypress", function (event) {
                 if (event.key === "Enter") {
@@ -308,28 +287,17 @@
                 }
             });
 
-
             function generateNewUserId() {
-                const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
                 let maxId = 0;
-
-                storedUsers.forEach(user => {
+                userData.forEach(user => {
                     maxId = Math.max(maxId, parseInt(user.id));
                 });
-
-                fetch("../../../Data/user.json")
-                    .then(response => response.json())
-                    .then(jsonUsers => {
-                        jsonUsers.forEach(user => {
-                            maxId = Math.max(maxId, parseInt(user.id));
-                        });
-
-                        document.getElementById("newUserId").value = maxId + 1;
-                    })
-                    .catch(error => {
-                        console.error("Không thể tải dữ liệu từ file JSON:", error);
-                        alert("Đã xảy ra lỗi khi tải dữ liệu từ hệ thống. Vui lòng thử lại sau.");
-                    });
+                // NHỮNG TÀI KHOẢN ĐĂNG KÝ THÊM TRÊN HỆ THỐNG //
+                // const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+                // accounts.forEach(user => {
+                //     maxId = Math.max(maxId, parseInt(user.id));
+                // });
+                document.getElementById("newUserId").value = maxId + 1;
             }
 
             let isEditMode = false;
@@ -366,17 +334,15 @@
                     return;
                 }
 
-                const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-
                 if (isEditMode && editingUserId) {
                     // Chỉnh sửa người dùng
-                    const userIndex = storedUsers.findIndex(user => parseInt(user.id) === parseInt(editingUserId));
+                    const userIndex = userData.findIndex(user => parseInt(user.id) === parseInt(editingUserId));
                     if (userIndex !== -1) {
-                        storedUsers[userIndex].ten = ten;
-                        storedUsers[userIndex].soDienThoai = soDienThoai;
-                        storedUsers[userIndex].email = email;
-                        storedUsers[userIndex].vaiTro = vaiTro;
-                        storedUsers[userIndex].trangThai = trangThai;
+                        userData[userIndex].ten = ten;
+                        userData[userIndex].soDienThoai = soDienThoai;
+                        userData[userIndex].email = email;
+                        userData[userIndex].vaiTro = vaiTro;
+                        userData[userIndex].trangThai = trangThai;
 
                         alert("Thông tin người dùng đã được cập nhật thành công!");
                     }
@@ -392,12 +358,12 @@
                         trangThai: trangThai,
                         ngayDangKy: ngayDangKy
                     };
-                    storedUsers.push(newUser);
+                    userData.push(newUser);
 
                     alert("Người dùng mới đã được thêm thành công!");
                 }
 
-                localStorage.setItem("users", JSON.stringify(storedUsers));
+                localStorage.setItem("users", JSON.stringify(userData));
                 loadUsers();
 
                 const modalElement = document.getElementById("addUserModal");
@@ -411,10 +377,8 @@
                 document.getElementById("addUserForm").reset();
                 resetFormState();
             }
-
             function openEditUserModal(userId) {
-                const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-                const userToEdit = storedUsers.find(user => parseInt(user.id) === parseInt(userId));
+                const userToEdit = userData.find(user => parseInt(user.id) === parseInt(userId));
 
                 if (userToEdit) {
                     document.getElementById("newUserId").value = userToEdit.id;
@@ -440,23 +404,15 @@
                 editingUserId = null;
             }
 
-            document.getElementById("openAddUserModalButton").onclick = generateNewUserId;
-            document.getElementById("addUserForm").onsubmit = addUser;
-            document.getElementById("submitUserButton").addEventListener("click", addUser);
-
-
             // Hàm xóa người dùng
             function deleteUser(userId) {
                 if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
                     alert(`Đã xóa người dùng có ID: ${userId}`);
-                    // Lấy danh sách người dùng từ localStorage
-                    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-
                     // Tìm và loại bỏ người dùng có ID khớp
-                    const updatedUsers = storedUsers.filter(user => parseInt(user.id) !== parseInt(userId));
+                    userData = userData.filter(user => parseInt(user.id) !== parseInt(userId));
 
                     // Lưu danh sách người dùng đã cập nhật vào localStorage
-                    localStorage.setItem("users", JSON.stringify(updatedUsers));
+                    localStorage.setItem("users", JSON.stringify(userData));
 
                     // Tải lại danh sách người dùng để cập nhật giao diện
                     loadUsers();
@@ -464,30 +420,11 @@
             }
 
             let isAscending = true; // Biến để lưu trạng thái sắp xếp
-            let jsonData = []; // Biến lưu trữ dữ liệu từ file JSON (chỉ tải một lần)
-
-            function loadInitialData() {
-                // Tải dữ liệu từ file JSON chỉ một lần khi trang được tải
-                fetch('../../../Data/user.json') // Thay bằng đường dẫn thực tế của bạn
-                    .then(response => response.json())
-                    .then(data => {
-                        jsonData = data; // Lưu dữ liệu từ file JSON
-                        loadUsers(); // Hiển thị dữ liệu khi đã tải xong
-                    })
-                    .catch(error => {
-                        console.error("Lỗi khi tải dữ liệu từ order.json: ", error);
-                    });
-            }
 
             function sortUsersByName() {
-                // Lấy dữ liệu từ localStorage
-                const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-                // Gộp dữ liệu từ JSON và localStorage nhưng không thêm lặp lại
-                const allUsers = [...jsonData, ...storedUsers];
 
                 // Sắp xếp danh sách theo tên
-                allUsers.sort((a, b) => {
+                userData.sort((a, b) => {
                     const nameA = a.ten.toLowerCase();
                     const nameB = b.ten.toLowerCase();
 
@@ -500,57 +437,27 @@
                 isAscending = !isAscending;
 
                 // Hiển thị danh sách đã sắp xếp mà không lưu lại vào localStorage
-                displayUsers(allUsers);
+                loadUsers(userData);
             }
-
-            // Hàm hiển thị người dùng
-            function displayUsers(users) {
-                // Xóa danh sách người dùng cũ trên giao diện
-                const userTableBody = document.getElementById("userTableBody");
-                userTableBody.innerHTML = ""; // Xóa nội dung cũ
-
-                // Thêm từng người dùng vào bảng
-                users.forEach(user => {
-                    const row = document.createElement("tr");
-                    const statusClass = user.trangThai.toLowerCase() === "hoạt động" ? "status-active" : "status-inactive";
-                    row.innerHTML = `
-                        <td>${user.id}</td>
-                        <td><img src="${user.anhDaiDien}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                        <td>${user.ten}</td>
-                        <td>${user.soDienThoai}</td>
-                        <td>${user.email}</td>
-                        <td>${user.vaiTro}</td>
-                        <td><span class="${statusClass}">${user.trangThai}</span></td>
-                        <td class="action-column">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Tùy chọn
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item" onclick="viewDetails(${user.id})">Chi tiết</button></li>
-                                    <li><button class="dropdown-item" onclick="openEditUserModal(${user.id})">Sửa</button></li>
-                                    <li><button class="dropdown-item text-danger" onclick="deleteUser(${user.id})">Xóa</button></li>
-                                </ul>
-                            </div>
-                        </td>
-                    `;
-                    userTableBody.appendChild(row);
-                });
-            }
+            
+            document.getElementById("openAddUserModalButton").onclick = generateNewUserId;
+            document.getElementById("addUserForm").onsubmit = addUser;
+            document.getElementById("submitUserButton").addEventListener("click", addUser);
 
             // Gắn sự kiện click cho nút sắp xếp
             document.getElementById("sortByNameButton").addEventListener("click", sortUsersByName);
 
-            // Gọi hàm để tải dữ liệu khi trang được tải
-            loadInitialData();
-
             // Tải dữ liệu khi trang được tải
             document.addEventListener("DOMContentLoaded", loadUsers);
+
         </script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> -->
     </main>
     <footer id="footer"></footer>
-
+    <script src="../common/header_company.js"></script>
+    <script src="../common/footer.js"></script>
+    
+    <script src="../../js/components/usermanagment.js"></script>
 </body>
 
 </html>
