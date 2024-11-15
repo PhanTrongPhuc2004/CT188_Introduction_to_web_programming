@@ -1,6 +1,6 @@
 // File header.js là chuyển đổi từ file header.html thành 1 biến js để chèn vào các trang khác (chỉ cần copy bên header.html rồi dán qua đây thôi)
 const headerHTML = `
-<header>
+<header id="Header">
 
   <head>
     <meta charset="UTF-8">

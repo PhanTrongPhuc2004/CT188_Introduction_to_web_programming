@@ -1,4 +1,8 @@
 /* ĐÂY LÀ FILE CSS TOÀN CỤC */
+* {
+    /* background-color: #f8f5f1; */
+}
+
 .text-bold {
     font-family: 'Albert Sans', sans-serif;
     font-weight: bold;
