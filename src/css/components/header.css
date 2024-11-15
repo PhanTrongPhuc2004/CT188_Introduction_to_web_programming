@@ -1,24 +1,28 @@
+*{
+  font-size: 0.83rem;
+}
 .navbar-brand {
- 
-    font-size: 1.5rem;
+  
+    font-size: 1.2rem;
   }
   .hotline {
     font-size: 0.7rem;
     font-style: italic;
   }
   .nav-item .nav-link {
-    color: #000000;
+    color: hsl(0, 0%, 0%);
     font-weight: bold;
     margin-right: 20px;
+    white-space: nowrap;
   }
   .weddingplanning{
-    font-size: 30px;
+    font-size: 25px;
     color:#9C7656;
     text-decoration-line: none;
   }
   .weddingplanning:hover{
-    color:#4C4C4C;
-    transition-duration: 0.7s;
+    color:#908080;
+    transition-duration: 1s;
   }
 .set-icon{
   margin-top: 5px;
@@ -38,8 +42,13 @@
 .btn-giohang, .btn-donhang{
   color:#9C7656;
   border: none;
-  background-color: white;
+  background-color: #f8f5f1;
 }
  .btn-giohang:hover, .btn-donhang:hover{
-  background-color:#9f9084;
+  color: rgb(44, 28, 14);
+  transition-duration: 1s;
+ }
+ .dropdown-menu .nav-item:hover{
+background-color: #c5c3c3;
+transition-duration: 0.5s;
  }

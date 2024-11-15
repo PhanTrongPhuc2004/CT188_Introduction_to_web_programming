@@ -1,3 +1,5 @@
+// File header.js là chuyển đổi từ file header.html thành 1 biến js để chèn vào các trang khác (chỉ cần copy bên header.html rồi dán qua đây thôi)
+const header_companyHTML = `
 <header>
 
   <head>
@@ -8,13 +10,13 @@
     <script src="/jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/src/css/styles.css">
-    <link rel="stylesheet" href="/src/css/components/header.css">
+    <link rel="stylesheet" href="../../css/components/header.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <base href="/">
+    <!-- <base href="/"> -->
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #f8f5f1;">
       <div class="container">
         <a class="navbar-brand" href="/src/components/pages/infor.html">
           <img src="/Data/Logo/logo1.jpg" class="img-fluid" alt="logo" width="100px">
@@ -34,36 +36,34 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/index.html">TRANG CHỦ</a>
+            <a class="nav-link"  href="../pages/admin.html">TRANG QUẢN TRỊ</a>
           </li>
+          
+          <li class="nav-item">
+              <a class="nav-link" href="../pages/orderManagement.html">QUẢN LÝ ĐƠN HÀNG</a>
+            </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../pages/productManagement.html">QUẢN LÝ SẢN PHẨM</a>
+          </li>
+        </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               MENU
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/src/components/pages/shop.html">DỊCH VỤ</a></li>
-
-              <li><a class="dropdown-item" href="/src/components/pages/login.html">ĐĂNG NHẬP</a></li>
-              <li><a class="dropdown-item" href="#">ĐĂNG XUẤT</a></li>
+              <li class="nav-item">
+                <li class="nav-item">
+                  <a class="nav-link" href="../pages/userManagement.html">QUẢN LÝ NGƯỜI DÙNG</a>
+                </li>
+              </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../pages/account.html">TÀI KHOẢN</a>
+                </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/src/components/pages/contact.html">LIÊN HỆ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/src/components/pages/account.html">TÀI KHOẢN</a>
-          </li>
-          <li class="set-icon">
-            <button class="btn-giohang">
-              <a href="/src/components/pages/cart.html"><i class="bi bi-cart"></i></a>
-            </button>
-            <span class="divider"></span>
-            <!-- Icon đơn hàng -->
-            <button class="btn-donhang">
-              <a href="/src/components/pages/orderManagement.html"><i class="bi bi-receipt"></i></a>
-            </button>
-          </li>
+          
         </ul>
 
       </div>
@@ -71,3 +71,4 @@
     </nav>
   </body>
 </header>
+`;

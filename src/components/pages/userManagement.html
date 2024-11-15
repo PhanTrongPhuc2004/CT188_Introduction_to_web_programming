@@ -9,10 +9,16 @@
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css">
-    
+    <script src="../../js/components/main.js"></script>
+
     <!-- my code -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
+        body {
+            padding-top: 100px;
+        }
+
         .user-card {
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -20,166 +26,531 @@
             margin-bottom: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .user-card h5 {
             font-weight: bold;
         }
+
         .status-active {
             color: green;
             font-weight: bold;
         }
+
         .status-inactive {
             color: red;
             font-weight: bold;
         }
-        
-        
+
+        .modal-body p {
+            text-align: left;
+        }
     </style>
 </head>
 
 <body>
     <header id="header"></header>
     <main id="main">
-        <div>
-            <h1>Đây là trang quản lý người dùng</h1>
+        <div class="container my-5">
+            <h2 class="text-center">Quản Lý Người Dùng</h2>
 
-            
-        </head>
-        <body>
-            <div class="container my-5">
-                <h2 class="text-center">User Management</h2>
-                <div class="table-responsive user-table">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-light">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Avatar</th>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Giới Tính</th>
-                                <th scope="col">Ngày Sinh</th>
-                                <th scope="col">Số Điện Thoại</th>
-                                <th scope="col">Địa Chỉ</th>
-                                <th scope="col">Vai Trò</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Trạng Thái</th>
-                                <th scope="col">Tùy Chọn</th>
-                            </tr>
-                        </thead>
-                        <tbody id="userTableBody">
-                            <!-- Dữ liệu người dùng sẽ được hiển thị tại đây -->
-                        </tbody>
-                    </table>
+            <!-- Filter and Actions -->
+            <div class="d-flex justify-content-between mb-3">
+                <div class="input-group" style="width: 40%;">
+                    <input type="text" class="form-control" placeholder="Tìm theo tên hoặc ID" id="filterInput">
+                    <button class="btn btn-outline-secondary" onclick="filterUser()">Tìm</button>
+                </div>
+                <!-- Button to open the modal -->
+                <button id="openAddUserModalButton" class="btn btn-success mb-3" data-bs-toggle="modal"
+                    data-bs-target="#addUserModal">Thêm Người
+                    Dùng Mới</button>
+
+            </div>
+
+            <!-- start modal thêm người dùng mới -->
+            <!-- Modal Thêm Người Dùng Mới -->
+            <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addUserModalLabel">Thêm Người Dùng Mới</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addUserForm">
+                                <div class="row mb-3">
+                                    <label for="newUserId" class="col-sm-4 col-form-label">ID</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="newUserId" readonly>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="newUserName" class="col-sm-4 col-form-label">Họ Tên</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="newUserName" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="newUserPhone" class="col-sm-4 col-form-label">Số Điện Thoại</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="newUserPhone" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="newUserEmail" class="col-sm-4 col-form-label">Email</label>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control" id="newUserEmail" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="newUserRole" class="col-sm-4 col-form-label">Vai Trò</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-select" id="newUserRole" required>
+                                            <option value="admin">admin</option>
+                                            <option value="user">user</option>
+                                            <option value="Nhân viên quản lý sản phẩm">Nhân viên quản lý sản phẩm
+                                            </option>
+                                            <option value="Nhân viên quản lý đơn hàng">Nhân viên quản lý đơn hàng
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="newUserStatus" class="col-sm-4 col-form-label">Trạng Thái</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-select" id="newUserStatus" required>
+                                            <option value="Hoạt động">Hoạt động</option>
+                                            <option value="Không hoạt động">Không hoạt động</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button id="submitUserButton" type="submit" class="btn btn-primary">Thêm Người
+                                    Dùng</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        
-            <script>
-                // Hàm loadUsers để tải dữ liệu và hiển thị trên bảng
-                async function loadUsers() {
-            try {
-                const response = await fetch('../../../Data/user.json'); // Đường dẫn thực tế
-                const users = await response.json();
-                const userTableBody = document.getElementById("userTableBody");
-                userTableBody.innerHTML = ""; // Xóa dữ liệu cũ
 
+
+
+            <!-- end modal thêm người dùng mới -->
+            <!--end modal  -->
+            <!-- User Management -->
+            <div class="table-responsive user-table">
+                <table class="table table-striped table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Ảnh</th>
+                            <th scope="col">Họ Tên
+                                <button id="sortByNameButton" class="btn btn-link p-0" style="border: none;">
+                                    <i class="bi bi-caret-down"></i> <!-- Bootstrap Icon: tam giác -->
+                                </button>
+                            </th>
+                            <!-- <th scope="col">Giới Tính</th>
+                                <th scope="col">Ngày Sinh</th> -->
+                            <th scope="col">Số Điện Thoại</th>
+                            <!-- <th scope="col">Địa Chỉ</th> -->
+                            <th scope="col">Email</th>
+                            <th scope="col">Vai Trò</th>
+                            <th scope="col">Trạng Thái</th>
+                            <th scope="col">Tùy Chọn</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <!-- Dữ liệu người dùng sẽ được hiển thị tại đây -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- start modal -->
+        <!-- Modal Chi Tiết Người Dùng -->
+        <div class="modal fade" id="userDetailsModal" tabindex="-1" aria-labelledby="userDetailsModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="userDetailsModalLabel">Chi Tiết Người Dùng</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>ID:</strong> <span id="detailId"></span></p>
+                        <p><strong>Ảnh:</strong> <img id="detailAvatar" src="" alt="Avatar"
+                                style="width: 40px; height: 40px; border-radius: 50%;"></p>
+                        <p><strong>Họ Tên:</strong> <span id="detailName"></span></p>
+                        <p><strong>Giới Tính:</strong> <span id="detailGender"></span></p>
+                        <p><strong>Ngày Sinh:</strong> <span id="detailDob"></span></p>
+                        <p><strong>Địa Chỉ:</strong> <span id="detailAddress"></span></p>
+                        <p><strong>Vai Trò:</strong> <span id="detailRole"></span></p>
+                        <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+                        <p><strong>Số Điện Thoại:</strong> <span id="detailPhone"></span></p>
+                        <p><strong>Ngày Đăng Ký:</strong> <span id="detailRegistrationDate"></span></p>
+                        <p><strong>Lần Đăng Nhập Cuối:</strong> <span id="detailLastLogin"></span></p>
+                        <p><strong>Trạng Thái:</strong> <span id="detailStatus"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            // Hàm loadUsers để tải dữ liệu và hiển thị trên bảng
+            async function loadUsers() {
+                try {
+                    const response = await fetch('../../../Data/user.json'); // Đường dẫn thực tế
+                    const users = await response.json();
+
+                    // Phần lấy dữ liệu từ localStorage khi thêm người dùng
+                    // Lấy dữ liệu từ localStorage
+                    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+                    // Hợp nhất dữ liệu người dùng từ file JSON với dữ liệu từ localStorage
+                    const allUsers = [...users, ...storedUsers];
+
+                    const userTableBody = document.getElementById("userTableBody");
+                    userTableBody.innerHTML = ""; // Xóa dữ liệu cũ
+
+                    allUsers.forEach(user => {
+                        const row = document.createElement("tr");
+                        const statusClass = user.trangThai.toLowerCase() === "hoạt động" ? "status-active" : "status-inactive";
+
+                        row.innerHTML = `
+                                <td>${user.id}</td>
+                                <td><img src="${user.anhDaiDien}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+                                <td>${user.ten}</td>
+                                <td>${user.soDienThoai}</td>
+                                <td>${user.email}</td>
+                                <td>${user.vaiTro}</td>
+                                <td><span class="${statusClass}">${user.trangThai}</span></td>
+                                <td class="action-column">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Tùy chọn
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><button class="dropdown-item" onclick="viewDetails(${user.id})">Chi tiết</button></li>
+                                            <li><button class="dropdown-item" onclick="openEditUserModal(${user.id})">Sửa</button></li>
+                                            <li><button class="dropdown-item text-danger" onclick="deleteUser(${user.id})">Xóa</button></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            `;
+                        userTableBody.appendChild(row);
+                    });
+                } catch (error) {
+                    console.error('Error loading users:', error);
+                }
+            }
+
+            // Hàm xem chi tiết người dùng
+            function viewDetails(userId) {
+
+                fetch('../../../Data/user.json')
+                    .then(response => response.json())
+                    .then(usersFromJson => {
+                        // Lấy dữ liệu từ localStorage
+                        const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+                        // Hợp nhất dữ liệu từ JSON và localStorage
+                        const allUsers = [...usersFromJson, ...storedUsers];
+
+                        // Tìm người dùng có id khớp
+                        // kiểu dữ liệu trong mảng allUsers sau khi hợp nhất với storedUsers với thuộc tính id đang là dạng chuỗi => chuyển về dạng số để so sánh tuyệt đối
+                        const user = allUsers.find(u => parseInt(u.id) === userId);
+
+
+                        if (user) {
+                            // Điền thông tin người dùng vào modal
+                            document.getElementById("detailId").textContent = user.id;
+                            document.getElementById("detailAvatar").src = user.anhDaiDien;
+                            document.getElementById("detailName").textContent = user.ten;
+                            document.getElementById("detailGender").textContent = user.gioiTinh;
+                            document.getElementById("detailDob").textContent = user.ngaySinh;
+                            document.getElementById("detailAddress").textContent = user.diaChi;
+                            document.getElementById("detailRole").textContent = user.vaiTro;
+                            document.getElementById("detailEmail").textContent = user.email;
+                            document.getElementById("detailPhone").textContent = user.soDienThoai;
+                            document.getElementById("detailRegistrationDate").textContent = user.ngayDangKy;
+                            document.getElementById("detailLastLogin").textContent = user.lanDangNhapCuoi;
+                            document.getElementById("detailStatus").textContent = user.trangThai;
+
+                            // Hiển thị modal
+                            // Tạo đối tượng Modal
+                            const userDetailsModal = new bootstrap.Modal(document.getElementById('userDetailsModal'));
+                            // Hiển thị modal
+                            userDetailsModal.show();
+                        }
+                    })
+                    .catch(error => console.error('Error fetching user details:', error));
+            }
+
+            // Hàm tìm kiếm người dùng
+            function filterUser() {
+                const filterText = document.getElementById("filterInput").value.toLowerCase();  // chuyển về chữ thường
+                document.querySelectorAll("#userTableBody tr").forEach(row => {
+                    // Kiểm tra nội dung tên người dùng
+                    const userId = row.cells[0].textContent.toLowerCase(); // Cột ID là cột thứ 0
+                    const userName = row.cells[2].textContent.toLowerCase(); // Chuyển thành chữ thường, cột thứ 2 trong bảng
+                    row.style.display = (userId.includes(filterText) || userName.includes(filterText)) ? "" : "none";   // hiển thị hàng hoặc ẩn hàng
+                });
+            }
+
+            // Bắt sự kiện khi nhấn Enter để tìm kiếm người dùng
+            document.getElementById("filterInput").addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    filterUser(); // Gọi hàm filterUser khi nhấn Enter
+                    event.preventDefault(); // Ngăn chặn hành vi mặc định
+                }
+            });
+
+
+            function generateNewUserId() {
+                const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+                let maxId = 0;
+
+                storedUsers.forEach(user => {
+                    maxId = Math.max(maxId, parseInt(user.id));
+                });
+
+                fetch("../../../Data/user.json")
+                    .then(response => response.json())
+                    .then(jsonUsers => {
+                        jsonUsers.forEach(user => {
+                            maxId = Math.max(maxId, parseInt(user.id));
+                        });
+
+                        document.getElementById("newUserId").value = maxId + 1;
+                    })
+                    .catch(error => {
+                        console.error("Không thể tải dữ liệu từ file JSON:", error);
+                        alert("Đã xảy ra lỗi khi tải dữ liệu từ hệ thống. Vui lòng thử lại sau.");
+                    });
+            }
+
+            let isEditMode = false;
+            let editingUserId = null;
+
+            function addUser(event) {
+                event.preventDefault();
+
+                const id = document.getElementById("newUserId").value.trim();
+                const ten = document.getElementById("newUserName").value.trim();
+                const soDienThoai = document.getElementById("newUserPhone").value.trim();
+                const email = document.getElementById("newUserEmail").value.trim();
+                const vaiTro = document.getElementById("newUserRole").value.trim();
+                const trangThai = document.getElementById("newUserStatus").value.trim();
+                // thêm vào thời điểm bắt đầu thêm trên máy
+                const currentDateTime = new Date();
+                var ngayDangKy = currentDateTime.toLocaleDateString("en-CA");
+                if (ten.length < 4) {
+                    alert("Tên phải có độ dài tối thiểu là 4 ký tự.");
+                    document.getElementById("newUserName").focus();
+                    return;
+                }
+
+                if (!/^\d+$/.test(soDienThoai)) {
+                    alert("Số điện thoại chỉ được chứa các chữ số.");
+                    document.getElementById("newUserPhone").focus();
+                    return;
+                }
+
+                const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                if (!emailRegex.test(email)) {
+                    alert("Vui lòng nhập email hợp lệ.");
+                    document.getElementById("newUserEmail").focus();
+                    return;
+                }
+
+                const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+                if (isEditMode && editingUserId) {
+                    // Chỉnh sửa người dùng
+                    const userIndex = storedUsers.findIndex(user => parseInt(user.id) === parseInt(editingUserId));
+                    if (userIndex !== -1) {
+                        storedUsers[userIndex].ten = ten;
+                        storedUsers[userIndex].soDienThoai = soDienThoai;
+                        storedUsers[userIndex].email = email;
+                        storedUsers[userIndex].vaiTro = vaiTro;
+                        storedUsers[userIndex].trangThai = trangThai;
+
+                        alert("Thông tin người dùng đã được cập nhật thành công!");
+                    }
+                } else {
+                    // Thêm người dùng mới
+                    const newUser = {
+                        id: id,
+                        anhDaiDien: "/Data/Images/Avatar/Avatar/1.jpg",
+                        ten: ten,
+                        soDienThoai: soDienThoai,
+                        email: email,
+                        vaiTro: vaiTro,
+                        trangThai: trangThai,
+                        ngayDangKy: ngayDangKy
+                    };
+                    storedUsers.push(newUser);
+
+                    alert("Người dùng mới đã được thêm thành công!");
+                }
+
+                localStorage.setItem("users", JSON.stringify(storedUsers));
+                loadUsers();
+
+                const modalElement = document.getElementById("addUserModal");
+                const modal = bootstrap.Modal.getInstance(modalElement);
+                modal.hide();
+
+                // Đặt lại nội dung của nút "submit" thành "Thêm người dùng"
+                document.getElementById("submitUserButton").textContent = "Thêm người dùng";
+
+
+                document.getElementById("addUserForm").reset();
+                resetFormState();
+            }
+
+            function openEditUserModal(userId) {
+                const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+                const userToEdit = storedUsers.find(user => parseInt(user.id) === parseInt(userId));
+
+                if (userToEdit) {
+                    document.getElementById("newUserId").value = userToEdit.id;
+                    document.getElementById("newUserName").value = userToEdit.ten;
+                    document.getElementById("newUserPhone").value = userToEdit.soDienThoai;
+                    document.getElementById("newUserEmail").value = userToEdit.email;
+                    document.getElementById("newUserRole").value = userToEdit.vaiTro;
+                    document.getElementById("newUserStatus").value = userToEdit.trangThai;
+
+                    isEditMode = true;
+                    editingUserId = userId;
+                    // Thay đổi nội dung của nút "submit" thành "Lưu"
+                    document.getElementById("submitUserButton").textContent = "Lưu";
+
+                    const modalElement = document.getElementById("addUserModal");
+                    const modal = new bootstrap.Modal(modalElement);
+                    modal.show();
+                }
+            }
+
+            function resetFormState() {
+                isEditMode = false;
+                editingUserId = null;
+            }
+
+            document.getElementById("openAddUserModalButton").onclick = generateNewUserId;
+            document.getElementById("addUserForm").onsubmit = addUser;
+            document.getElementById("submitUserButton").addEventListener("click", addUser);
+
+
+            // Hàm xóa người dùng
+            function deleteUser(userId) {
+                if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
+                    alert(`Đã xóa người dùng có ID: ${userId}`);
+                    // Lấy danh sách người dùng từ localStorage
+                    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+                    // Tìm và loại bỏ người dùng có ID khớp
+                    const updatedUsers = storedUsers.filter(user => parseInt(user.id) !== parseInt(userId));
+
+                    // Lưu danh sách người dùng đã cập nhật vào localStorage
+                    localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+                    // Tải lại danh sách người dùng để cập nhật giao diện
+                    loadUsers();
+                }
+            }
+
+            let isAscending = true; // Biến để lưu trạng thái sắp xếp
+            let jsonData = []; // Biến lưu trữ dữ liệu từ file JSON (chỉ tải một lần)
+
+            function loadInitialData() {
+                // Tải dữ liệu từ file JSON chỉ một lần khi trang được tải
+                fetch('../../../Data/user.json') // Thay bằng đường dẫn thực tế của bạn
+                    .then(response => response.json())
+                    .then(data => {
+                        jsonData = data; // Lưu dữ liệu từ file JSON
+                        loadUsers(); // Hiển thị dữ liệu khi đã tải xong
+                    })
+                    .catch(error => {
+                        console.error("Lỗi khi tải dữ liệu từ order.json: ", error);
+                    });
+            }
+
+            function sortUsersByName() {
+                // Lấy dữ liệu từ localStorage
+                const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+                // Gộp dữ liệu từ JSON và localStorage nhưng không thêm lặp lại
+                const allUsers = [...jsonData, ...storedUsers];
+
+                // Sắp xếp danh sách theo tên
+                allUsers.sort((a, b) => {
+                    const nameA = a.ten.toLowerCase();
+                    const nameB = b.ten.toLowerCase();
+
+                    if (nameA < nameB) return isAscending ? -1 : 1;
+                    if (nameA > nameB) return isAscending ? 1 : -1;
+                    return 0;
+                });
+
+                // Đổi trạng thái sắp xếp cho lần bấm tiếp theo
+                isAscending = !isAscending;
+
+                // Hiển thị danh sách đã sắp xếp mà không lưu lại vào localStorage
+                displayUsers(allUsers);
+            }
+
+            // Hàm hiển thị người dùng
+            function displayUsers(users) {
+                // Xóa danh sách người dùng cũ trên giao diện
+                const userTableBody = document.getElementById("userTableBody");
+                userTableBody.innerHTML = ""; // Xóa nội dung cũ
+
+                // Thêm từng người dùng vào bảng
                 users.forEach(user => {
                     const row = document.createElement("tr");
                     const statusClass = user.trangThai.toLowerCase() === "hoạt động" ? "status-active" : "status-inactive";
-
                     row.innerHTML = `
                         <td>${user.id}</td>
-                        <td><img src="${user.avatar}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+                        <td><img src="${user.anhDaiDien}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
                         <td>${user.ten}</td>
-                        <td>${user.gioiTinh}</td>
-                        <td>${user.ngaySinh}</td>
                         <td>${user.soDienThoai}</td>
-                        <td>${user.diaChi}</td>
-                        <td>${user.vaiTro}</td>
                         <td>${user.email}</td>
+                        <td>${user.vaiTro}</td>
                         <td><span class="${statusClass}">${user.trangThai}</span></td>
                         <td class="action-column">
-    <div class="btn-group">
-        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Tùy chọn
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" onclick="viewDetails(${user.id})">Chi tiết</a></li>
-            <li><a class="dropdown-item" href="#" onclick="editUser(${user.id})">Sửa</a></li>
-            <li><a class="dropdown-item text-danger" href="#" onclick="deleteUser(${user.id})">Xóa</a></li>
-        </ul>
-    </div>
-</td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tùy chọn
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" onclick="viewDetails(${user.id})">Chi tiết</button></li>
+                                    <li><button class="dropdown-item" onclick="openEditUserModal(${user.id})">Sửa</button></li>
+                                    <li><button class="dropdown-item text-danger" onclick="deleteUser(${user.id})">Xóa</button></li>
+                                </ul>
+                            </div>
+                        </td>
                     `;
                     userTableBody.appendChild(row);
                 });
-            } catch (error) {
-                console.error('Error loading users:', error);
             }
-                }
-            
-                // Hàm xem chi tiết người dùng
-                function viewDetails(userId) {
-                    fetch('path/to/user.json') // Thay bằng đường dẫn thực tế của file JSON
-                        .then(response => response.json())
-                        .then(users => {
-                            const user = users.find(u => u.id === userId);
-                            if (user) {
-                                alert(`
-                                    ID: ${user.id}
-                                    Tên: ${user.ten}
-                                    Giới Tính: ${user.gioiTinh}
-                                    Ngày Sinh: ${user.ngaySinh}
-                                    Địa Chỉ: ${user.diaChi}
-                                    Vai Trò: ${user.vaiTro}
-                                    Email: ${user.email}
-                                    Trạng Thái: ${user.trangThai}
-                                `);
-                            }
-                        })
-                        .catch(error => console.error('Error fetching user details:', error));
-                }
-            
-                // Hàm chỉnh sửa người dùng
-                function editUser(userId) {
-                    fetch('path/to/user.json') // Thay bằng đường dẫn thực tế của file JSON
-                        .then(response => response.json())
-                        .then(users => {
-                            const user = users.find(u => u.id === userId);
-                            if (user) {
-                                const newName = prompt("Nhập tên mới:", user.ten);
-                                if (newName && newName !== user.ten) {
-                                    user.ten = newName;
-                                    alert(`Đã cập nhật tên người dùng thành ${user.ten}`);
-                                    loadUsers(); // Tải lại dữ liệu để cập nhật trên giao diện
-                                }
-                            }
-                        })
-                        .catch(error => console.error('Error fetching user for editing:', error));
-                }
-            
-                // Hàm xóa người dùng
-                function deleteUser(userId) {
-                    if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
-                        fetch('path/to/user.json') // Thay bằng đường dẫn thực tế của file JSON
-                            .then(response => response.json())
-                            .then(users => {
-                                const newUsers = users.filter(user => user.id !== userId);
-                                alert(`Đã xóa người dùng có ID: ${userId}`);
-                                // Tạm thời chỉ hiển thị, thay vì xóa khỏi JSON (vì JSON là file tĩnh).
-                                loadUsers(); // Tải lại dữ liệu để cập nhật trên giao diện
-                            })
-                            .catch(error => console.error('Error deleting user:', error));
-                    }
-                }
-            
-                // Tải dữ liệu khi trang được tải
-                document.addEventListener("DOMContentLoaded", loadUsers);
-            </script>
-            <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> -->
-        </div>
+
+            // Gắn sự kiện click cho nút sắp xếp
+            document.getElementById("sortByNameButton").addEventListener("click", sortUsersByName);
+
+            // Gọi hàm để tải dữ liệu khi trang được tải
+            loadInitialData();
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", loadUsers);
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> -->
     </main>
-    <footer id="footer">TEST</footer>
-    <script src="../../components/common/header.js"></script>
-    <script src="../../components/common/footer.js"></script>
-    <script src="../../js/components/main.js"></script>
+    <footer id="footer"></footer>
+
 </body>
 
 </html>
