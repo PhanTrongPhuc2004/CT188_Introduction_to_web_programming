@@ -1,6 +1,6 @@
 // File footer.js là chuyển đổi từ file footer.html thành 1 biến js để chèn vào các trang khác (chỉ cần copy bên footer.html rồi dán qua đây thôi)
 const footerHTML = `
- <footer class="footer mt-5">
+<footer class="footer mt-5">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
