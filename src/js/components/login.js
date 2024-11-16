@@ -1,3 +1,4 @@
+//tạo hiệu ứng slash cho icon mắt
 document.getElementById('eye').addEventListener('click', function () {
     const passwordField = document.getElementById('loginPassword');
     const eyeIcon = document.querySelector('#eye i');
@@ -25,7 +26,7 @@ fetch('../../../Data/user.json')
         console.error('Error fetching user data:', error);
     });
 
-
+// kiểm tra thông tin đăng nhập
 const loginForm = document.getElementById('form-login');
 
 loginForm.addEventListener('submit', function (e) {
@@ -41,20 +42,27 @@ loginForm.addEventListener('submit', function (e) {
     console.log(accounts, accounts2);
     console.log(accounts2)
 
-    // Kiểm tra tài khoản và mật khẩu
+    // Kiểm tra tài khoản và mật khẩu từ đăng ký đã lưu vào localstorage
     const user = accounts.find(account =>
         account.username === loginUsername && account.password === loginPassword
     );
+    // kiểm tra tài khoản và mật khẩu từ file json đã lưu vào localstorage
     const user2 = accounts2.find(user =>
         user.email === loginUsername && user.matKhau === loginPassword
     );
-    console.log("ĐK: "+user, "ĐN: "+user2); 
+    console.log("ĐK: " + user, "ĐN: " + user2);
 
     if (user || user2) {
         alert('Đăng nhập thành công!');
-        
+        if (user) {
+            localStorage.setItem("loggedInUser", JSON.stringify(user));
+        }
+        if (user2) {
+            localStorage.setItem("loggedInUser", JSON.stringify(user2));
+        }
         window.location.replace('index.html'); // Chuyển hướng đến trang chủ
     } else {
         alert('Sai tên người dùng hoặc mật khẩu!');
     }
+
 });

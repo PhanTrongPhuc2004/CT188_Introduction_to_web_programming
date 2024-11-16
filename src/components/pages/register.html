@@ -94,7 +94,7 @@
                     </div>
                     <div class="form-group">
                         <i class="bi bi-key"></i>
-                        <input id="password" type="password" class="form-input" placeholder="Tạo mật khẩu" required>
+                        <input id="loginPassword" type="password" class="form-input" placeholder="Tạo mật khẩu" required>
                         <div id="eye" class="open">
                             <i class="bi bi-eye"></i>
                         </div>
@@ -118,7 +118,7 @@
         e.preventDefault();
 
         const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+        const password = document.getElementById('loginPassword').value;
 
         if (username && password) {
             let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
@@ -141,7 +141,7 @@
 </script>
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="../../js/components/namePage.js"></script>
+<script src="../../js/components/login.js"></script>
 <script src="../../components/common/header.js"></script>
 <script src="../../components/common/footer.js"></script>
 <script src="../../js/components/main.js"></script>
