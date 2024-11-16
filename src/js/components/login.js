@@ -53,12 +53,30 @@ loginForm.addEventListener('submit', function (e) {
     );
 
     if (user || user2) {
-        alert('Đăng nhập thành công!');
+        // alert('Đăng nhập thành công!');
         if (user) {
-            localStorage.setItem("loggedInUser", JSON.stringify(user));
+            // Lấy biến loggedUser trong local storage lên
+            const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
+            // lưu trạng thái đã đăng nhập bằng true
+            storedUser.status = true;
+            // lưu trạng vai trò người dùng
+            // storedUser.vaiTro = user.vaiTro;
+            // lưu lại thông tin người dùng
+            storedUser.user = user;
+            // lưu lại biến loggedUser vào trong local storage
+            localStorage.setItem("loggedUser", JSON.stringify(storedUser));
         }
         if (user2) {
-            localStorage.setItem("loggedInUser", JSON.stringify(user2));
+             // Lấy biến loggedUser trong local storage lên
+             const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
+             // lưu trạng thái đã đăng nhập bằng true
+             storedUser.status = true;
+             // lưu trạng vai trò người dùng
+            // storedUser.vaiTro = user2.vaiTro;
+             // lưu lại thông tin người dùng
+             storedUser.user = user2;
+             // lưu lại biến loggedUser vào trong local storage
+             localStorage.setItem("loggedUser", JSON.stringify(storedUser));
         }
         window.location.replace('index.html'); // Chuyển hướng đến trang chủ
     } else {

@@ -1,147 +1,118 @@
-const users = [
+[
     {
         "id": 1,
-        "ten": "Phan Trọng Phúc",
+        "hoTen": "Phan Trọng Phúc",
         "gioiTinh": "Nam",
-        "ngaySinh": "2004-03-19",
-        "diaChi": "Khu 2, Đường 3 tháng 2, Xuân Khánh, Ninh Kiều, Cần Thơ",
+        "ngaySinh": "19-03-2004",
+        "diaChi": {
+            "tinhThanh": "Cần Thơ",
+            "quanHuyen": "Ninh Kiều",
+            "phuongXa": "Xuân Khánh",
+            "tenDuong": "Đường 3 tháng 2",
+            "soNha": "Khu 2"
+        },
         "vaiTro": "admin",
         "email": "admin@gmail.com",
         "matKhau": "admin123",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "avatar.jpg",
-        "ngayDangKy": "2024-10-15",
-        "trangThai": "Hoạt động",
-        "lanDangNhapCuoi": "2024-10-15 10:30:00",
-        "danhSachYeuThich": [
-            {
-                "id": "1"
-            },
-            {
-                "id": "2"
-            },
-            {
-                "id": "3"
-            },
-            {
-                "id": "4"
-            }
-        ]
+        "anhDaiDien": "/Data/Images/Avatar/Avatar/1.jpg",
+        "trangThai": "Hoạt động"
     },
     {
         "id": 2,
-        "ten": "Nguyễn Văn B",
+        "hoTen": "Nguyễn Văn B",
         "gioiTinh": "Nam",
-        "ngaySinh": "2000-01-01",
-        "diaChi": "123 đường Láng, Hà Nội",
+        "ngaySinh": "01-01-2000",
+       "diaChi": {
+            "tinhThanh": "Cần Thơ",
+            "quanHuyen": "Ninh Kiều",
+            "phuongXa": "Xuân Khánh",
+            "tenDuong": "Đường 3 tháng 2",
+            "soNha": "Khu 2"
+        },
         "vaiTro": "user",
         "email": "b@gmail.com",
         "matKhau": "b@gmail.com",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "Data/Images/Avatar/1/A=1.jpg",
-        "ngayDangKy": "2023-11-22",
-        "trangThai": "hoạt động",
-        "lanDangNhapCuoi": "2023-11-22 10:30:00",
-        "danhSachYeuThich": [
-            {
-                "id": "1"
-            },
-            {
-                "id": "2"
-            },
-            {
-                "id": "3"
-            },
-            {
-                "id": "4"
-            }
-        ]
-    },
+        "anhDaiDien": "/Data/Images/Avatar/2/1.jpg",
+        "trangThai": "Hoạt động"
+    }
+    ,
     {
         "id": 3,
-        "ten": "Nguyễn Văn C",
+        "hoTen": "Nguyễn Văn C",
         "gioiTinh": "Nam",
-        "ngaySinh": "2000-01-01",
-        "diaChi": "123 đường Láng, Hà Nội",
+        "ngaySinh": "01-01-2000",
+       "diaChi": {
+            "tinhThanh": "Cần Thơ",
+            "quanHuyen": "Ninh Kiều",
+            "phuongXa": "Xuân Khánh",
+            "tenDuong": "Đường 3 tháng 2",
+            "soNha": "Khu 2"
+        },
         "vaiTro": "user",
         "email": "c@gmail.com",
         "matKhau": "c@gmail.com",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "avatar.jpg",
-        "ngayDangKy": "2023-11-22",
-        "trangThai": "hoạt động",
-        "lanDangNhapCuoi": "2023-11-22 10:30:00",
-        "danhSachYeuThich": [
-            {
-                "id": "1"
-            },
-            {
-                "id": "2"
-            },
-            {
-                "id": "3"
-            },
-            {
-                "id": "4"
-            }
-        ]
+        "anhDaiDien": "/Data/Images/Avatar/2/2.jpg",
+        "trangThai": "Hoạt động"
     },
     {
         "id": 4,
-        "ten": "Nguyễn Văn D",
+        "hoTen": "Nguyễn Văn D",
         "gioiTinh": "Nam",
-        "ngaySinh": "2000-01-01",
-        "diaChi": "123 đường Láng, Hà Nội",
+        "ngaySinh": "01-01-2000",
+       "diaChi": {
+            "tinhThanh": "Cần Thơ",
+            "quanHuyen": "Ninh Kiều",
+            "phuongXa": "Xuân Khánh",
+            "tenDuong": "Đường 3 tháng 2",
+            "soNha": "Khu 2"
+        },
         "vaiTro": "user",
         "email": "d@gmail.com",
         "matKhau": "d@gmail.com",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "avatar.jpg",
-        "ngayDangKy": "2023-11-22",
-        "trangThai": "hoạt động",
-        "lanDangNhapCuoi": "2023-11-22 10:30:00",
-        "danhSachYeuThich": [
-            {
-                "id": "1"
-            },
-            {
-                "id": "2"
-            },
-            {
-                "id": "3"
-            },
-            {
-                "id": "4"
-            }
-        ]
+        "anhDaiDien": "/Data/Images/Avatar/2/3.jpg",
+        "trangThai": "Hoạt động"
     },
     {
         "id": 5,
-        "ten": "Nguyễn Văn E",
+        "hoTen": "Nguyễn Văn E",
         "gioiTinh": "Nam",
-        "ngaySinh": "2000-01-01",
-        "diaChi": "123 đường Láng, Hà Nội",
+        "ngaySinh": "01-01-2000",
+       "diaChi": {
+            "tinhThanh": "Cần Thơ",
+            "quanHuyen": "Ninh Kiều",
+            "phuongXa": "Xuân Khánh",
+            "tenDuong": "Đường 3 tháng 2",
+            "soNha": "Khu 2"
+        },
         "vaiTro": "user",
         "email": "e@gmail.com",
         "matKhau": "e@gmail.com",
         "soDienThoai": "0123456789",
-        "anhDaiDien": "avatar.jpg",
-        "ngayDangKy": "2023-11-22",
-        "trangThai": "hoạt động",
-        "lanDangNhapCuoi": "2023-11-22 10:30:00",
-        "danhSachYeuThich": [
-            {
-                "id": "1"
-            },
-            {
-                "id": "2"
-            },
-            {
-                "id": "3"
-            },
-            {
-                "id": "4"
-            }
-        ]
+        "anhDaiDien": "/Data/Images/Avatar/2/5.webp",
+        "trangThai": "Hoạt động"
+    },
+    {
+        "id": 6,
+        "hoTen": "Nguyễn Văn F",
+        "gioiTinh": "Nam",
+        "ngaySinh": "01-01-2000",
+       "diaChi": {
+            "tinhThanh": "Cần Thơ",
+            "quanHuyen": "Ninh Kiều",
+            "phuongXa": "Xuân Khánh",
+            "tenDuong": "Đường 3 tháng 2",
+            "soNha": "Khu 2"
+        },
+        "vaiTro": "user",
+        "email": "f@gmail.com",
+        "matKhau": "f@gmail.com",
+        "soDienThoai": "0123456789",
+        "anhDaiDien": "/Data/Images/Avatar/2/5.jpg",
+        "trangThai": "Hoạt động"
     }
-];
+    
+]
