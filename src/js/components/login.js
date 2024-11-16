@@ -12,6 +12,7 @@ document.getElementById('eye').addEventListener('click', function () {
         eyeIcon.classList.remove('bi-eye-slash');
         eyeIcon.classList.add('bi-eye');
     }
+   
 });
 
 // Fetch dữ liệu từ file JSON và lưu vào localStorage  
@@ -50,7 +51,6 @@ loginForm.addEventListener('submit', function (e) {
     const user2 = accounts2.find(user =>
         user.email === loginUsername && user.matKhau === loginPassword
     );
-    console.log("ĐK: " + user, "ĐN: " + user2);
 
     if (user || user2) {
         alert('Đăng nhập thành công!');
