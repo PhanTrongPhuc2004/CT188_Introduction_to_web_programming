@@ -7,7 +7,7 @@
     "tongTien": 1000000,
     "trangThaiDonHang": "Đang vận chuyển",
     "trangThaiThanhToan": "Đã thanh toán",
-    "hinhThucThanhToan": "chuyển khoản online",
+    "hinhThucThanhToan": "chuyển khoản",
     "sanPham": [
         {
             "id": "1"
@@ -45,7 +45,7 @@
     "tongTien": 7000000,
     "trangThaiDonHang": "Đã nhận",
     "trangThaiThanhToan": "Đã thanh toán",
-    "hinhThucThanhToan": "chuyển khoản online",
+    "hinhThucThanhToan": "chuyển khoản",
     "sanPham": [
         {
             "id": "1"
@@ -64,7 +64,7 @@
     "tongTien": 15000000,
     "trangThaiDonHang": "Đang vận chuyển",
     "trangThaiThanhToan": "Đã thanh toán",
-    "hinhThucThanhToan": "chuyển khoản online",
+    "hinhThucThanhToan": "chuyển khoản",
     "sanPham": [
         {
             "id": "1"
@@ -83,7 +83,7 @@
     "tongTien": 4000000,
     "trangThaiDonHang": "Đang vận chuyển",
     "trangThaiThanhToan": "Đã thanh toán",
-    "hinhThucThanhToan": "chuyển khoản online",
+    "hinhThucThanhToan": "chuyển khoản",
     "sanPham": [
         {
             "id": "1"
