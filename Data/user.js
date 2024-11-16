@@ -1,4 +1,4 @@
-[
+const users = [
     {
         "id": 1,
         "ten": "Phan Trọng Phúc",
@@ -36,7 +36,7 @@
         "diaChi": "123 đường Láng, Hà Nội",
         "vaiTro": "user",
         "email": "b@gmail.com",
-        "matKhau": "b12345678",
+        "matKhau": "b@gmail.com",
         "soDienThoai": "0123456789",
         "anhDaiDien": "/Data/Images/Avatar/2/2.jpg",
         "ngayDangKy": "2023-11-22",
@@ -65,7 +65,7 @@
         "diaChi": "123 đường Láng, Hà Nội",
         "vaiTro": "user",
         "email": "c@gmail.com",
-        "matKhau": "c12345678",
+        "matKhau": "c@gmail.com",
         "soDienThoai": "0123456789",
         "anhDaiDien": "/Data/Images/Avatar/2/3.jpg",
         "ngayDangKy": "2023-11-22",
@@ -94,7 +94,7 @@
         "diaChi": "123 đường Láng, Hà Nội",
         "vaiTro": "user",
         "email": "d@gmail.com",
-        "matKhau": "d12345678",
+        "matKhau": "d@gmail.com",
         "soDienThoai": "0123456789",
         "anhDaiDien": "/Data/Images/Avatar/2/4.webp",
         "ngayDangKy": "2023-11-22",
@@ -123,7 +123,7 @@
         "diaChi": "123 đường Láng, Hà Nội",
         "vaiTro": "user",
         "email": "e@gmail.com",
-        "matKhau": "e12345678",
+        "matKhau": "e@gmail.com",
         "soDienThoai": "0123456789",
         "anhDaiDien": "/Data/Images/Avatar/2/5.jpg",
         "ngayDangKy": "2023-11-22",
@@ -144,4 +144,4 @@
             }
         ]
     }
-]
+];
