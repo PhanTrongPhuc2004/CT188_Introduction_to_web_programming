@@ -1,4 +1,4 @@
-//tạo hiệu ứng slash cho icon mắt
+//tạo hiệu ứng slash cho icon mắt nhập pass
 document.getElementById('eye1').addEventListener('click', function () {
     const passwordField1 = document.getElementById('registerPassword');
     const eyeIcon = document.querySelector('#eye1 i');
@@ -14,6 +14,7 @@ document.getElementById('eye1').addEventListener('click', function () {
     }
    
 });
+//tạo hiệu ứng slash cho icon mắt xác nhận pass
 document.getElementById('eye2').addEventListener('click', function () {
     const confirmPasswordField = document.getElementById('confirmRegisterPassword');
     const eyeIcon = document.querySelector('#eye2 i');
@@ -29,8 +30,6 @@ document.getElementById('eye2').addEventListener('click', function () {
     }
    
 });
-
-
 
 const form = document.getElementById('form-register');
 form.addEventListener('submit', function (e) {

@@ -12,7 +12,7 @@ document.getElementById('eye').addEventListener('click', function () {
         eyeIcon.classList.remove('bi-eye-slash');
         eyeIcon.classList.add('bi-eye');
     }
-   
+
 });
 
 // Fetch dữ liệu từ file JSON và lưu vào localStorage  
@@ -38,18 +38,15 @@ loginForm.addEventListener('submit', function (e) {
 
     // Lấy danh sách tài khoản từ LocalStorage
     let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-    console.log(accounts)
     let accounts2 = JSON.parse(localStorage.getItem('users')) || [];
-    console.log(accounts, accounts2);
-    console.log(accounts2)
 
     // Kiểm tra tài khoản và mật khẩu từ đăng ký đã lưu vào localstorage
-    const user = accounts.find(account =>
-        account.username === loginUsername && account.password === loginPassword
+    const user = accounts.find(acc =>
+        acc.username === loginUsername && acc.password === loginPassword
     );
     // kiểm tra tài khoản và mật khẩu từ file json đã lưu vào localstorage
-    const user2 = accounts2.find(user =>
-        user.email === loginUsername && user.matKhau === loginPassword
+    const user2 = accounts2.find(acc =>
+        acc.email === loginUsername && acc.matKhau === loginPassword
     );
 
     if (user || user2) {
