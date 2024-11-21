@@ -11,15 +11,9 @@
     <link rel="stylesheet" href="../../css/styles.css">
     <!-- mycode -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/Data/orders.js"></script>
     <style>
         /* CSS for customized layout */
-        /* CSS for customized layout */
-        .order-container {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px;
-        }
 
         .status-badge {
             font-size: 0.85em;
@@ -31,21 +25,6 @@
         }
 
         /* Đặt chiều rộng tối thiểu cho các cột cần thiết */
-        .status-column {
-            min-width: 70px;
-            text-align: center;
-        }
-
-        .payment-method-column {
-            min-width: 100px;
-            text-align: center;
-            white-space: nowrap;
-            /* Ngăn ngắt dòng */
-        }
-        .product-column, .note-column {
-            min-width: 300px;
-            white-space: nowrap;
-        }
 
         .status-pending {
             background-color: #ffc107;
@@ -55,8 +34,8 @@
             background-color: #28a745;
         }
 
-        .status-shipping {
-            background-color: #007bff;
+        .status-complete {
+            background-color: #2196F3;
         }
 
         .status-cancelled {
@@ -64,10 +43,8 @@
         }
 
         table thead th {
-            text-align: center;
+            text-align: left;
         }
-
-        
     </style>
 </head>
 
@@ -84,82 +61,82 @@
             <!-- Filter and Actions -->
             <div class="d-flex justify-content-between mb-3">
                 <div class="input-group" style="width: 40%;">
-                    <input type="text" class="form-control" placeholder="Filter by Order ID or Customer ID"
-                        id="filterInput">
-                    <button class="btn btn-outline-secondary" onclick="filterOrders()">Filter</button>
+                    <input type="text" class="form-control" placeholder="Tìm theo ID sản phẩm" id="filterInput">
+                    <button class="btn btn-outline-secondary" onclick="filterOrders()">Tìm</button>
                 </div>
-                <button class="btn btn-primary" onclick="approveSelected()">Approve Selected</button>
+                <button id="apply-all" class="btn btn-primary" onclick="approveSelected()">Duyệt các ô đã chọn</button>
+                <button id="submit-status" class="btn btn-primary">Áp Dụng</button>
             </div>
 
             <!-- Order Table -->
-            <div class="order-container">
-                <table class="table table-striped table-bordered">
+            <div class="table-responsive order-container">
+                <table class="table table-striped table-bordered table-hover">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">Order ID</th>
-                            <th scope="col" class="status-column">Status</th>
-                            <th scope="col">Customer ID</th>
-                            <th scope="col">Order Date</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Payment Status</th>
-                            <th scope="col" class="payment-method-column">Payment Method</th>
-                            <th scope="col">Products</th> <!-- Cột Sản phẩm -->
-                            <th scope="col">Notes</th> <!-- Cột Ghi chú -->
-                            <th scope="col">Actions</th>
-                            <th scope="col">Select</th>
+                            <th scope="col">ID</th>
+                            <th scope="col" class="status-column">Trạng Thái</th>
+                            <th scope="col">ID Khách Hàng</th>
+                            <th scope="col">Ngày Đặt Hàng</th>
+                            <th scope="col">Tổng Tiền</th>
+                            <th scope="col">Trạng Thái Thanh Toán</th>
+                            <th scope="col">Sản Phẩm</th> <!-- Cột Sản phẩm -->
+                            <th scope="col">Hành Động</th>
+                            <th scope="col">Chọn</th>
                         </tr>
                     </thead>
                     <tbody id="orderTableBody">
-                        <!-- Orders will be loaded here -->
+                        <!--  -->
                     </tbody>
                 </table>
             </div>
         </div>
 
         <script>
-            // Load orders from `order.json` file
+            // my fix
+            // Lấy dữ liệu đơn hàng từ localStorage hoặc từ biến `orders`
+            let orderData = JSON.parse(localStorage.getItem('orders')) || orders;
+
+            // Nếu chưa có dữ liệu trong localStorage, lưu dữ liệu vào localStorage
+            if (!localStorage.getItem('orders')) {
+                localStorage.setItem('orders', JSON.stringify(orders));
+            }
+
+            // Hàm tải dữ liệu và hiển thị lên bảng
             async function loadOrders() {
-                try {
-                    const response = await fetch('../../../Data/order.json');
-                    const orders = await response.json();
-                    const orderTableBody = document.getElementById("orderTableBody");
-                    orderTableBody.innerHTML = "";
+                const orderTableBody = document.getElementById("orderTableBody");
+                orderTableBody.innerHTML = "";
 
-                    orders.forEach(order => {
-                        let statusClass = "";
-                        if (order.trangThaiDonHang === "Đang vận chuyển") statusClass = "status-shipping";
-                        else if (order.trangThaiDonHang === "Đã nhận") statusClass = "status-approved";
-                        else if (order.trangThaiDonHang === "Hủy") statusClass = "status-cancelled";
-                        else statusClass = "status-pending";
+                // Duyệt qua danh sách đơn hàng và thêm vào bảng
+                orderData.forEach(order => {
+                    let statusClass = "";
+                    if (order.trangThaiDonHang === "Đã giao") statusClass = "status-complete";
+                    else if (order.trangThaiDonHang === "Đã duyệt") statusClass = "status-approved";
+                    else if (order.trangThaiDonHang === "Đã hủy") statusClass = "status-cancelled";
+                    else statusClass = "status-pending";
 
-                        // Lấy danh sách ID sản phẩm từ mảng sản phẩm
-                        const productIds = order.sanPham.map(sp => sp.id).join(", ");
-                        const row = document.createElement("tr");
-                        row.innerHTML = `
-                            <td>${order.id}</td>
-                            <td><span class="status-badge ${statusClass}">${order.trangThaiDonHang}</span></td>
-                            <td>${order.maKhachHang}</td>
-                            <td>${order.ngayDatHang} ${order.gioDatHang}</td>
-                            <td>${order.tongTien.toLocaleString()} VND</td>
-                            <td>${order.trangThaiThanhToan}</td>
-                            <td><span class="payment-method-column">${order.hinhThucThanhToan}</span></td>
-                            <td>${productIds}</td> <!-- Hiển thị danh sách sản phẩm -->
-                            <td>${order.ghiChu || ""}</td> <!-- Hiển thị ghi chú -->
-                            <td>
-                                <select class="form-select form-select-sm" onchange="updateOrderStatus(${order.id}, this.value)">
-                                    <option value="Duyệt">Duyệt</option>
-                                    <option value="Hủy">Hủy</option>
-                                    <option value="Đang giao">Đang giao</option>
-                                    <option value="Đã giao">Đã giao</option>
-                                </select>
-                            </td>
-                            <td><input type="checkbox" class="form-check-input" data-order-id="${order.id}"></td>
-                        `;
-                        orderTableBody.appendChild(row);
-                    });
-                } catch (error) {
-                    console.error('Error loading orders:', error);
-                }
+                    // Lấy danh sách ID sản phẩm từ mảng sản phẩm
+                    const productIds = order.sanPham.map(sp => sp.id).join(", ");
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${order.id}</td>
+                        <td><span class="status-badge ${statusClass}">${order.trangThaiDonHang}</span></td>
+                        <td>${order.maKhachHang}</td>
+                        <td>${order.ngayDatHang} ${order.gioDatHang}</td>
+                        <td>${order.tongTien.toLocaleString()} VND</td>
+                        <td>${order.trangThaiThanhToan}</td>
+                        <td>${productIds}</td> <!-- Hiển thị danh sách sản phẩm -->
+                        <td>
+                            <select class="form-select form-select-sm" onchange="updateOrderStatus(${order.id}, this.value)">
+                                <option value="Đang chờ xử lý">Hành động</option>
+                                <option value="Đã duyệt">Duyệt</option>
+                                <option value="Đã hủy">Hủy</option>
+                                <option value="Đã giao">Đã giao</option>
+                            </select>
+                        </td>
+                        <td><input type="checkbox" class="form-check-input" data-order-id="${order.id}"></td>
+                    `;
+                    orderTableBody.appendChild(row);
+                });
             }
 
             // Filter orders by input
@@ -167,31 +144,60 @@
                 const filterText = document.getElementById("filterInput").value.toLowerCase();
                 document.querySelectorAll("#orderTableBody tr").forEach(row => {
                     const id = row.cells[0].textContent;
-                    const customerId = row.cells[2].textContent;
-                    row.style.display = (id.includes(filterText) || customerId.includes(filterText)) ? "" : "none";
+                    row.style.display = (id.includes(filterText)) ? "" : "none";
                 });
             }
+            // Bắt sự kiện khi nhấn Enter để tìm kiếm người dùng
+            document.getElementById("filterInput").addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    filterOrders(); // Gọi hàm filterUser khi nhấn Enter
+                    event.preventDefault(); // Ngăn chặn hành vi mặc định
+                }
+            });
 
             // Update order status
+            // Hàm cập nhật trạng thái đơn hàng và lưu vào localStorage
             function updateOrderStatus(orderId, newStatus) {
+                // Tìm đơn hàng có id khớp và cập nhật trạng thái
+                const orderIndex = orderData.findIndex(order => parseInt(order.id) === parseInt(orderId));
+                orderData[orderIndex].trangThaiDonHang = newStatus;
+
+
+                // Cập nhật giao diện
                 const rows = document.querySelectorAll("#orderTableBody tr");
                 rows.forEach(row => {
-                    if (row.cells[0].textContent === orderId.toString()) {
+                    if (parseInt(row.cells[0].textContent) === orderId) {
                         const statusBadge = row.querySelector(".status-badge");
                         statusBadge.textContent = newStatus;
-                        if (newStatus === "Duyệt") statusBadge.className = "status-badge status-approved";
-                        else if (newStatus === "Hủy") statusBadge.className = "status-badge status-cancelled";
-                        else if (newStatus === "Đang giao") statusBadge.className = "status-badge status-shipping";
-                        else if (newStatus === "Đã giao") statusBadge.className = "status-badge status-pending";
+                        if (newStatus === "Đã duyệt") statusBadge.className = "status-badge status-approved";
+                        else if (newStatus === "Đã hủy") statusBadge.className = "status-badge status-cancelled";
+                        else if (newStatus === "Đã giao") statusBadge.className = "status-badge status-complete";
+                        else {
+                            statusBadge.className = "status-badge status-pending";
+                            statusBadge.textContent = "Đang chờ xử lý";
+                        }
+                            
                     }
                 });
+                document.getElementById("submit-status").onclick = submitStatus;
+                
+            }
+            let markApplyAll=0;
+            // Approve selected orders
+            function submitStatus() {
+                // Lưu dữ liệu cập nhật vào localStorage
+                localStorage.setItem('orders', JSON.stringify(orderData));
+                alert("Đã lưu trạng thái!")
             }
 
-            // Approve selected orders
             function approveSelected() {
                 document.querySelectorAll("#orderTableBody input[type=checkbox]:checked").forEach(checkbox => {
                     const orderId = checkbox.getAttribute("data-order-id");
-                    updateOrderStatus(orderId, "Duyệt");
+                    updateOrderStatus(orderId, "Đã duyệt");
+                    localStorage.setItem('orders', JSON.stringify(orderData));
+                    loadOrders();
+                    markApplyAll++;
+                    if(markApplyAll==1)alert("Đã duyệt các ô đã chọn");
                 });
             }
 

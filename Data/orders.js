@@ -5,7 +5,7 @@ const orders = [
         "ngayDatHang": "2023-11-22",
         "gioDatHang": "14:30:00",
         "tongTien": 1000000,
-        "trangThaiDonHang": "Đang vận chuyển",
+        "trangThaiDonHang": "Đang chờ xử lý",
         "trangThaiThanhToan": "Đã thanh toán",
         "hinhThucThanhToan": "chuyển khoản online",
         "sanPham": [
@@ -24,7 +24,7 @@ const orders = [
         "ngayDatHang": "2023-11-22",
         "gioDatHang": "14:30:00",
         "tongTien": 500000,
-        "trangThaiDonHang": "Đang vận chuyển",
+        "trangThaiDonHang": "Đã duyệt",
         "trangThaiThanhToan": "Chưa thanh toán",
         "hinhThucThanhToan": "Tiền mặt",
         "sanPham": [
@@ -43,7 +43,7 @@ const orders = [
         "ngayDatHang": "2023-11-22",
         "gioDatHang": "14:30:00",
         "tongTien": 7000000,
-        "trangThaiDonHang": "Đã nhận",
+        "trangThaiDonHang": "Đã giao",
         "trangThaiThanhToan": "Đã thanh toán",
         "hinhThucThanhToan": "chuyển khoản online",
         "sanPham": [
@@ -62,7 +62,7 @@ const orders = [
         "ngayDatHang": "2023-11-22",
         "gioDatHang": "14:30:00",
         "tongTien": 15000000,
-        "trangThaiDonHang": "Đang vận chuyển",
+        "trangThaiDonHang": "Đã giao",
         "trangThaiThanhToan": "Đã thanh toán",
         "hinhThucThanhToan": "chuyển khoản online",
         "sanPham": [
@@ -81,7 +81,7 @@ const orders = [
         "ngayDatHang": "2023-11-22",
         "gioDatHang": "14:30:00",
         "tongTien": 4000000,
-        "trangThaiDonHang": "Đang vận chuyển",
+        "trangThaiDonHang": "Đang chờ xử lý",
         "trangThaiThanhToan": "Đã thanh toán",
         "hinhThucThanhToan": "chuyển khoản online",
         "sanPham": [
