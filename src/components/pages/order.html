@@ -71,40 +71,41 @@
 
             // Gọi hàm để lấy các đơn hàng của người dùng
             const userOrders = getUserOrders();
+            localStorage.setItem("loggedUser", JSON.stringify(userOrders));
             console.log("Đơn hàng của người dùng:", userOrders);
 
 
             // hiển thị đơn hàng
             function displayUserOrders() {
-    const userOrders = getUserOrders();
-    const orderTableBody = document.getElementById("orderTableBody");
-    orderTableBody.innerHTML = ""; // Xóa nội dung cũ
+                const userOrders = getUserOrders();
+                const orderTableBody = document.getElementById("orderTableBody");
+                orderTableBody.innerHTML = ""; // Xóa nội dung cũ
 
-    userOrders.forEach(order => {
-        const orderCard = document.createElement("div");
-        orderCard.className = "order-card mb-4 p-3 border rounded";
-        orderCard.innerHTML = `
-            <div class="row">
-                <div class="col-md-8">
-                    <h5>Mã đơn hàng: #${order.id}</h5>
-                    <p>Ngày đặt: ${order.ngayDatHang}</p>
-                    <p>Tổng tiền: ${order.tongTien.toLocaleString()} VND</p>
-                    <p class="order-status ${
-                      order.trangThaiDonHang === "Đã giao"
-                        ? "text-success"
-                        : order.trangThaiDonHang === "Đang xử lý"
-                        ? "text-warning"
-                        : "text-danger"
-                    }">Trạng thái: ${order.trangThaiDonHang}</p>
-                </div>
-                <div class="col-md-4 text-end">
-                    <a href="#" class="btn view-details-btn">Xem chi tiết</a>
-                </div>
-            </div>
-        `;
-        orderTableBody.appendChild(orderCard);
-    });
-}
+                userOrders.forEach(order => {
+                    const orderCard = document.createElement("div");
+                    orderCard.className = "order-card mb-4 p-3 border rounded";
+                    orderCard.innerHTML = `
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h5>Mã đơn hàng: #${order.id}</h5>
+                                <p>Ngày đặt: ${order.ngayDatHang}</p>
+                                <p>Tổng tiền: ${order.tongTien.toLocaleString()} VND</p>
+                                <p class="order-status ${
+                                order.trangThaiDonHang === "Đã giao"
+                                    ? "text-success"
+                                    : order.trangThaiDonHang === "Đang xử lý"
+                                    ? "text-warning"
+                                    : "text-danger"
+                                }">Trạng thái: ${order.trangThaiDonHang}</p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <a href="#" class="btn view-details-btn">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    `;
+                    orderTableBody.appendChild(orderCard);
+                });
+            }
 
             // Gọi hàm hiển thị
             displayUserOrders();
