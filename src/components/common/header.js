@@ -71,6 +71,7 @@ const headerHTML = `
             </div>
             </div>
         </nav>
+        <div style="width: 100%; height: 120px; "></div>
     </body>
 </header>
 `;
