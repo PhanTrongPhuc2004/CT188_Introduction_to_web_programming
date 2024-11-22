@@ -9,7 +9,6 @@
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css">
-    <script src="../../js/components/main.js"></script>
 
     <!-- my code -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -220,7 +219,7 @@
                         row.innerHTML = `
                                 <td>${user.id}</td>
                                 <td><img src="${user.anhDaiDien}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                                <td>${user.ten}</td>
+                                <td>${user.hoTen}</td>
                                 <td>${user.soDienThoai}</td>
                                 <td>${user.email}</td>
                                 <td>${user.vaiTro}</td>
@@ -252,7 +251,7 @@
                     // Điền thông tin người dùng vào modal
                     document.getElementById("detailId").textContent = user.id;
                     document.getElementById("detailAvatar").src = user.anhDaiDien;
-                    document.getElementById("detailName").textContent = user.ten;
+                    document.getElementById("detailName").textContent = user.hoTen;
                     document.getElementById("detailGender").textContent = user.gioiTinh;
                     document.getElementById("detailDob").textContent = user.ngaySinh;
                     document.getElementById("detailAddress").textContent = user.diaChi;
@@ -339,7 +338,7 @@
                     // Chỉnh sửa người dùng
                     const userIndex = userData.findIndex(user => parseInt(user.id) === parseInt(editingUserId));
                     if (userIndex !== -1) {
-                        userData[userIndex].ten = ten;
+                        userData[userIndex].hoTen = ten;
                         userData[userIndex].soDienThoai = soDienThoai;
                         userData[userIndex].email = email;
                         userData[userIndex].vaiTro = vaiTro;
@@ -383,7 +382,7 @@
 
                 if (userToEdit) {
                     document.getElementById("newUserId").value = userToEdit.id;
-                    document.getElementById("newUserName").value = userToEdit.ten;
+                    document.getElementById("newUserName").value = userToEdit.hoTen;
                     document.getElementById("newUserPhone").value = userToEdit.soDienThoai;
                     document.getElementById("newUserEmail").value = userToEdit.email;
                     document.getElementById("newUserRole").value = userToEdit.vaiTro;
@@ -426,8 +425,8 @@
 
                 // Sắp xếp danh sách theo tên
                 userData.sort((a, b) => {
-                    const nameA = a.ten.toLowerCase();
-                    const nameB = b.ten.toLowerCase();
+                    const nameA = a.hoTen.toLowerCase();
+                    const nameB = b.hoTen.toLowerCase();
 
                     if (nameA < nameB) return isAscending ? -1 : 1;
                     if (nameA > nameB) return isAscending ? 1 : -1;
@@ -455,8 +454,9 @@
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> -->
     </main>
     <footer id="footer"></footer>
-    <script src="../common/header_company.js"></script>
+    <script src="../common/header.js"></script>
     <script src="../common/footer.js"></script>
+    
     <script src="../../js/components/usermanagment.js"></script>
 </body>
 

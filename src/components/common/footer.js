@@ -56,7 +56,7 @@ const footerHTML = `
                 </div>
 
                 <!-- DICH VU -->
-                <div class="d-flex col-md-3 text-start justify-content-center align-items-center ">
+                <div class="col-md-3 text-start justify-content-center align-items-center ">
                     <div>
                         <h5>DỊCH VỤ</h5>
                     <ul class="list-unstyled">

@@ -14,31 +14,37 @@
         body {
             background-color: silver;
         }
+
         #wrapper {
-            min-height: 80vh;
+            min-height: 70vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         #form-register {
             max-width: 400px;
             background: rgba(0, 0, 0, 0.8);
             flex-grow: 1;
+            margin-top: 110px;
             padding: 30px 30px 40px;
             box-shadow: 2px 2px 17px 4px rgba(247, 245, 245, 0.8);
         }
+
         .form-heading {
             font-size: 25px;
             color: #fff;
             text-align: center;
             margin-bottom: 30px;
         }
+
         .form-group {
             border-bottom: 1px solid #fff;
             margin-top: 15px;
             margin-bottom: 15px;
             display: flex;
         }
+
         .form-input {
             background: transparent;
             border: 0;
@@ -46,15 +52,16 @@
             color: #f5f5f5;
             flex-grow: 1;
         }
-        #eye i {
+
+        #eye1 i,#eye2 i {
             padding: 0px;
             cursor: pointer;
         }
+
         .forgot {
             text-align: center;
             color: #fff;
         }
-        .form-submit,
         .form-submit-subscribe {
             background: #d8d7ce;
             border: 1px solid #f5f5f5;
@@ -64,14 +71,16 @@
             padding: 8px;
             margin-top: 20px;
         }
+
         .form-submit-subscribe {
             background: transparent;
             color: #fff;
+            padding: 15px;
         }
-        .form-submit:hover,
         .form-submit-subscribe:hover {
             border: 1px solid #ee1313;
         }
+
         .form-group i {
             color: #f5f5f5;
             padding-top: 7px;
@@ -86,21 +95,30 @@
     <main id="main">
         <div id="wrapper">
             <div id="form-register">
-                <form action=""  >
+                <form action="">
                     <h1 class="form-heading">Đăng Ký</h1>
                     <div class="form-group">
                         <i class="bi bi-person"></i>
-                        <input id="username" type="text" class="form-input" placeholder="Nhập địa chỉ email hoặc số điện thoại" required>
+                        <input id="registerUsername" type="text" class="form-input"
+                            placeholder="Nhập địa chỉ email hoặc số điện thoại" required>
                     </div>
                     <div class="form-group">
                         <i class="bi bi-key"></i>
-                        <input id="password" type="password" class="form-input" placeholder="Tạo mật khẩu" required>
-                        <div id="eye" class="open">
+                        <input id="registerPassword" type="password" class="form-input" placeholder="Tạo mật khẩu" required>
+                        <div id="eye1" class="open">
+                            <i class="bi bi-eye"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <i class="bi bi-key"></i>  
+                        <input id="confirmRegisterPassword" type="password" class="form-input" placeholder="Xác nhận lại mật khẩu mật khẩu" required>
+                        <div id="eye2" class="open">
                             <i class="bi bi-eye"></i>
                         </div>
                     </div>
                     <div class="forgot">
-                        Bạn đã có tài khoản? <a href="http://127.0.0.1:5500/src/components/pages/login.html">Đăng Nhập</a>
+                        Bạn đã có tài khoản? <a href="http://127.0.0.1:5500/src/components/pages/login.html">Đăng
+                            Nhập</a>
                     </div>
                     <button type="submit" class="form-submit-subscribe">Đăng ký</button>
                 </form>
@@ -111,37 +129,10 @@
     </footer>
 </body>
 
-<script>
-    const form = document.getElementById('form-register');
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        if (username && password) {
-            let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-            const isExistingUser = accounts.some(account => account.username === username);
-
-            if (isExistingUser) {
-                alert('Tên người dùng đã tồn tại!')
-            } else {
-                accounts.push({ username, password });
-                localStorage.setItem('accounts', JSON.stringify(accounts));
-                alert('Đăng ký thành công!')
-
-                // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
-                    window.location.href = 'http://127.0.0.1:5500/src/components/pages/login.html';
-            }
-        } else {
-            message.textContent = 'Vui lòng điền đầy đủ thông tin!';
-        }
-    });
-</script>
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="../../js/components/namePage.js"></script>
+<script src="../../js/components/register.js"></script>
 <script src="../../components/common/header.js"></script>
 <script src="../../components/common/footer.js"></script>
 <script src="../../js/components/main.js"></script>
