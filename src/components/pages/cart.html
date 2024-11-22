@@ -20,69 +20,9 @@
         <div class="container my-5">
             <h1 class="cart-title mb-5">Giỏ hàng</h1>
             <div class="d-flex row">
-                <!-- Product Items -->
-                <div class="col-lg-8">
-                    <!-- First Product -->
-                     
-                    <div class="d-flex border border-2 rounded-3 pb-3 mb-3">
-                        <img src="../../../Data/Images/1/15/1.jpg" alt="Dịch vụ 1" class="product-img me-3">
-                        <div class="flex-grow-1">
-                            <h5 class="product-title">Dịch vụ 1</h5>
-                            <p>10 000đ</p>
-                            <p>Phong cách châu Âu sang trọng.</p>
-                            <div class="d-flex align-items-center">
-                                <button class="btn btn-outline-secondary btn-sm me-2">-</button>
-                                <input type="text" value="3" class="form-control form-control-sm text-center"
-                                    style="width: 50px;">
-                                <button class="btn btn-outline-secondary btn-sm ms-2">+</button>
-                                <a href="#" class="text-danger ms-auto">Xóa đơn hàng</a>
-                            </div>
-                        </div>
-                        <div class="text-start">
-                            <p class="fw-bold">30 000đ</p>
-                        </div>
-                    </div>
-
-                    <!-- Second Product -->
-                    <div class="d-flex border border-2 rounded-3 pb-3 mb-3">
-                        <img src="../../../Data/Images/1/1/1.jpg" alt="" class="product-img me-3">
-                        <div class="flex-grow-1">
-                            <h5 class="product-title">Dịch vụ 2</h5>
-                            <p>20 000đ</p>
-                            <p>Tiệc Cưới Lãng Mạn Với Sắc Hồng Tinh Tế.</p>
-                            <div class="d-flex align-items-center">
-                                <button class="btn btn-outline-secondary btn-sm me-2">-</button>
-                                <input type="text" value="3" class="form-control form-control-sm text-center"
-                                    style="width: 50px;">
-                                <button class="btn btn-outline-secondary btn-sm ms-2">+</button>
-                                <a href="#" class="text-danger ms-auto">Xóa đơn hàng</a>
-                            </div>
-                        </div>
-                        <div class="text-end">
-                            <p class="fw-bold">60 000đ</p>
-                        </div>
-                    </div>
-
-                    <!-- Second Product -->
-                    <div class="d-flex border border-2 rounded-3 pb-3 mb-3">
-                        <img src="../../../Data/Images/1/1/1.jpg" alt="" class="product-img me-3">
-                        <div class="flex-grow-1">
-                            <h5 class="product-title">Dịch vụ 2</h5>
-                            <p>20 000đ</p>
-                            <p>Tiệc Cưới Lãng Mạn Với Sắc Hồng Tinh Tế.</p>
-                            <div class="d-flex align-items-center">
-                                <button class="btn btn-outline-secondary btn-sm me-2">-</button>
-                                <input type="text" value="3" class="form-control form-control-sm text-center"
-                                    style="width: 50px;">
-                                <button class="btn btn-outline-secondary btn-sm ms-2">+</button>
-                                <a href="#" class="text-danger ms-auto">Xóa đơn hàng</a>
-                            </div>
-                        </div>
-                        <div class="text-end">
-                            <p class="fw-bold">60 000đ</p>
-                        </div>
-                    </div>
-                    
+                <!-- Product Items Container -->
+                <div class="col-lg-8" id="product-items-container">
+                    <!-- JavaScript sẽ chèn các sản phẩm vào đây -->
                 </div>
 
                 <!-- Cart Totals -->
@@ -98,36 +38,52 @@
                                         <th>Đơn giá</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Dịch vụ 1</td>
-                                        <td>3</td>
-                                        <td>30 000đ</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dịch vụ 2</td>
-                                        <td>3</td>
-                                        <td>60 000đ</td>
-                                    </tr>
+                                <tbody id="cart-totals-body">
+                                    <!-- JavaScript sẽ chèn thông tin hóa đơn vào đây -->
                                 </tbody>
                             </table>
                         </div>
                         <div class="d-flex justify-content-between fw-bold">
                             <p>Tổng hóa đơn</p>
-                            <p>90 000đ</p>
+                            <p id="total-amount">90 000đ</p>
                         </div>
                         <button class="btn btn-checkout mt-3 btn-danger">Thanh toán</button>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Container để hiển thị danh sách sản phẩm -->
+        <div class="col-lg-8"></div>
+
+        <!-- Modal Chi tiết Sản phẩm -->
+        <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productDetailsLabel">Chi tiết Sản phẩm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="modalProductImage" src="" alt="Product Image" class="img-fluid mb-3">
+                        <h5 id="modalProductName" class="mb-2"></h5>
+                        <p id="modalProductPrice" class="text-muted"></p>
+                        <p id="modalProductDescription"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </main>
     <footer id="footer"></footer>
-    <script src="../common/header.js"></script>
+    <script src="../common/header_customer.js"></script>
     <script src="../common/footer.js"></script>
-    <!-- <script src="../../js/components/cart.js"></script> -->
-    <script src="../../js/components/main.js"></script>
+    <script src="/Data/products.js"></script>
+    <script src="/src/js/components/cart.js"></script>
 
 </body>
 
