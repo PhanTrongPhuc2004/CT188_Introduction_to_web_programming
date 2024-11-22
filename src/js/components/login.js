@@ -56,8 +56,6 @@ loginForm.addEventListener('submit', function (e) {
             const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
             // lưu trạng thái đã đăng nhập bằng true
             storedUser.status = true;
-            // lưu trạng vai trò người dùng
-            // storedUser.vaiTro = user.vaiTro;
             // lưu lại thông tin người dùng
             storedUser.user = user;
             // lưu lại biến loggedUser vào trong local storage
@@ -68,8 +66,6 @@ loginForm.addEventListener('submit', function (e) {
              const storedUser = JSON.parse(localStorage.getItem("loggedUser"));
              // lưu trạng thái đã đăng nhập bằng true
              storedUser.status = true;
-             // lưu trạng vai trò người dùng
-            // storedUser.vaiTro = user2.vaiTro;
              // lưu lại thông tin người dùng
              storedUser.user = user2;
              // lưu lại biến loggedUser vào trong local storage

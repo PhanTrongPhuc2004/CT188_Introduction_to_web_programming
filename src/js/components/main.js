@@ -11,6 +11,7 @@ footerElement.innerHTML = footerHTML;
 // Phần làm rỗng biến loggedUser khi chọn đăng xuất
 const logoutButton = document.getElementById('logout_button');
 logoutButton.addEventListener('click', () => {
+    
   // Lấy biến loggedUser trong local storage lên
   let stored_User = JSON.parse(localStorage.getItem("loggedUser"));
   // lưu trạng thái đã đăng nhập bằng false
@@ -25,7 +26,7 @@ logoutButton.addEventListener('click', () => {
   localStorage.setItem("loggedUser", JSON.stringify(stored_User));
 });
 
-// Phần ẩn nút Quản lý trên header nếu không là admin 
+// Phần ẩn nút Quản lý. icon cart/order trên header
 let stored_User = JSON.parse(localStorage.getItem("loggedUser"));
 
 if (stored_User.status == false) {
