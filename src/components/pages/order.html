@@ -63,6 +63,8 @@
                     // Lọc các đơn hàng có `maKhachHang` trùng với `loggedUser.user.id`
                     const userOrders = orderList.filter(order => parseInt(order.maKhachHang) === parseInt(loggedUser.user.id));
                     console.log("1");
+                    loggedUser.order = userOrders;
+                    localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
                     // Trả về danh sách đơn hàng của người dùng
                     return userOrders;
                 }
@@ -71,7 +73,6 @@
 
             // Gọi hàm để lấy các đơn hàng của người dùng
             const userOrders = getUserOrders();
-            localStorage.setItem("loggedUser", JSON.stringify(userOrders));
             console.log("Đơn hàng của người dùng:", userOrders);
 
 
