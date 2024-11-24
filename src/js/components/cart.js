@@ -5,18 +5,37 @@ headerElement.innerHTML = header_customerHTML;
 const footerElement = document.getElementById('footer');
 footerElement.innerHTML = footerHTML;
 
-// Khởi tạo dữ liệu sản phẩm từ localStorage hoặc từ product.js
-let productData = JSON.parse(localStorage.getItem('products')) || products;
-
 // Lưu dữ liệu vào localStorage nếu chưa có
-if (!localStorage.getItem('products')) {
-    localStorage.setItem('products', JSON.stringify(products));
+if (!localStorage.getItem('cartsList')) {
+    localStorage.setItem('cartsList', JSON.stringify(carts));
 }
+
+// Cập nhật loggedUser với các carts
+function getUserCarts() {
+    // Lấy thông tin loggedUser từ localStorage
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+    // Lấy danh sách carts từ localStorage
+    const cartList = JSON.parse(localStorage.getItem("cartsList"));
+
+    if (loggedUser && loggedUser.user?.id && cartList) {
+        // Lọc các đơn hàng có `maKhachHang` trùng với `loggedUser.user.id`
+        const userCart = cartList.filter(cart => parseInt(cart.maKhachHang) === parseInt(loggedUser.user.id));
+        console.log("1");
+        loggedUser.cart = userCart;
+        localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+        // Trả về danh sách đơn hàng của người dùng
+        return userCart;
+    }
+    return [];
+}
+
+const userCarts = getUserCarts();
 
 // Khởi tạo ứng dụng
 function init() {
     setupEventListeners();
-    displayProducts();
+    displayCarts();
 }
 
 // Thiết lập các sự kiện
@@ -36,27 +55,77 @@ function setupEventListeners() {
     });
 }
 
-// Hàm tăng/giảm số lượng sản phẩm
+// Cập nhật số lượng sản phẩm
 function updateQuantity(productId, change) {
-    const product = productData.find(p => parseInt(p.id) === parseInt(productId));
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    const userCart = loggedUser.cart || [];
+
+    // Tìm sản phẩm cần cập nhật
+    const product = userCart.find(p => parseInt(p.id) === parseInt(productId));
     if (product) {
-        product.soLuong = Math.max(1, product.soLuong + change); // Số lượng không được nhỏ hơn 1
-        localStorage.setItem('products', JSON.stringify(productData));
-        displayProducts(); // Cập nhật lại giao diện và tổng giá trị
+        // Cập nhật số lượng (không cho nhỏ hơn 1)
+        product.soLuong = Math.max(1, product.soLuong + change);
+
+        // Lưu thay đổi vào loggedUser
+        loggedUser.cart = userCart;
+        localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+
+        // Cập nhật lại cartList gốc
+        updateCartList(userCart);
+
+        // Hiển thị lại giao diện
+        displayCarts();
     }
 }
 
+// Xóa sản phẩm
+function deleteProduct(productId) {
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    let userCart = loggedUser.cart || [];
+
+    // Lọc bỏ sản phẩm khỏi giỏ hàng
+    userCart = userCart.filter(p => parseInt(p.id) !== parseInt(productId));
+
+    // Lưu thay đổi vào loggedUser
+    loggedUser.cart = userCart;
+    localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+
+    // Cập nhật lại cartList gốc và loại bỏ sản phẩm đã xóa
+    updateCartList(userCart);
+
+    // Hiển thị lại giao diện
+    displayCarts();
+}
+
+// Cập nhật cartList gốc trong localStorage
+function updateCartList(userCart) {
+    let cartList = JSON.parse(localStorage.getItem("cartsList")) || [];
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+    // Lọc bỏ các sản phẩm không còn trong giỏ hàng
+    cartList = cartList.filter(cart => {
+        if (parseInt(cart.maKhachHang) === parseInt(loggedUser.user.id)) {
+            return userCart.some(p => p.id === cart.id);
+        }
+        return true;
+    });
+
+    // Lưu lại cartList vào localStorage
+    localStorage.setItem("cartsList", JSON.stringify(cartList));
+}
+
 // Hiển thị danh sách sản phẩm
-function displayProducts() {
-    console.log("test1");
+function displayCarts() {
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    const userCart = loggedUser.cart || [];
     const productContainer = document.getElementById('product-items-container');
     productContainer.innerHTML = ''; // Xóa nội dung cũ
 
-    productData.forEach(product => {
+    userCart.forEach(product => {
         const productElement = document.createElement('div');
         productElement.className = 'd-flex border border-2 rounded-3 pb-3 mb-3';
         productElement.innerHTML = `
-             <img src="${product.anhBia}" alt="${product.ten}" class="product-img me-3">
+            <img src="${product.anhBia}" alt="${product.ten}" class="product-img me-3">
             <div class="flex-grow-1">
                 <h5 class="product-title">${product.ten}</h5>
                 <p>${product.gia.toLocaleString()}đ</p>
@@ -75,22 +144,21 @@ function displayProducts() {
          `;
         productContainer.appendChild(productElement);
     });
-     // Cập nhật tổng giá trị giỏ hàng
-     const totalAmountElement = document.getElementById('total-amount');
-     totalAmountElement.innerText = calculateTotalAmount().toLocaleString() + 'đ';
+
+    // Cập nhật tổng giá trị giỏ hàng
+    const totalAmountElement = document.getElementById('total-amount');
+    totalAmountElement.innerText = calculateTotalAmount(userCart).toLocaleString() + 'đ';
 }
+
 // Tính tổng giá trị giỏ hàng
-function calculateTotalAmount() {
-    let totalAmount = 0;
-    productData.forEach(product => {
-        totalAmount += product.gia * product.soLuong;
-    });
-    return totalAmount;
+function calculateTotalAmount(cart) {
+    return cart.reduce((total, product) => total + product.gia * product.soLuong, 0);
 }
+
 
 // Hiển thị chi tiết sản phẩm
 function showProductDetails(productId) {
-    const product = productData.find(p => parseInt(p.id) === parseInt(productId));
+    const product = userCarts.find(p => parseInt(p.id) === parseInt(productId));
 
     if (product) {
         // Hiển thị chi tiết sản phẩm trong modal
@@ -105,16 +173,6 @@ function showProductDetails(productId) {
     } else {
         alert('Sản phẩm không tìm thấy!');
     }
-}
-
-// Xóa sản phẩm
-function deleteProduct(productId) {
-    // Lọc bỏ sản phẩm khỏi dữ liệu
-    productData = productData.filter(p => parseInt(p.id) !== parseInt(productId));
-
-    // Cập nhật lại localStorage và làm mới giao diện
-    localStorage.setItem('products', JSON.stringify(productData));
-    displayProducts(); // Hiển thị lại danh sách sản phẩm
 }
 
 // Khởi động ứng dụng

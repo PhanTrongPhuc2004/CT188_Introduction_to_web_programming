@@ -49,15 +49,13 @@
         </div>
 
         <script>
-            // Đưa mảng orders lên localStorage
-            localStorage.setItem("orderList", JSON.stringify(orders));
             // Cập nhật loggedUser với các đơn hàng từ orders
             function getUserOrders() {
                 // Lấy thông tin loggedUser từ localStorage
                 const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
                 // Lấy danh sách orders từ localStorage
-                const orderList = JSON.parse(localStorage.getItem("orderList"));
+                const orderList = JSON.parse(localStorage.getItem("orders"));
 
                 if (loggedUser && loggedUser.user?.id && orderList) {
                     // Lọc các đơn hàng có `maKhachHang` trùng với `loggedUser.user.id`
@@ -92,10 +90,12 @@
                                 <p>Ngày đặt: ${order.ngayDatHang}</p>
                                 <p>Tổng tiền: ${order.tongTien.toLocaleString()} VND</p>
                                 <p class="order-status ${
-                                order.trangThaiDonHang === "Đã giao"
+                                order.trangThaiDonHang === "Đã duyệt"
                                     ? "text-success"
-                                    : order.trangThaiDonHang === "Đang xử lý"
+                                    : order.trangThaiDonHang === "Đang chờ xử lý"
                                     ? "text-warning"
+                                    : order.trangThaiDonHang === "Đã giao"
+                                    ? "text-primary"
                                     : "text-danger"
                                 }">Trạng thái: ${order.trangThaiDonHang}</p>
                             </div>
