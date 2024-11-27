@@ -1,27 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WeddingPlanning</title>
-    <link rel="stylesheet" href="../../../bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="../../../bootstrap-5.0.2-dist/css/bootstrap.min.css"
+    />
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../../css/styles.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="../../css/styles.css" />
+  </head>
 
-<body>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .table th,
+    .table td {
+      vertical-align: middle;
+    }
+    .table img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .btn-custom {
+      background-color: #000;
+      color: #fff;
+    }
+    .btn-custom:hover {
+      background-color: #333;
+    }
+    .form-control {
+      border-radius: 50px;
+    }
+    .form-control:focus {
+      box-shadow: none;
+    }
+    .btn-group .btn {
+      border-radius: 50px;
+    }
+    .btn-group .btn.active {
+      background-color: #000;
+      color: #fff;
+    }
+    .btn-group .btn.active:hover {
+      background-color: #333;
+    }
+    .profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  </style>
+
+  <body>
     <header id="header"></header>
     <main id="main">
-        <div>
-            <h1>Đây là trang quản lý sản phẩm</h1>
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h1>Quản lý sản phẩm</h1>
         </div>
+        <div class="input-group mb-3" style="width: 400px">
+          <span class="input-group-text bg-white border-0">
+            <i class="fas fa-search"> </i>
+          </span>
+          <input
+            id="searchInput"
+            class="form-control"
+            placeholder="Tìm kiếm sản phẩm theo ID hoặc tên"
+            type="text"
+            />
+            <button class="btn btn-outline-primary" onclick="searchProducts()">
+              Tìm kiếm
+            </button>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="btn-group" role="group">
+            <button class="btn btn-outline-secondary active" type="button">
+              Active
+            </button>
+            <button class="btn btn-outline-secondary" type="button">
+              Category
+            </button>
+            <button class="btn btn-outline-secondary" type="button">
+              Quantity
+            </button>
+            <button class="btn btn-outline-secondary" type="button">
+              Price
+            </button>
+          </div>
+          <div>
+            <!-- <button class="btn btn-outline-primary" type="button">
+              CREATE CATEGORY
+            </button> -->
+            <button class="btn btn-outline-primary" type="button">
+              Thêm sản phẩm
+            </button>
+          </div>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">
+                <input type="checkbox" />
+              </th>
+              <th scope="col">ID</th>
+              <th scope="col">Tên sản phẩm</th>
+              <th scope="col">Loại</th>
+              <th scope="col">Địa chỉ</th>
+              <th scope="col">Giờ mở cửa</th>
+              <!-- <th scope="col">Cost</th> -->
+              <th scope="col">Giá</th>
+              <th scope="col">Số điện thoại</th>
+              <th scope="col">Chỉnh sửa</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody">
+            <!-- Sản phẩm sẽ được hiển thị ở đây -->
+          </tbody>
+        </table>
+      </div>
     </main>
     <footer id="footer"></footer>
     <script src="../../components/common/header.js"></script>
     <script src="../../components/common/footer.js"></script>
     <script src="../../js/components/main.js"></script>
-</body>
+    <script src="/Data/products.js"></script>
+  </body>
 
+  <script>
+    // Load products from localStorage or use the products array from product.js
+    let productData = JSON.parse(localStorage.getItem("products")) || products;
+
+    // Store products in localStorage if not already stored
+    if (!localStorage.getItem("products")) {
+      localStorage.setItem("products", JSON.stringify(products));
+    }
+
+    // Hàm hiển thị sản phẩm trong bảng
+    function loadProducts(filteredData = productData) {
+      const productTableBody = document.getElementById("productTableBody");
+      productTableBody.innerHTML = ""; // Xóa dữ liệu cũ nếu có
+
+      // Lặp qua danh sách sản phẩm (mặc định là productData hoặc mảng đã lọc)
+      filteredData.forEach((product) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td><input type="checkbox" /></td>
+        <td>${product.id}</td>
+        <td>${product.ten}</td>
+        <td>${product.loaiDiaDiem}</td>
+        <td>${product.diaChi}</td>
+        <td>${product.gioMoCua}</td>
+        <td>${product.gia.toLocaleString()} VND</td>
+        <td>${product.soDienThoai}</td>
+         <td>
+            <button class="btn btn-sm btn-outline-primary" title="Chỉnh sửa">
+                <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger" title="Xóa">
+                <i class="bi bi-trash3"></i>
+            </button>
+        </td>
+    `;
+        productTableBody.appendChild(row);
+      });
+    }
+
+    // Hàm tìm kiếm sản phẩm
+    function searchProducts() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const isQueryNumeric = !isNaN(query); // Kiểm tra query là số hay không
+
+      // Lọc sản phẩm theo ID hoặc tên
+      const filteredProducts = productData.filter((product) => {
+        if (isQueryNumeric) {
+          // Nếu là số, so sánh chính xác với ID
+          return product.id.toString() === query;
+        } else {
+          // Nếu là chuỗi, tìm kiếm trong tên sản phẩm
+          return product.ten.toLowerCase().includes(query);
+        }
+      });
+
+      // Hiển thị danh sách sản phẩm đã lọc
+      loadProducts(filteredProducts);
+    }
+
+    // Gọi hàm loadProducts() khi tải trang
+    document.addEventListener("DOMContentLoaded", () => {
+      loadProducts();
+    });
+  </script>
 </html>
