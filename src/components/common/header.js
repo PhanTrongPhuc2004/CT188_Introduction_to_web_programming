@@ -51,11 +51,9 @@ const headerHTML = `
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/src/components/pages/account.html">TÀI KHOẢN</a></li>
-                            <li><a id="admin_button" class="dropdown-item" href="/src/components/pages/admin.html">QUẢN
-                                    LÝ</a></li>
+                            <li><a id="admin_button" class="dropdown-item" href="/src/components/pages/admin.html">QUẢN LÝ</a></li>
                             <li><a class="dropdown-item" href="/src/components/pages/login.html">ĐĂNG NHẬP</a></li>
-                            <li><a id="logout_button" class="dropdown-item" type="button" href="/index.html">ĐĂNG
-                                    XUẤT</a></li>
+                            <li><a id="logout_button" class="dropdown-item" type="button" href="/index.html">ĐĂNG XUẤT</a></li>
                         </ul>
                     </li>
                     <li id="icon_cart_order" class="set-icon">
@@ -87,6 +85,7 @@ const headerHTML = `
                 }
             }, 0);
         </script>
+        <div style="width: 100%; height: 120px; "></div>
     </body>
 </header>
 `;
