@@ -47,7 +47,7 @@
       box-shadow: none;
     }
     .btn-group .btn {
-      border-radius: 50px;
+      border-radius: 0px;
     }
     .btn-group .btn.active {
       background-color: #000;
@@ -87,26 +87,63 @@
 
         <div class="d-flex justify-content-between align-items-center mb-3">
           <div class="btn-group" role="group">
-            <!-- <button class="btn btn-outline-secondary active" type="button">
-              Active
-            </button> -->
-            <button class="btn btn-outline-secondary" type="button">
-              Loại
-            </button>
-            <!-- <button class="btn btn-outline-secondary" type="button">
-              Quantity
-            </button> -->
-            <button class="btn btn-outline-secondary" type="button">
+            <!-- Mới thêm từ chatGPT, cho có dropdown "Loại" -->
+            <!-- Dropdown "Loại" -->
+            <div class="dropdown">
+              <button
+                class="btn btn-outline-primary dropdown-toggle"
+                type="button"
+                id="categoryDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Loại
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    onclick="filterByCategory('Nhà hàng')"
+                    >Nhà hàng</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    onclick="filterByCategory('Sảnh tiệc')"
+                    >Sảnh tiệc</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    onclick="filterByCategory('Sân vườn')"
+                    >Sân vườn</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" onclick="filterByCategory('')"
+                    >Tất cả</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              onclick="sortProductsByPrice('asc')"
+            >
               Giá tăng dần
             </button>
-            <button class="btn btn-outline-secondary" type="button">
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              onclick="sortProductsByPrice('desc')"
+            >
               Giá giảm dần
             </button>
           </div>
           <div>
-            <!-- <button class="btn btn-outline-primary" type="button">
-              CREATE CATEGORY
-            </button> -->
             <button
               class="btn btn-outline-primary"
               type="button"
@@ -120,16 +157,16 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">
+              <!-- <th scope="col">
                 <input type="checkbox" />
-              </th>
+              </th> -->
               <th scope="col">ID</th>
               <th scope="col">Ảnh</th>
               <th scope="col">Tên sản phẩm</th>
               <th scope="col">Loại</th>
               <th scope="col">Địa chỉ</th>
               <th scope="col">Giờ mở cửa</th>
-              <th scope="col">Giá</th>
+              <th scope="col">Giá một bàn</th>
               <th scope="col">Số điện thoại</th>
               <th scope="col">Chỉnh sửa</th>
             </tr>
@@ -229,14 +266,24 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="productPrice" class="form-label">Giá</label>
+                  <label for="productPrice" class="form-label"
+                    >Giá một bàn</label
+                  >
                   <input
                     type="number"
                     class="form-control"
                     id="productPrice"
                     min="1"
+                    max="10000000"
                     required
                   />
+                  <small
+                    class="form-text text-danger"
+                    id="priceError"
+                    style="display: none"
+                  >
+                    Giá tối đa một bàn là 10.000.000 VND.
+                  </small>
                 </div>
                 <div class="mb-3">
                   <label for="productPhone" class="form-label"
@@ -274,6 +321,38 @@
       localStorage.setItem("products", JSON.stringify(products));
     }
 
+    // Mới thêm từ chatGPT
+    // Hàm chỉnh sửa sản phẩm
+    function editProduct(productId) {
+      // Tìm sản phẩm trong productData theo ID
+      const product = productData.find((product) => product.id === productId);
+
+      // Điền thông tin sản phẩm vào các trường trong form
+      document.getElementById("productImage").value = ""; // Không gán giá trị cho input type="file"
+      document.getElementById("productName").value = product.ten;
+      document.getElementById("productType").value = product.loaiDiaDiem;
+      document.getElementById("productAddress").value = product.diaChi;
+      document.getElementById("openingHoursStart").value =
+        product.gioMoCua.split(" - ")[0];
+      document.getElementById("openingHoursEnd").value =
+        product.gioMoCua.split(" - ")[1];
+      document.getElementById("productPrice").value = product.gia;
+      document.getElementById("productPhone").value = product.soDienThoai;
+
+      // Đổi tiêu đề của modal thành "Chỉnh sửa sản phẩm"
+      document.getElementById("addProductModalLabel").textContent =
+        "Chỉnh sửa sản phẩm";
+
+      // Lưu ID sản phẩm vào ẩn trong form để biết sản phẩm nào cần sửa
+      document.getElementById("addProductForm").dataset.productId = productId;
+
+      // Mở modal để chỉnh sửa
+      const addProductModal = new bootstrap.Modal(
+        document.getElementById("addProductModal")
+      );
+      addProductModal.show();
+    }
+
     // Hàm xóa sản phẩm
     //Mới thêm hàm xóa từ chatGPT
     function deleteProduct(productId) {
@@ -297,7 +376,6 @@
       filteredData.forEach((product) => {
         const row = document.createElement("tr");
         row.innerHTML = `
-        <td><input type="checkbox" /></td>
         <td>${product.id}</td>
        <td><img src="${
          product.anhBia
@@ -309,7 +387,9 @@
         <td>${product.gia.toLocaleString()} VND</td>
         <td>${product.soDienThoai}</td>
          <td>
-            <button class="btn btn-sm btn-outline-primary" title="Chỉnh sửa">
+            <button class="btn btn-sm btn-outline-primary" title="Chỉnh sửa" onclick="editProduct(${
+              product.id
+            })">
                 <i class="bi bi-pencil"></i>
             </button>
             <button class="btn btn-sm btn-outline-danger" title="Xóa" onclick="deleteProduct(${
@@ -322,15 +402,6 @@
         productTableBody.appendChild(row);
       });
     }
-
-    // document
-    //   .getElementById("searchInput")
-    //   .addEventListener("keypress", function (event) {
-    //     if (event.key === "Enter") {
-    //       searchProducts(); // Gọi hàm tìm kiếm khi nhấn Enter
-    //       event.preventDefault(); // Ngăn hành vi mặc định (như di chuyển con trỏ, gửi form, v.v.)
-    //     }
-    //   });
 
     function searchProducts() {
       const query = document
@@ -386,6 +457,117 @@
       }
     });
 
+    //Mới thêm từ chatGPT để kiếm tra giá một bàn khi nhập form không vượt quá 10.000.000VND
+    document
+      .getElementById("productPrice")
+      .addEventListener("input", function () {
+        const maxPrice = 10000000; // Giá tối đa: 10 triệu
+        const priceInput = this.value;
+
+        if (priceInput > maxPrice) {
+          this.setCustomValidity("Giá tối đa một bàn là 10.000.000 VND");
+          this.reportValidity(); // Hiển thị thông báo lỗi
+        } else {
+          this.setCustomValidity(""); // Xóa thông báo lỗi nếu hợp lệ
+        }
+      });
+
+    //Mới thêm từ chatGPT để kiếm tra TG bắt đầu và kết thúc
+    document
+      .getElementById("openingHoursEnd")
+      .addEventListener("input", function () {
+        const startTimeInput =
+          document.getElementById("openingHoursStart").value;
+        const endTimeInput = this.value;
+
+        if (!startTimeInput || !endTimeInput) return;
+
+        const startTime = new Date(`1970-01-01T${startTimeInput}:00`);
+        const endTime = new Date(`1970-01-01T${endTimeInput}:00`);
+
+        if (endTime <= startTime) {
+          this.setCustomValidity("Giờ kết thúc phải sau giờ bắt đầu!");
+          this.reportValidity(); // Hiển thị lỗi
+        } else {
+          this.setCustomValidity(""); // Xóa lỗi nếu hợp lệ
+        }
+      });
+
+    //Mới thêm từ chatGPT để kiếm tra giá một bàn và TG bắt đầu, kết thúc khi nhấn lưu sản phẩm
+    document
+      .getElementById("addProductForm")
+      .addEventListener("submit", function (event) {
+        const priceInput = document.getElementById("productPrice").value;
+        const maxPrice = 10000000;
+
+        const startTimeInput =
+          document.getElementById("openingHoursStart").value;
+        const endTimeInput = document.getElementById("openingHoursEnd").value;
+        const startTime = new Date(`1970-01-01T${startTimeInput}:00`);
+        const endTime = new Date(`1970-01-01T${endTimeInput}:00`);
+
+        // Kiểm tra giờ
+        if (endTime <= startTime) {
+          event.preventDefault();
+          alert("Giờ kết thúc phải sau giờ bắt đầu!");
+          return;
+        }
+
+        // Kiểm tra giá
+        if (priceInput > maxPrice) {
+          event.preventDefault(); // Ngăn gửi form
+          alert("Giá tối đa một bàn là 10.000.000 VND");
+        }
+      });
+
+    // Mới thêm từ chatGPT lọc "Loại" gồm nhà hàng, sảnh tiệc, sân vườn
+    function filterByCategory(category) {
+      let filteredProducts;
+
+      if (category) {
+        // Lọc sản phẩm theo loại
+        filteredProducts = productData.filter(
+          (product) => product.loaiDiaDiem === category
+        );
+      } else {
+        // Nếu không có loại (tất cả), hiển thị toàn bộ sản phẩm
+        filteredProducts = productData;
+      }
+
+      // Hiển thị sản phẩm sau khi lọc
+      displayProducts(filteredProducts);
+    }
+
+    // Mới thêm từ chatGPT để sắp xếp sản phẩm theo giá
+    let originalData = [...productData]; // Lưu dữ liệu gốc
+    let sortState = { asc: false, desc: false }; // Trạng thái sắp xếp
+
+    function sortProductsByPrice(order) {
+      if (order === "asc") {
+        if (sortState.asc) {
+          // Nếu đã sắp xếp tăng dần, trở về trạng thái ban đầu
+          productData = [...originalData];
+          sortState.asc = false;
+        } else {
+          // Sắp xếp tăng dần
+          productData.sort((a, b) => a.gia - b.gia);
+          sortState = { asc: true, desc: false }; // Cập nhật trạng thái
+        }
+      } else if (order === "desc") {
+        if (sortState.desc) {
+          // Nếu đã sắp xếp giảm dần, trở về trạng thái ban đầu
+          productData = [...originalData];
+          sortState.desc = false;
+        } else {
+          // Sắp xếp giảm dần
+          productData.sort((a, b) => b.gia - a.gia);
+          sortState = { asc: false, desc: true }; // Cập nhật trạng thái
+        }
+      }
+
+      displayProducts(); // Hiển thị dữ liệu sau khi sắp xếp
+    }
+
     // Hàm tạo ID sản phẩm mới (dựa trên ID lớn nhất hiện có)
     function generateNewProductId() {
       const maxId = productData.reduce(
@@ -395,13 +577,17 @@
       return maxId + 1;
     }
 
-    // Hàm thêm sản phẩm mới
+    //Mới thêm từ chatGPT để tải ảnh lên và hiển thị được
     function addProduct(event) {
       event.preventDefault();
 
       // Lấy giá trị từ form
       const productId = generateNewProductId();
-      const productImage = document.getElementById("productImage").value;
+
+      //Lấy ảnh từ file
+      const productImageInput = document.getElementById("productImage"); // Input file
+      const productFile = productImageInput.files[0]; // Lấy tệp đầu tiên được chọn
+
       const productName = document.getElementById("productName").value;
       const productType = document.getElementById("productType").value;
       const productAddress = document.getElementById("productAddress").value;
@@ -411,71 +597,134 @@
       const productPrice = document.getElementById("productPrice").value;
       const productPhone = document.getElementById("productPhone").value;
 
-      // Tạo đối tượng sản phẩm mới
-      const newProduct = {
-        id: productId,
-        anhBia: productImage,
-        ten: productName,
-        loaiDiaDiem: productType,
-        diaChi: productAddress,
-        gioMoCua: `${openingHoursStart} - ${openingHoursEnd}`,
-        gia: parseFloat(productPrice),
-        soDienThoai: productPhone,
+      // Kiểm tra nếu người dùng chưa chọn ảnh
+      if (!productFile) {
+        alert("Vui lòng chọn ảnh!");
+        return;
+      }
+
+      // Sử dụng FileReader API để đọc ảnh
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        // Base64 URL của ảnh
+        const productImage = e.target.result;
+
+        // Tạo đối tượng sản phẩm mới
+        const newProduct = {
+          id: productId,
+          anhBia: productImage, // Lưu Base64 của ảnh
+          ten: productName,
+          loaiDiaDiem: productType,
+          diaChi: productAddress,
+          gioMoCua: `${openingHoursStart} - ${openingHoursEnd}`,
+          gia: parseFloat(productPrice),
+          soDienThoai: productPhone,
+        };
+
+        // Thêm sản phẩm vào mảng dữ liệu
+        productData.push(newProduct);
+
+        // Cập nhật dữ liệu vào localStorage
+        localStorage.setItem("products", JSON.stringify(productData));
+
+        // Làm mới bảng hiển thị và reset form
+        document.getElementById("addProductForm").reset(); // Reset form
+        $("#addProductModal").modal("hide"); // Đóng modal
+        displayProducts(); // Hiển thị lại sản phẩm trong bảng
       };
 
-      // Thêm sản phẩm vào mảng dữ liệu
-      productData.push(newProduct);
-
-      // Cập nhật dữ liệu vào localStorage
-      localStorage.setItem("products", JSON.stringify(productData));
-
-      // Đóng modal và làm mới bảng hiển thị
-      document.getElementById("addProductForm").reset(); // Reset form
-      $("#addProductModal").modal("hide"); // Đóng modal
-      // loadProducts(); // Hiển thị lại sản phẩm trong bảng
-      // Hiển thị lại sản phẩm trong bảng
-      //Theo chatGPT đổi tên từ loadProducts() thành loadProductsTable
-      displayProducts();
+      // Đọc tệp ảnh dưới dạng URL Base64
+      reader.readAsDataURL(productFile);
     }
 
-    // Lắng nghe sự kiện submit form
+    // Mới thêm từ chatGPT
+    // Lằng nghe sự kiện submit khi thêm SP hoặc chỉnh sửa SP
     document
       .getElementById("addProductForm")
-      .addEventListener("submit", addProduct);
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    // Hàm hiển thị sản phẩm trong bảng
-    // function loadProducts() {
-    //   const productTableBody = document.getElementById("productTableBody");
-    //   productTableBody.innerHTML = ""; // Xóa dữ liệu cũ
+        const productId = this.dataset.productId; // Lấy ID sản phẩm nếu đang chỉnh sửa
+        const productImageInput = document.getElementById("productImage");
+        const productFile = productImageInput.files[0];
+        const productName = document.getElementById("productName").value;
+        const productType = document.getElementById("productType").value;
+        const productAddress = document.getElementById("productAddress").value;
+        const openingHoursStart =
+          document.getElementById("openingHoursStart").value;
+        const openingHoursEnd =
+          document.getElementById("openingHoursEnd").value;
+        const productPrice = parseFloat(
+          document.getElementById("productPrice").value
+        );
+        const productPhone = document.getElementById("productPhone").value;
 
-    //   productData.forEach((product) => {
-    //     const row = document.createElement("tr");
-    //     row.innerHTML = `
-    //   <td><input type="checkbox" /></td>
-    //   <td>${product.id}</td>
-    //   <td><img src="${
-    //     product.anhBia
-    //   }" alt="Ảnh bìa" style="width: 150px; height: 150px; border-radius: 20%;"></td>
-    //   <td>${product.ten}</td>
-    //   <td>${product.loaiDiaDiem}</td>
-    //   <td>${product.diaChi}</td>
-    //   <td>${product.gioMoCua}</td>
-    //   <td>${product.gia.toLocaleString()} VND</td>
-    //   <td>${product.soDienThoai}</td>
-    //   <td>
-    //     <button class="btn btn-sm btn-outline-primary" title="Chỉnh sửa">
-    //       <i class="bi bi-pencil"></i>
-    //     </button>
-    //     <button class="btn btn-sm btn-outline-danger" title="Xóa ">
-    //       <i class="bi bi-trash3"></i>
-    //     </button>
-    //   </td>
-    // `;
-    //     productTableBody.appendChild(row);
-    //   });
-    // }
+        // Kiểm tra ảnh nếu thêm mới hoặc chỉnh sửa ảnh
+        if (!productId && !productFile) {
+          alert("Vui lòng chọn ảnh!");
+          return;
+        }
 
-    // // Gọi hàm loadProducts khi trang được tải
-    // document.addEventListener("DOMContentLoaded", loadProducts);
+        const processProduct = (productImage) => {
+          if (productId) {
+            // Chỉnh sửa sản phẩm
+            const productIndex = productData.findIndex(
+              (p) => p.id === parseInt(productId)
+            );
+
+            if (productIndex !== -1) {
+              productData[productIndex] = {
+                ...productData[productIndex],
+                anhBia: productImage || productData[productIndex].anhBia, // Giữ ảnh cũ nếu không chỉnh sửa
+                ten: productName,
+                loaiDiaDiem: productType,
+                diaChi: productAddress,
+                gioMoCua: `${openingHoursStart} - ${openingHoursEnd}`,
+                gia: productPrice,
+                soDienThoai: productPhone,
+              };
+            }
+          } else {
+            // Thêm mới sản phẩm
+            const newProduct = {
+              id: generateNewProductId(),
+              anhBia: productImage,
+              ten: productName,
+              loaiDiaDiem: productType,
+              diaChi: productAddress,
+              gioMoCua: `${openingHoursStart} - ${openingHoursEnd}`,
+              gia: productPrice,
+              soDienThoai: productPhone,
+            };
+
+            productData.push(newProduct);
+          }
+
+          // Cập nhật localStorage
+          localStorage.setItem("products", JSON.stringify(productData));
+
+          // Reset form và đóng modal
+          document.getElementById("addProductForm").reset();
+          const addProductModal = bootstrap.Modal.getInstance(
+            document.getElementById("addProductModal")
+          );
+          addProductModal.hide();
+
+          // Hiển thị lại sản phẩm
+          displayProducts();
+
+          // Xóa `dataset.productId` để tránh xung đột
+          delete document.getElementById("addProductForm").dataset.productId;
+        };
+
+        // Đọc file ảnh nếu cần
+        if (productFile) {
+          const reader = new FileReader();
+          reader.onload = (e) => processProduct(e.target.result);
+          reader.readAsDataURL(productFile);
+        } else {
+          processProduct(); // Không chỉnh sửa ảnh
+        }
+      });
   </script>
 </html>
