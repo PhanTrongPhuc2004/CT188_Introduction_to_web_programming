@@ -41,6 +41,9 @@
             background-color: #eeeae6;
             color: #241d1a;
         }
+        #main {
+            margin-top: 150px;
+        }
     </style>
 </head>
 
@@ -48,13 +51,20 @@
     <header id="header"></header>
     <main id="main">
         <div class="container mt-5">
-            <h2 class="mb-4">Danh sách đơn hàng</h2>
+            <h2 class="mb-4 text-center">Danh sách đơn hàng</h2>
 
             <div id="orderTableBody"></div>
         </div>
         
 
         <script>
+            let orderData = JSON.parse(localStorage.getItem('orders')) || orders;
+
+            // Nếu chưa có dữ liệu trong localStorage, lưu dữ liệu vào localStorage
+            if (!localStorage.getItem('orders')) {
+                localStorage.setItem('orders', JSON.stringify(orders));
+            }
+
             // Cập nhật loggedUser với các đơn hàng từ orders
             function getUserOrders() {
                 // Lấy thông tin loggedUser từ localStorage
