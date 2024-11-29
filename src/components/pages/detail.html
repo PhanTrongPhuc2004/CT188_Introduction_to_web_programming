@@ -9,26 +9,312 @@
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        .details-card {
+            width: 80%;
+            margin: auto;
+        }
+
+
+        .description-container {
+            position: relative;
+            /* height: 900px; */
+        }
+
+        .main-description1 {
+            position: absolute;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        .main-description h3 {
+            font-size: 2rem;
+        }
+
+        .add-inputs,
+        .add-inputs input {
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 2px;
+        }
+
+        .add-inputs button {
+            border-radius: 0;
+        }
+
+        .add-inputs input {
+            height: 48px;
+            width: 65px;
+            border-radius: 0;
+        }
+
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+        }
+
+        .social-list {
+            padding: 0;
+            list-style: none;
+        }
+
+        .social-list li {
+            float: left;
+            padding: 6px 8px;
+            margin-right: 12px;
+        }
+
+        .social-list li a {
+            color: black;
+            font-size: 2rem;
+        }
+
+        .social-list li a i {
+            font-size: 2rem;
+        }
+
+        /* Phần css cho chuyển ảnh */
+        .slider {
+            width: auto;
+            height: auto;
+            max-height: 800px;
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            float: left;
+        }
+
+        .flickity-button {
+            position: absolute;
+            top: 20%;
+            width: auto;
+            margin-top: -22px;
+            padding: 10px 20px;
+
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 50%;
+            /* border: 1px solid #ffffff; */
+            transform: translateY(-50%);
+            text-decoration: none;
+
+        }
+
+        .flickity-prev-next-button.previous {
+            left: 3%;
+            /* Điều chỉnh khoảng cách từ mép trái */
+        }
+
+        .flickity-prev-next-button.next {
+            right: 54%;
+            /* Điều chỉnh khoảng cách từ mép phải */
+        }
+
+        .previous:hover,
+        .next:hover {
+            /* border: 1px solid #e46571; */
+            color: #e46571;
+
+        }
+    </style>
 </head>
 
 <body>
     <header id="header"></header>
     <main id="main">
-        <div>
-            <h1>Đây là trang chi tiết sản phẩm</h1>
+        <div class="container my-5">
+            <div class="card details-card p-0">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <!-- <img id="anhBia" class="img-fluid details-img" src="#" alt="Ảnh bìa"> -->
+                        <section>
+                            <div class="slider">
+                                <div class="slide"><img class="anh" style="width:100%"></div>
+                                <div class="slide"><img class="anh" style="width:100%"></div>
+                                <div class="slide"><img class="anh" style="width:100%"></div>
+                                <div class="slide"><img class="anh" style="width:100%"></div>
+                                <div class="slide"><img class="anh" style="width:100%"></div>
+                                <div class="slide"><img class="anh" style="width:100%"></div>
+                            </div>
+                            <a class="flickity-button flickity-prev-next-button previous"
+                                onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="flickity-button flickity-prev-next-button next"
+                                onclick="plusSlides(1)">&#10095;</a>
+                        </section>
+                    </div>
+                    <div class="col-md-6 col-sm-12 description-container p-5">
+                        <div class="main-description">
+                            <p id="loai" class="product-category mb-0"></p>
+                            <h3 id="ten"></h3>
+                            <hr>
+                            <p id="quantityTableCount"></p>
+                            <div class="add-inputs">
+                                <div class="d-flex align-items-center">
+                                    <button id="decrementQuantity"
+                                        class="btn btn-outline-secondary btn-sm me-2 btn-decrease">-</button>
+                                    <input id="quantityTable" name="quantitytable" type="number"
+                                        class="form-control form-control-sm text-center"
+                                        style="width: 70px; height: 20px; margin: 0px;">
+                                    <button id="incrementQuantity"
+                                        class="btn btn-outline-secondary btn-sm ms-2 btn-increase">+</button>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <hr>
+                            <p class="product-category mb-0">Giá thuê:</p>
+                            <h3 id="gia" class="product-price"></h3>
+                            <hr>
+                            <div class="add-inputs">
+                                <button id="add_to_cart" name="add_to_cart" type="button" class="btn btn-checkout mt-3 btn-outline-danger">Thêm vào giỏ hàng</button>
+                            </div>
+                            <div class="add-inputs">
+                                <button id="add_to_order" name="add_to_order" type="button" class="btn btn-checkout mt-3 btn-danger">Thuê ngay</button>
+                            </div>
+                            <div style="clear:both"></div>
+                            <hr>
+                            <p class="product-title mt-4 mb-1">Giới thiệu về địa điểm:</p>
+                            <p class="product-description mb-4">
+                                <b>Nơi kiến tạo những khoảnh khắc đáng nhớ</b><br>
+
+                                Với không gian tổ chức tiệc cưới sang trọng, hiện đại, cùng hệ thống âm thanh, ánh sáng
+                                đẳng cấp, Nhà hàng tự hào là điểm đến lý tưởng để các cặp đôi tổ chức lễ cưới
+                                trong mơ. Thực đơn đa dạng, phong phú, được chế biến bởi đội ngũ đầu bếp tài năng, hứa
+                                hẹn sẽ mang đến những trải nghiệm ẩm thực tuyệt vời cho quý khách.
+                            </p>
+                            <hr>
+                            <p class="product-title mt-4 mb-1">Thông số:</p>
+                            <p class="product-description mb-4"></p>
+                            <hr>
+                            <p class="product-title mt-4 mb-1">Đánh giá về địa điểm:</p>
+                            <ul class="social-list">
+                                <li><a href="#"><i class="fa-brands fa-facebook"></a></i></li>
+                                <li><a href="#"><i class="fa-brands fa-twitter"></a></i></li>
+                                <li><a href="#"><i class="fa-brands fa-square-instagram"></a></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="product-detail"></div>
     </main>
     <footer id="footer"></footer>
-    <script src="../../components/common/header.js"></script>
-    <script src="../../components/common/footer.js"></script>
-    <script src="../../../Data/products.js"></script>
-    <script src="../../js/components/main.js"></script>
-    <script>
-        let id = localStorage.getItem("productId");
-        const container = document.getElementById('product-detail');
-        alert('ID product: '+id)
-    </script>
 </body>
+<footer id="footer"></footer>
+<script src="../../components/common/header.js"></script>
+<script src="../../components/common/footer.js"></script>
+<script src="../../../Data/products.js"></script>
+<script src="../../js/components/main.js"></script>
+<script>
+
+    // document.addEventListener('DOMContentLoaded', () => {
+    document.f
+    // Lấy sp đã chọn trong local storage ra
+    const Products = JSON.parse(localStorage.getItem("productSelected"));
+
+    const anh = document.querySelectorAll('.anh');
+    for (var i = 0; i < anh.length; i++) {
+        anh[i].src = "/" + Products.anh[i];
+        // console.log(slides[i].src);
+    }
+
+    const loai = document.getElementById("loai");
+    const ten = document.getElementById("ten");
+    const gia = document.getElementById("gia");
+    const SL_Ban = document.getElementById("quantityTable");
+    const quantityTableCount = document.getElementById("quantityTableCount");
+
+    loai.textContent = Products.loaiDiaDiem;
+    ten.textContent = Products.ten;
+    gia.textContent = Products.gia.toLocaleString() + 'đ';
+    SL_Ban.value = 1;
+    quantityTableCount.textContent = 'Số bàn còn lại có thể đặt (' + (Products.sucChua - SL_Ban.value) + '/' + Products.sucChua + '):';
+    SL_Ban.min = 1;
+    SL_Ban.max = Products.sucChua;
+
+    // Lấy giá trị ban đầu từ ô input và gán vào biến Number
+    let Number = SL_Ban.value;
+
+    // Thêm sự kiện lắng nghe khi giá trị trong ô input thay đổi
+    SL_Ban.addEventListener('input', () => {
+        Number = SL_Ban.value;
+        quantityTableCount.textContent = 'Số bàn còn lại có thể đặt (' + (Products.sucChua - SL_Ban.value) + '/' + Products.sucChua + '):';
+        console.log('Số lượng hiện tại:', Number);
+
+    });
+
+    // Phần js cho 2 nút chuyển ảnh sản phẩm
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function
+        showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("slide");
+
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+
+        }
+        slides[slideIndex - 1].style.display = "block";
+    }
+
+    // Phần js cho 2 nút chuyển tăng giảm SL sản phẩm
+    const decrementQuantity = document.getElementById("decrementQuantity");
+    const incrementQuantity = document.getElementById("incrementQuantity");
+    // console.log(decrementQuantity);
+    // console.log(incrementQuantity);
+    decrementQuantity.addEventListener('click', () => {
+        event.preventDefault()
+        let Number = SL_Ban.value;
+        if (Number >= 2) {
+            Number--;
+            SL_Ban.value = Number;
+            quantityTableCount.textContent = 'Số bàn còn lại có thể đặt (' + (Products.sucChua - SL_Ban.value) + '/' + Products.sucChua + '):';
+        }
+    });
+    incrementQuantity.addEventListener('click', () => {
+        event.preventDefault()
+        let Number = SL_Ban.value;
+        if (Number < Products.sucChua) {
+            Number++;
+            SL_Ban.value = Number;
+            quantityTableCount.textContent = 'Số bàn còn lại có thể đặt (' + (Products.sucChua - SL_Ban.value) + '/' + Products.sucChua + '):';
+        }
+    });
+
+    // Phần js cho 2 nút thêm vào giỏ hàng và thêm vào đơn hàng
+    const add_to_cart = document.getElementById("add_to_cart");
+    const add_to_order = document.getElementById("add_to_order");
+
+    add_to_cart.addEventListener('click', () => { 
+        let Product = JSON.parse(localStorage.getItem("productSelected"));
+        
+    });
+    add_to_order.addEventListener('click', () => { 
+        
+    });
+    // });
+</script>
 
 </html>
