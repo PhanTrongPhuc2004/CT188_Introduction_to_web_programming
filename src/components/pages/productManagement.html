@@ -79,31 +79,40 @@
             class="form-control"
             placeholder="Tìm kiếm sản phẩm theo ID hoặc tên"
             type="text"
-            />
-            <button class="btn btn-outline-primary" onclick="searchProducts()">
-              Tìm kiếm
-            </button>
+          />
+          <button class="btn btn-outline-primary" onclick="searchProducts()">
+            Tìm kiếm
+          </button>
         </div>
+
         <div class="d-flex justify-content-between align-items-center mb-3">
           <div class="btn-group" role="group">
-            <button class="btn btn-outline-secondary active" type="button">
+            <!-- <button class="btn btn-outline-secondary active" type="button">
               Active
-            </button>
+            </button> -->
             <button class="btn btn-outline-secondary" type="button">
-              Category
+              Loại
             </button>
-            <button class="btn btn-outline-secondary" type="button">
+            <!-- <button class="btn btn-outline-secondary" type="button">
               Quantity
+            </button> -->
+            <button class="btn btn-outline-secondary" type="button">
+              Giá tăng dần
             </button>
             <button class="btn btn-outline-secondary" type="button">
-              Price
+              Giá giảm dần
             </button>
           </div>
           <div>
             <!-- <button class="btn btn-outline-primary" type="button">
               CREATE CATEGORY
             </button> -->
-            <button class="btn btn-outline-primary" type="button">
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#addProductModal"
+            >
               Thêm sản phẩm
             </button>
           </div>
@@ -115,11 +124,11 @@
                 <input type="checkbox" />
               </th>
               <th scope="col">ID</th>
+              <th scope="col">Ảnh</th>
               <th scope="col">Tên sản phẩm</th>
               <th scope="col">Loại</th>
               <th scope="col">Địa chỉ</th>
               <th scope="col">Giờ mở cửa</th>
-              <!-- <th scope="col">Cost</th> -->
               <th scope="col">Giá</th>
               <th scope="col">Số điện thoại</th>
               <th scope="col">Chỉnh sửa</th>
@@ -130,6 +139,124 @@
           </tbody>
         </table>
       </div>
+
+      <!-- Modal form thêm sản phẩm -->
+      <div
+        class="modal fade"
+        id="addProductModal"
+        tabindex="-1"
+        aria-labelledby="addProductModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProductModalLabel">
+                Thêm sản phẩm
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <!-- Form nhập liệu -->
+              <form id="addProductForm">
+                <div class="mb-3">
+                  <label for="productImage" class="form-label"
+                    >Ảnh sản phẩm</label
+                  >
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="productImage"
+                    placeholder="Tải ảnh lên"
+                    accept=".jpg, .png"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="productName" class="form-label"
+                    >Tên sản phẩm</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="productName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="productType" class="form-label"
+                    >Loại sản phẩm</label
+                  >
+                  <select class="form-select" id="productType">
+                    <option value="Nhà hàng">Nhà hàng</option>
+                    <option value="Sảnh tiệc">Sảnh tiệc</option>
+                    <option value="Sân vườn">Sân vườn</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="productAddress" class="form-label">Địa chỉ</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="productAddress"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="openingHoursStart" class="form-label"
+                    >Giờ bắt đầu</label
+                  >
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="openingHoursStart"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="openingHoursEnd" class="form-label"
+                    >Giờ kết thúc</label
+                  >
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="openingHoursEnd"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="productPrice" class="form-label">Giá</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="productPrice"
+                    min="1"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="productPhone" class="form-label"
+                    >Số điện thoại</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="productPhone"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Lưu sản phẩm
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer id="footer"></footer>
     <script src="../../components/common/header.js"></script>
@@ -139,7 +266,7 @@
   </body>
 
   <script>
-    // Load products from localStorage or use the products array from product.js
+    // Lấy dữ liệu từ local storage
     let productData = JSON.parse(localStorage.getItem("products")) || products;
 
     // Store products in localStorage if not already stored
@@ -147,8 +274,22 @@
       localStorage.setItem("products", JSON.stringify(products));
     }
 
+    // Hàm xóa sản phẩm
+    //Mới thêm hàm xóa từ chatGPT
+    function deleteProduct(productId) {
+      // Xóa sản phẩm khỏi mảng dữ liệu
+      productData = productData.filter((product) => product.id !== productId);
+
+      // Cập nhật lại localStorage với dữ liệu mới
+      localStorage.setItem("products", JSON.stringify(productData));
+
+      // Cập nhật lại bảng hiển thị
+      displayProducts();
+    }
+
     // Hàm hiển thị sản phẩm trong bảng
-    function loadProducts(filteredData = productData) {
+    // Mới đổi tên theo chatGPT, hàm ban đầu loadProducts
+    function displayProducts(filteredData = productData) {
       const productTableBody = document.getElementById("productTableBody");
       productTableBody.innerHTML = ""; // Xóa dữ liệu cũ nếu có
 
@@ -158,6 +299,9 @@
         row.innerHTML = `
         <td><input type="checkbox" /></td>
         <td>${product.id}</td>
+       <td><img src="${
+         product.anhBia
+       }" alt="Ảnh bìa" style="width: 150px; height: 150px; border-radius: 20%;"></td>
         <td>${product.ten}</td>
         <td>${product.loaiDiaDiem}</td>
         <td>${product.diaChi}</td>
@@ -168,7 +312,9 @@
             <button class="btn btn-sm btn-outline-primary" title="Chỉnh sửa">
                 <i class="bi bi-pencil"></i>
             </button>
-            <button class="btn btn-sm btn-outline-danger" title="Xóa">
+            <button class="btn btn-sm btn-outline-danger" title="Xóa" onclick="deleteProduct(${
+              product.id
+            })">
                 <i class="bi bi-trash3"></i>
             </button>
         </td>
@@ -177,29 +323,159 @@
       });
     }
 
-    // Hàm tìm kiếm sản phẩm
-    function searchProducts() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const isQueryNumeric = !isNaN(query); // Kiểm tra query là số hay không
+    // document
+    //   .getElementById("searchInput")
+    //   .addEventListener("keypress", function (event) {
+    //     if (event.key === "Enter") {
+    //       searchProducts(); // Gọi hàm tìm kiếm khi nhấn Enter
+    //       event.preventDefault(); // Ngăn hành vi mặc định (như di chuyển con trỏ, gửi form, v.v.)
+    //     }
+    //   });
 
-      // Lọc sản phẩm theo ID hoặc tên
-      const filteredProducts = productData.filter((product) => {
+    function searchProducts() {
+      const query = document
+        .getElementById("searchInput")
+        .value.toLowerCase()
+        .trim();
+      const isQueryNumeric = !isNaN(query) && query !== ""; // Kiểm tra query là số và không trống
+
+      let filteredProducts = [];
+
+      if (query === "") {
+        // Nếu ô tìm kiếm trống, hiển thị tất cả sản phẩm
+        filteredProducts = productData;
+      } else {
         if (isQueryNumeric) {
-          // Nếu là số, so sánh chính xác với ID
-          return product.id.toString() === query;
+          // Nếu là số, tìm kiếm chính xác với ID
+          filteredProducts = productData.filter(
+            (product) => product.id.toString() === query
+          ); // So sánh chính xác với ID
         } else {
           // Nếu là chuỗi, tìm kiếm trong tên sản phẩm
-          return product.ten.toLowerCase().includes(query);
+          filteredProducts = productData.filter((product) => {
+            return product.ten.toLowerCase().includes(query); // Tìm kiếm chuỗi trong tên sản phẩm
+          });
+        }
+      }
+
+      // Hiển thị danh sách sản phẩm đã lọc
+      // loadProducts(filteredProducts);
+      //Mới thêm từ chatGPT
+      displayProducts(filteredProducts);
+    }
+
+    // Bắt sự kiện khi nhấn Enter trong ô tìm kiếm
+    //Mới thêm từ chatGPT
+    document
+      .getElementById("searchInput")
+      .addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          searchProducts(); // Gọi hàm searchProducts khi nhấn Enter
+          event.preventDefault(); // Ngăn chặn hành động mặc định của phím Enter
         }
       });
 
-      // Hiển thị danh sách sản phẩm đã lọc
-      loadProducts(filteredProducts);
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!productData || productData.length === 0) {
+        console.error("Dữ liệu sản phẩm rỗng hoặc không hợp lệ!");
+      } else {
+        // loadProducts(); // Hiển thị danh sách sản phẩm khi tải trang
+        // Hiển thị danh sách sản phẩm khi tải trang
+        //Mới đổi tên theo chat GPT từ loadProducts sang displayProducts
+        displayProducts();
+      }
+    });
+
+    // Hàm tạo ID sản phẩm mới (dựa trên ID lớn nhất hiện có)
+    function generateNewProductId() {
+      const maxId = productData.reduce(
+        (max, product) => (product.id > max ? product.id : max),
+        0
+      );
+      return maxId + 1;
     }
 
-    // Gọi hàm loadProducts() khi tải trang
-    document.addEventListener("DOMContentLoaded", () => {
-      loadProducts();
-    });
+    // Hàm thêm sản phẩm mới
+    function addProduct(event) {
+      event.preventDefault();
+
+      // Lấy giá trị từ form
+      const productId = generateNewProductId();
+      const productImage = document.getElementById("productImage").value;
+      const productName = document.getElementById("productName").value;
+      const productType = document.getElementById("productType").value;
+      const productAddress = document.getElementById("productAddress").value;
+      const openingHoursStart =
+        document.getElementById("openingHoursStart").value;
+      const openingHoursEnd = document.getElementById("openingHoursEnd").value;
+      const productPrice = document.getElementById("productPrice").value;
+      const productPhone = document.getElementById("productPhone").value;
+
+      // Tạo đối tượng sản phẩm mới
+      const newProduct = {
+        id: productId,
+        anhBia: productImage,
+        ten: productName,
+        loaiDiaDiem: productType,
+        diaChi: productAddress,
+        gioMoCua: `${openingHoursStart} - ${openingHoursEnd}`,
+        gia: parseFloat(productPrice),
+        soDienThoai: productPhone,
+      };
+
+      // Thêm sản phẩm vào mảng dữ liệu
+      productData.push(newProduct);
+
+      // Cập nhật dữ liệu vào localStorage
+      localStorage.setItem("products", JSON.stringify(productData));
+
+      // Đóng modal và làm mới bảng hiển thị
+      document.getElementById("addProductForm").reset(); // Reset form
+      $("#addProductModal").modal("hide"); // Đóng modal
+      // loadProducts(); // Hiển thị lại sản phẩm trong bảng
+      // Hiển thị lại sản phẩm trong bảng
+      //Theo chatGPT đổi tên từ loadProducts() thành loadProductsTable
+      displayProducts();
+    }
+
+    // Lắng nghe sự kiện submit form
+    document
+      .getElementById("addProductForm")
+      .addEventListener("submit", addProduct);
+
+    // Hàm hiển thị sản phẩm trong bảng
+    // function loadProducts() {
+    //   const productTableBody = document.getElementById("productTableBody");
+    //   productTableBody.innerHTML = ""; // Xóa dữ liệu cũ
+
+    //   productData.forEach((product) => {
+    //     const row = document.createElement("tr");
+    //     row.innerHTML = `
+    //   <td><input type="checkbox" /></td>
+    //   <td>${product.id}</td>
+    //   <td><img src="${
+    //     product.anhBia
+    //   }" alt="Ảnh bìa" style="width: 150px; height: 150px; border-radius: 20%;"></td>
+    //   <td>${product.ten}</td>
+    //   <td>${product.loaiDiaDiem}</td>
+    //   <td>${product.diaChi}</td>
+    //   <td>${product.gioMoCua}</td>
+    //   <td>${product.gia.toLocaleString()} VND</td>
+    //   <td>${product.soDienThoai}</td>
+    //   <td>
+    //     <button class="btn btn-sm btn-outline-primary" title="Chỉnh sửa">
+    //       <i class="bi bi-pencil"></i>
+    //     </button>
+    //     <button class="btn btn-sm btn-outline-danger" title="Xóa ">
+    //       <i class="bi bi-trash3"></i>
+    //     </button>
+    //   </td>
+    // `;
+    //     productTableBody.appendChild(row);
+    //   });
+    // }
+
+    // // Gọi hàm loadProducts khi trang được tải
+    // document.addEventListener("DOMContentLoaded", loadProducts);
   </script>
 </html>
