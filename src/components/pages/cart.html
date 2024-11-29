@@ -21,12 +21,12 @@
             <h1 class="cart-title mb-5">Giỏ hàng</h1>
             <div class="d-flex row">
                 <!-- Product Items Container -->
-                <div class="col-lg-8" id="product-items-container">
+                <div class="col-lg-7" id="product-items-container">
                     <!-- JavaScript sẽ chèn các sản phẩm vào đây -->
                 </div>
 
                 <!-- Cart Totals -->
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <div class="cart-totals">
                         <h4>Hóa đơn</h4>
                         <div class="mb-3">
@@ -34,18 +34,19 @@
                                 <thead>
                                     <tr>
                                         <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-end">Đơn giá</th>
                                     </tr>
                                 </thead>
                                 <tbody id="cart-totals-body">
                                     <!-- JavaScript sẽ chèn thông tin hóa đơn vào đây -->
+                                    
                                 </tbody>
                             </table>
                         </div>
                         <div class="d-flex justify-content-between fw-bold">
                             <p>Tổng hóa đơn</p>
-                            <p id="total-amount"></p>
+                            <p id="total-amount" class="fs-5"></p>
                         </div>
                         <button class="btn btn-checkout mt-3 btn-danger">Thanh toán</button>
                     </div>

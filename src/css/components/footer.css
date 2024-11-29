@@ -20,7 +20,8 @@ ul li{
 
 .footer a:hover {
     text-decoration: none; /* Đảm bảo không có gạch chân khi hover */
-    color: inherit; /* Đảm bảo không thay đổi màu khi hover */
+    color: #9C7656; /* Đảm bảo không thay đổi màu khi hover */
+    transition-duration: 1.2s;
 }
 
 

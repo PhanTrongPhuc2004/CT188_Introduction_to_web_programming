@@ -125,7 +125,7 @@ function displayCarts() {
         const productElement = document.createElement('div');
         productElement.className = 'd-flex border border-2 rounded-3 pb-3 mb-3';
         productElement.innerHTML = `
-            <img src="${product.anhBia}" alt="${product.ten}" class="product-img me-3">
+            <img src="${product.anhBia}" alt="${product.ten}" class="product-img m-3">
             <div class="flex-grow-1">
                 <h5 class="product-title">${product.ten}</h5>
                 <p>${product.gia.toLocaleString()}đ</p>
@@ -134,20 +134,45 @@ function displayCarts() {
                     <button class="btn btn-outline-secondary btn-sm me-2 btn-decrease" data-id="${product.id}">-</button>
                     <input type="text" value="${product.soLuong}" class="form-control form-control-sm text-center" style="width: 50px;" readonly>
                     <button class="btn btn-outline-secondary btn-sm ms-2 btn-increase" data-id="${product.id}">+</button>
-                    <button class="btn btn-info btn-sm me-2" data-id="${product.id}">Chi tiết</button>
-                    <button class="text-danger ms-auto" data-id="${product.id}">Xóa đơn hàng</button>
+                    <button class="btn btn-info btn-sm ms-2" data-id="${product.id}">Chi tiết</button>
+               
+                    
                 </div>
             </div>
-            <div class="text-end">
-                <p class="fw-bold">${(product.gia * product.soLuong).toLocaleString()}đ</p>
-            </div>
+                <div class="fw-bold">
+                <div style="margin-bottom: 70px; font-size:1em;">
+                ${(product.gia * product.soLuong).toLocaleString()}đ
+                </div>
+                <button class="text-danger ms-auto rounded me-3" data-id="${product.id}">Xóa đơn hàng</button>
+                </div>
          `;
         productContainer.appendChild(productElement);
     });
-
+    // Hiển thị bill
+    displayBill();
     // Cập nhật tổng giá trị giỏ hàng
     const totalAmountElement = document.getElementById('total-amount');
     totalAmountElement.innerText = calculateTotalAmount(userCart).toLocaleString() + 'đ';
+}
+
+// Hiển thị danh sách sản phẩm
+function displayBill() {
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    const userCart = loggedUser.cart || [];
+    const carttotalsbody = document.getElementById('cart-totals-body');
+    carttotalsbody.innerHTML = ''; // Xóa nội dung cũ
+
+    userCart.forEach(product => {
+        const productElement = document.createElement('tr');
+        productElement.innerHTML = `
+                <td>${product.ten}</td>
+                <td class="text-center">${product.soLuong}</td>
+                <td class ="text-end ">
+                       ${(product.gia * product.soLuong).toLocaleString()}đ
+                </td>
+         `;
+        carttotalsbody.appendChild(productElement);
+    });
 }
 
 // Tính tổng giá trị giỏ hàng

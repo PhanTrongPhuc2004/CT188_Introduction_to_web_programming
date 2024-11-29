@@ -1,6 +1,6 @@
 // File footer.js là chuyển đổi từ file footer.html thành 1 biến js để chèn vào các trang khác (chỉ cần copy bên footer.html rồi dán qua đây thôi)
 const footerHTML = `
- <footer class="footer mt-5">
+<footer class="footer mt-5">
 
     <head>
         <meta charset="UTF-8">
@@ -30,12 +30,12 @@ const footerHTML = `
                             <img src="../../../Data/Icon/footer_icon/telephone.png" alt="" class="footer_icon">
                             <p>Điện thoại: 0911 522 929</p>
                         </div>
-                        
+
                         <div class="d-flex text-nowrap">
                             <img src="../../../Data/Icon/footer_icon/mail.png" alt="" class="footer_icon">
                             <p>Email: weddingplanning@gmail.com</p>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -44,38 +44,40 @@ const footerHTML = `
                     <h5 class="text-nowrap">MẠNG XÃ HỘI</h5>
 
                     <ul class="list-unstyled">
-                        <li><a href="facebook.com"><img class="mxh" src="../../../Data/Images/mangxahoi/facebook.png"
+                        <li><a href="#"><img class="mxh" src="../../../Data/Images/mangxahoi/facebook.png"
                                     width="50px" alt="facebook">Facebook</a></li>
 
-                        <li><a href="facebook.com"><img class="mxh" src="../../../Data/Images/mangxahoi/instagram.png"
+                        <li><a href="#"><img class="mxh" src="../../../Data/Images/mangxahoi/instagram.png"
                                     width="50px" alt="facebook">Instagram</a></li>
 
-                        <li><a href="facebook.com"><img class="mxh" src="../../../Data/Images/mangxahoi/zalo.png"
+                        <li><a href="#"><img class="mxh" src="../../../Data/Images/mangxahoi/zalo.png"
                                     width="50px" alt="facebook">Zalo</a></li>
                     </ul>
+
+
                 </div>
 
                 <!-- DICH VU -->
                 <div class="col-md-3 text-start justify-content-center align-items-center ">
                     <div>
                         <h5>DỊCH VỤ</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Trang điểm</a></li>
-                        <li><a href="#">Quay phim</a></li>
-                        <li><a href="#">Chụp ảnh </a></li>
-                        <li><a href="#">Phục vụ món ăn</a></li>
-                    </ul>
+                        <ul class="list-unstyled">
+                            <li>Trang điểm</li>
+                            <li>Quay phim</li>
+                            <li>Chụp ảnh </li>
+                            <li>Phục vụ món ăn</li>
+                        </ul>
                     </div>
-                    
+
                 </div>
+
 
                 <div class="col-md-3 text-start">
                     <h5>THÔNG TIN THÊM</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#">Chăm sóc khách hàng</a></li>
-                        <li><a href="#">Ưu đãi</a></li>
-                        <li><a href="#">Bảo mật</a></li>
-                        <li><a href="#">Thông tin chính sách</a></li>
+                        <li><a href="/src/components/pages/customer_service.html">Chăm sóc khách hàng</a></li>
+                        <li><a href="/src/components/pages/preferential.html">Ưu đãi</a></li>
+                        <li><a href="/src/components/pages/privacy policy.html">Thông tin chính sách và bảo mật</a></li>
                     </ul>
                 </div>
             </div>
