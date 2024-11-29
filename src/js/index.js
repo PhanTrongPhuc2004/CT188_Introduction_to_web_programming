@@ -8,28 +8,6 @@ headerElement.innerHTML = headerHTML;
 const footerElement = document.getElementById('footer');
 footerElement.innerHTML = footerHTML;
 
-// Lấy dữ liệu từ file products.js vào
-// const container = document.getElementById('product-container');
-// products.forEach(product => {
-//   const card = document.createElement('div');
-//   card.classList.add('col-md-4');
-
-//   const cardContent = `
-//       <div class="card">
-//         <img src="./${product.anhBia}" class="card-img-top" alt="${product.ten}">
-//         <div class="card-body">
-//           <h5 class="card-title">${product.ten}</h5>
-//           <p class="card-text">${product.moTa}</p>
-//           <p class="card-text">Giá: ${product.gia} VNĐ</p>
-//           <button class="btn btn-primary">Xem chi tiết</button>
-//         </div>
-//       </div>
-//     `;
-
-//   card.innerHTML = cardContent;
-//   container.appendChild(card);
-// });
-
 // Phần js cho 2 nút chuyển ảnh đầu trang chủ
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -66,9 +44,13 @@ if (!storedUser) {
     order: {}
   };
   localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
-  //   console.log("Đã tạo và lưu thông tin người dùng vào localStorage");
-  // } else {
-  //   console.log("Thông tin người dùng đã tồn tại trong localStorage");
+}
+
+//Lấy danh sách sp ra và bỏ vào local stogare nếu chưa có trong local storage trước
+let Products = JSON.parse(localStorage.getItem("products"));
+// console.log(productList);
+if (!Products) {
+localStorage.setItem('products', JSON.stringify(products));
 }
 
 // Phần làm rỗng biến loggedUser khi chọn đăng xuất

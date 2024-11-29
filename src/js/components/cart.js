@@ -1,5 +1,5 @@
 const headerElement = document.getElementById('header');
-headerElement.innerHTML = header_customerHTML;
+headerElement.innerHTML = headerHTML;
 
 // Chèn phần footer từ footer.js vào các trang
 const footerElement = document.getElementById('footer');

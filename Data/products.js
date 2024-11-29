@@ -2,9 +2,7 @@ const products = [
   {
     id: 1,
     ten: "Nhà hàng A",
-    // loaiDiaDiem: "Loại địa điểm (ví dụ: nhà hàng, sảnh tiệc, sân vườn)",
     loaiDiaDiem: "Nhà hàng",
-    // diaChi: "Địa chỉ chi tiết của địa điểm",
     diaChi: "Đường a",
     kichThuoc: 3000,
     soLuong: 1,
