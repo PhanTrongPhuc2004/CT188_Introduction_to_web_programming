@@ -9,13 +9,51 @@
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css">
+
+    <style>
+        body {}
+
+        #container {
+            display: flex;
+            justify-content: space-between; /* Căn đều khoảng cách giữa các phần tử con */
+            align-items: center; /* Canh giữa theo chiều dọc */
+        }
+
+        #image {
+            width: 50%; /* Đặt chiều rộng của ảnh */
+            height: auto; /* Giữ tỷ lệ khung hình */
+        }
+        #content {
+            flex: 1; /* Phần tử này chiếm không gian còn lại */
+            padding-left: 20px; /* Thêm khoảng cách giữa ảnh và nội dung */
+        }
+    </style>
 </head>
 
 <body>
     <header id="header"></header>
     <main id="main">
-        <div>
-            <h1>Đây là trang thông tin giới thiệu</h1>
+        <div id="container">
+            <div id="image">
+                <img src="https://kisswe.com/wp-content/uploads/2023/04/KISS-1-1536x864.png" alt="" style="width:100%; height:auto;">
+            </div>
+            <div id="content">
+                <h1 style="text-align: center;">Thông tin về chúng tôi</h1>
+                <p>Tụi mình đã bắt đầu làm cưới từ những những ngày Wedding Planner còn là điều gì đó đó mới mẻ ở thị
+                    trường Việt Nam, tụi mình đã ở đây gần 12 năm và nhìn thấy sự phát triển của ngành cưới ngày một mở
+                    rộng và nhận được nhiều sự tin tưởng từ cô dâu chú rể, gia đình hơn.
+
+                    Năm nay, khi mà 2024 được xem là năm của sự ươm mầm của những tia hi vọng về cuộc sống bình thường
+                    mới, cho những khởi đầu được nở hoa thì cũng tình cờ hành trình làm nghề của tụi mình được lật sang
+                    một trang mới đánh dấu chặng đường 12 năm theo nghề.
+
+
+                    Để có thể đi đến chặng này, KISS chắc chắn không thể không gửi lời cảm ơn đến quý vị đối tác, các
+                    bạn đồng nghiệp và đặc biệt là những cặp đôi, những gia đình đã tin tưởng gửi gắm hạnh phúc cả đời
+                    của họ nơi tụi mình. Và cảm ơn cả những sự đồng điệu từ những cuộc trò chuyện đầu tiên đã có thể kéo
+                    tụi mình và cô dâu chú rể xích lại gần hơn, để làm nên những câu chuyện tình rất riêng, rất chất và
+                    rất “tình”</p>
+            </div>
         </div>
     </main>
     <footer id="footer"></footer>
