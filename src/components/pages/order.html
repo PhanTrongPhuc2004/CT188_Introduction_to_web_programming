@@ -25,16 +25,21 @@
 
         .order-card h5 {
             font-weight: bold;
+            margin-bottom: 30px;
         }
 
         .order-status {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 600;
         }
 
         .view-details-btn {
             background-color: #007bff;
             color: white;
+        }
+        .order-card.mb-4.p-3.border.rounded{
+            background-color: #eeeae6;
+            color: #241d1a;
         }
     </style>
 </head>
@@ -47,6 +52,7 @@
 
             <div id="orderTableBody"></div>
         </div>
+        
 
         <script>
             // Cập nhật loggedUser với các đơn hàng từ orders
@@ -98,9 +104,6 @@
                                     ? "text-primary"
                                     : "text-danger"
                                 }">Trạng thái: ${order.trangThaiDonHang}</p>
-                            </div>
-                            <div class="col-md-4 text-end">
-                                <a href="#" class="btn view-details-btn">Xem chi tiết</a>
                             </div>
                         </div>
                     `;

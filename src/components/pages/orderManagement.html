@@ -45,6 +45,10 @@
         table thead th {
             text-align: left;
         }
+        .btn.btn-css{
+            background-color: #d64d68;
+            color: #eeeae6;
+        }
     </style>
 </head>
 
@@ -52,7 +56,7 @@
     <header id="header"></header>
     <main id="main">
         <div class="container">
-        <h2 class="my-4">Quản lý đơn hàng</h2>
+        <h2 class="my-4 text-center">Quản lý đơn hàng</h2>
 
             <!-- Filter and Actions -->
             <div class="d-flex justify-content-between mb-3">
@@ -60,8 +64,8 @@
                     <input type="text" class="form-control" placeholder="Tìm theo ID sản phẩm" id="filterInput">
                     <button class="btn btn-outline-secondary" onclick="filterOrders()">Tìm</button>
                 </div>
-                <button id="apply-all" class="btn btn-primary" onclick="approveSelected()">Duyệt các ô đã chọn</button>
-                <button id="submit-status" class="btn btn-primary">Áp Dụng</button>
+                <button id="apply-all" class="btn btn-success" onclick="approveSelected()">Duyệt các ô đã chọn</button>
+                <button id="submit-status" class="btn btn-css">Áp Dụng</button>
             </div>
 
             <!-- Order Table -->
