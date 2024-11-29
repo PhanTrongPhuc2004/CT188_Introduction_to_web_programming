@@ -16,24 +16,28 @@
         }
 
         #wrapper {
-            min-height: 70vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-image: url('../../../Data/Images/1/1/4.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0px 112px 0px ;
         }
 
         #form-login {
             max-width: 400px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgb(167, 172, 172); 
             flex-grow: 1;
             margin-top: 110px;
+            margin-bottom: 110px;
             padding: 30px 30px 40px;
-            box-shadow: 2px 2px 17px 4px rgba(247, 245, 245, 0.8);
+            /* box-shadow: 2px 2px 17px 4px rgba(247, 245, 245, 0.8); */
         }
 
         .form-heading {
             font-size: 25px;
-            color: #fff;
+            color: black;
             text-align: center;
             margin-bottom: 30px;
         }
@@ -60,7 +64,11 @@
        
         .forgot {
             text-align: center;
-            color: #fff;
+            color: black;
+        }
+
+        .forgot a{
+            text-decoration: none;
         }
 
         .form-submit{
@@ -90,17 +98,19 @@
         }
         .form-submit-subscribe {
             background: transparent;
-            color: #fff;
+            color: black;
             padding: 15px; 
         }
 
         .form-submit:hover,
         .form-submit-subscribe:hover {
-            border: 1px solid #ee1313;
+            border: 1px solid black;
         }
-
+        input::placeholder { 
+            color: rgb(19, 16, 16);
+         }
         .form-group i {
-            color: #f5f5f5;
+            color: black;
             padding-top: 7px;
             padding-right: 5px;
             font-size: 14px;
