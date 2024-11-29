@@ -83,9 +83,13 @@ if (stored_User.status == false) {
 }
 else {
   let elementAdmin_button = document.getElementById('admin_button');
-  elementAdmin_button.style.display = 'none';
+  let elementIcon_cart_order = document.getElementById('icon_cart_order');
   if (stored_User.user.vaiTro === 'admin') {
     elementAdmin_button.style.display = 'block';
+    elementIcon_cart_order.style.display = 'none';
   }
-
+  else {
+    elementAdmin_button.style.display = 'none';
+    elementIcon_cart_order.style.display = 'block';
+  }
 }

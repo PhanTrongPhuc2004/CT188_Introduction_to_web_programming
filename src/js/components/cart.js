@@ -200,5 +200,63 @@ function showProductDetails(productId) {
     }
 }
 
+function getCurrentTime() {
+    const now = new Date();
+
+    // Lấy giờ, phút, giây và đảm bảo chúng có định dạng 2 chữ số
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    // Trả về chuỗi thời gian theo định dạng HH:MM:SS
+    return `${hours}:${minutes}:${seconds}`;
+}
+// Lưu đơn hàng và xóa giỏ hàng
+function checkout() {
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    const userCart = loggedUser.cart || [];
+
+    if (userCart.length === 0) {
+        alert("Giỏ hàng trống. Vui lòng thêm sản phẩm trước khi thanh toán!");
+        return;
+    }
+
+    // Lấy danh sách đơn hàng hiện tại
+    let ordersList = JSON.parse(localStorage.getItem("orders")) || orders;
+    // thêm vào thời điểm bắt đầu thêm trên máy
+    const currentDateTime = new Date();
+    var ngayDangKy = currentDateTime.toLocaleDateString("en-CA");
+    // Lấy và in thời gian hiện tại
+    const currentTime = getCurrentTime();
+    console.log(currentTime);  // Ví dụ kết quả: 14:30:45
+    // Tạo đơn hàng mới
+    const newOrder = {
+        id: Date.now(), // ID duy nhất cho đơn hàng
+        maKhachHang: loggedUser.user.id,
+        sanPham: userCart,
+        gioDatHang: currentTime,
+        ngayDatHang: ngayDangKy,
+        tongTien: calculateTotalAmount(userCart),
+        trangThaiDonHang: "Đang chờ xử lý",
+        trangThaiThanhToan: "Đã thanh toán",
+    };
+
+    // Thêm đơn hàng mới vào danh sách
+    ordersList.push(newOrder);
+    localStorage.setItem("orders", JSON.stringify(ordersList));
+
+    // Xóa giỏ hàng
+    loggedUser.cart = [];
+    localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+    updateCartList([]); // Xóa dữ liệu từ cartList gốc
+
+    // Điều hướng đến trang order
+    alert("Đơn hàng của bạn đã được tạo thành công!");
+    window.location.href = "src/components/pages/order.html"; // Điều hướng đến trang order
+}
+
+// Gắn sự kiện vào nút Thanh toán
+document.getElementById("checkout-btn").addEventListener("click", checkout);
+
 // Khởi động ứng dụng
 document.addEventListener('DOMContentLoaded', init);

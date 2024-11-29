@@ -37,12 +37,14 @@
             background-color: #007bff;
             color: white;
         }
-        .order-card.mb-4.p-3.border.rounded{
+
+        .order-card.mb-4.p-3.border.rounded {
             background-color: #eeeae6;
             color: #241d1a;
         }
-        #main {
-            margin-top: 150px;
+        .btn.btn-primary.btn-details{
+            color: #eeeae6;
+            background-color: #d64d68;
         }
     </style>
 </head>
@@ -55,8 +57,6 @@
 
             <div id="orderTableBody"></div>
         </div>
-        
-
         <script>
             let orderData = JSON.parse(localStorage.getItem('orders')) || orders;
 
@@ -76,7 +76,6 @@
                 if (loggedUser && loggedUser.user?.id && orderList) {
                     // Lọc các đơn hàng có `maKhachHang` trùng với `loggedUser.user.id`
                     const userOrders = orderList.filter(order => parseInt(order.maKhachHang) === parseInt(loggedUser.user.id));
-                    console.log("1");
                     loggedUser.order = userOrders;
                     localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
                     // Trả về danh sách đơn hàng của người dùng
@@ -100,28 +99,71 @@
                     const orderCard = document.createElement("div");
                     orderCard.className = "order-card mb-4 p-3 border rounded";
                     orderCard.innerHTML = `
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h5>Mã đơn hàng: #${order.id}</h5>
-                                <p>Ngày đặt: ${order.ngayDatHang}</p>
-                                <p>Tổng tiền: ${order.tongTien.toLocaleString()} VND</p>
-                                <p class="order-status ${
-                                order.trangThaiDonHang === "Đã duyệt"
-                                    ? "text-success"
-                                    : order.trangThaiDonHang === "Đang chờ xử lý"
-                                    ? "text-warning"
-                                    : order.trangThaiDonHang === "Đã giao"
+            <div class="row">
+                <div class="col-md-8">
+                    <h5>Mã đơn hàng: #${order.id}</h5>
+                    <p>Ngày đặt: ${order.ngayDatHang}</p>
+                    <p>Tổng tiền: ${order.tongTien.toLocaleString()} VND</p>
+                    <p class="order-status ${order.trangThaiDonHang === "Đã duyệt"
+                            ? "text-success"
+                            : order.trangThaiDonHang === "Đang chờ xử lý"
+                                ? "text-warning"
+                                : order.trangThaiDonHang === "Đã giao"
                                     ? "text-primary"
                                     : "text-danger"
-                                }">Trạng thái: ${order.trangThaiDonHang}</p>
-                            </div>
-                        </div>
-                    `;
+                        }">Trạng thái: ${order.trangThaiDonHang}</p>
+                    <button class="btn btn-primary btn-details" data-order-id="${order.id}">Chi tiết</button>
+                </div>
+            </div>
+            <div class="product-details mt-3" id="details-${order.id}" style="display: none;">
+                <!-- Chi tiết sản phẩm sẽ được hiển thị ở đây -->
+            </div>
+        `;
                     orderTableBody.appendChild(orderCard);
+                });
+
+                // Thêm sự kiện click cho nút "Chi tiết"
+                const detailButtons = document.querySelectorAll(".btn-details");
+                detailButtons.forEach(button => {
+                    button.addEventListener("click", event => {
+                        const orderId = event.target.getAttribute("data-order-id");
+                        toggleOrderDetails(orderId);
+                    });
                 });
             }
 
-            // Gọi hàm hiển thị
+            // Hàm hiển thị hoặc ẩn chi tiết sản phẩm
+            function toggleOrderDetails(orderId) {
+                const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+                const detailsDiv = document.getElementById(`details-${orderId}`);
+
+                // Lấy đơn hàng cần hiển thị chi tiết dựa vào ID
+                const selectedOrder = loggedUser.order.find(order => order.id == orderId);
+
+                if (detailsDiv.style.display === "none") {
+                    if (selectedOrder && selectedOrder.sanPham.length > 0) {
+                        let productDetailsHtml = "<h6>Chi tiết sản phẩm:</h6><ul>";
+                        selectedOrder.sanPham.forEach(product => {
+                            productDetailsHtml += `
+                    <li>
+                        <strong>${product.ten || "Tên sản phẩm không có"}</strong> 
+                        - Số lượng: ${product.soLuong || 1} 
+                        - Giá: ${product.gia?.toLocaleString() || 0} VND
+                    </li>
+                `;
+                        });
+                        productDetailsHtml += "</ul>";
+                        detailsDiv.innerHTML = productDetailsHtml;
+                    } else {
+                        detailsDiv.innerHTML = "<p>Không có sản phẩm nào trong đơn hàng.</p>";
+                    }
+                    detailsDiv.style.display = "block";
+                } else {
+                    detailsDiv.style.display = "none";
+                }
+            }
+
+            // Gọi hàm hiển thị danh sách đơn hàng
             displayUserOrders();
         </script>
 
@@ -134,4 +176,6 @@
     <script src="../../components/common/header.js"></script>
     <script src="../../components/common/footer.js"></script>
     <script src="../../js/components/main.js"></script>
+    <script src="src/js/components/avatar.js"></script>
+
 </body>

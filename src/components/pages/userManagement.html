@@ -45,11 +45,10 @@
             text-align: left;
         }
 
-        .btn.btn-primary.btn-sm.dropdown-toggle{
+        .btn.btn-primary.btn-sm.dropdown-toggle {
             background-color: #d64d68;
             color: #eeeae6;
         }
-
     </style>
 </head>
 
@@ -142,7 +141,7 @@
 
             <!-- end modal thêm người dùng mới -->
             <!--end modal  -->
-            
+
             <!-- User Management -->
             <div class="table-responsive user-table">
                 <table class="table table-striped table-bordered table-hover">
@@ -215,14 +214,14 @@
 
             // Hàm loadUsers để tải dữ liệu và hiển thị trên bảng
             async function loadUsers() {
-                    const userTableBody = document.getElementById("userTableBody");
-                    userTableBody.innerHTML = ""; // Xóa dữ liệu cũ
+                const userTableBody = document.getElementById("userTableBody");
+                userTableBody.innerHTML = ""; // Xóa dữ liệu cũ
 
-                    userData.forEach(user => {
-                        const row = document.createElement("tr");
-                        const statusClass = user.trangThai.toLowerCase() === "hoạt động" ? "status-active" : "status-inactive";
+                userData.forEach(user => {
+                    const row = document.createElement("tr");
+                    const statusClass = user.trangThai.toLowerCase() === "hoạt động" ? "status-active" : "status-inactive";
 
-                        row.innerHTML = `
+                    row.innerHTML = `
                                 <td>${user.id}</td>
                                 <td><img src="${user.anhDaiDien}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
                                 <td>${user.hoTen}</td>
@@ -243,38 +242,37 @@
                                     </div>
                                 </td>
                             `;
-                        userTableBody.appendChild(row);
-                    });
+                    userTableBody.appendChild(row);
+                });
             }
 
             // Hàm xem chi tiết người dùng
+            // Hàm xem chi tiết người dùng
             function viewDetails(userId) {
                 // Tìm người dùng có id khớp
-                // kiểu dữ liệu trong mảng userData với thuộc tính id đang là dạng chuỗi => chuyển về dạng số để so sánh tuyệt đối
                 const user = userData.find(u => parseInt(u.id) === userId);
 
                 if (user) {
                     // Điền thông tin người dùng vào modal
-                    document.getElementById("detailId").textContent = user.id;
-                    document.getElementById("detailAvatar").src = user.anhDaiDien;
-                    document.getElementById("detailName").textContent = user.hoTen;
-                    document.getElementById("detailGender").textContent = user.gioiTinh;
-                    document.getElementById("detailDob").textContent = user.ngaySinh;
-                    document.getElementById("detailAddress").textContent = user.diaChi;
-                    document.getElementById("detailRole").textContent = user.vaiTro;
-                    document.getElementById("detailEmail").textContent = user.email;
-                    document.getElementById("detailPhone").textContent = user.soDienThoai;
-                    document.getElementById("detailRegistrationDate").textContent = user.ngayDangKy;
-                    document.getElementById("detailLastLogin").textContent = user.lanDangNhapCuoi;
-                    document.getElementById("detailStatus").textContent = user.trangThai;
+                    $("#detailId").text(user.id);
+                    $("#detailAvatar").attr("src", user.anhDaiDien);
+                    $("#detailName").text(user.hoTen);
+                    $("#detailGender").text(user.gioiTinh);
+                    $("#detailDob").text(user.ngaySinh);
+                    $("#detailAddress").text(`${user.diaChi.soNha}, ${user.diaChi.tenDuong}, ${user.diaChi.phuongXa}, ${user.diaChi.quanHuyen}, ${user.diaChi.tinhThanh}`);
+                    $("#detailRole").text(user.vaiTro);
+                    $("#detailEmail").text(user.email);
+                    $("#detailPhone").text(user.soDienThoai);
+                    $("#detailRegistrationDate").text(user.ngayDangKy);
+                    $("#detailLastLogin").text(user.lanDangNhapCuoi);
+                    $("#detailStatus").text(user.trangThai);
 
                     // Hiển thị modal
-                    // Tạo đối tượng Modal
-                    const userDetailsModal = new bootstrap.Modal(document.getElementById('userDetailsModal'));
-                    // Hiển thị modal
+                    const userDetailsModal = new bootstrap.Modal($('#userDetailsModal')[0]);
                     userDetailsModal.show();
                 }
             }
+
             // Hàm tìm kiếm người dùng
             function filterUser() {
                 const filterText = document.getElementById("filterInput").value.toLowerCase();  // chuyển về chữ thường
@@ -352,22 +350,31 @@
 
                         alert("Thông tin người dùng đã được cập nhật thành công!");
                     }
-                } else {
+                } else if (!userData.find(u => u.email === email)) {
                     // Thêm người dùng mới
                     const newUser = {
                         id: id,
                         anhDaiDien: "/Data/Images/Avatar/Avatar/1.jpg",
-                        ten: ten,
+                        hoTen: ten,
                         soDienThoai: soDienThoai,
                         email: email,
                         vaiTro: vaiTro,
                         trangThai: trangThai,
                         ngayDangKy: ngayDangKy,
-                        matKhau: "123456"
+                        matKhau: "123456",
+                        diaChi: {
+                            tinhThanh: "Cần Thơ",
+                            quanHuyen: "Ninh Kiều",
+                            phuongXa: "Xuân Khánh",
+                            tenDuong: "Đường 3 tháng 2",
+                            soNha: "Khu 2"
+                        }
                     };
                     userData.push(newUser);
 
                     alert("Người dùng mới đã được thêm thành công!");
+                } else {
+                    alert("Email người dùng đã tồn tại!");
                 }
 
                 localStorage.setItem("users", JSON.stringify(userData));
@@ -446,7 +453,7 @@
                 // Hiển thị danh sách đã sắp xếp mà không lưu lại vào localStorage
                 loadUsers(userData);
             }
-            
+
             document.getElementById("openAddUserModalButton").onclick = generateNewUserId;
             document.getElementById("addUserForm").onsubmit = addUser;
             document.getElementById("submitUserButton").addEventListener("click", addUser);
@@ -463,8 +470,8 @@
     <footer id="footer"></footer>
     <script src="../common/header.js"></script>
     <script src="../common/footer.js"></script>
-    
     <script src="../../js/components/usermanagment.js"></script>
+    <script src="src/js/components/avatar.js"></script>
 </body>
 
 </html>
