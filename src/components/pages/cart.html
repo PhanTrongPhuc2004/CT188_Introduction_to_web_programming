@@ -40,7 +40,7 @@
                                 </thead>
                                 <tbody id="cart-totals-body">
                                     <!-- JavaScript sẽ chèn thông tin hóa đơn vào đây -->
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -86,8 +86,32 @@
     <script src="/Data/orders.js"></script>
     <script src="/Data/carts.js"></script>
     <script src="/src/js/components/cart.js"></script>
-    <script src="src/js/components/avatar.js"></script>
+    <script>
+        // Phần ẩn nút Quản lý. icon cart/order trên header
+        let stored_User = JSON.parse(localStorage.getItem("loggedUser"));
 
+        if (stored_User.status == false) {
+
+            let elementAdmin_button = document.getElementById('admin_button');
+            let elementIcon_cart_order = document.getElementById('icon_cart_order');
+
+            elementIcon_cart_order.style.display = 'none';
+            elementAdmin_button.style.display = 'none';
+        }
+        else {
+            let elementAdmin_button = document.getElementById('admin_button');
+            let elementIcon_cart_order = document.getElementById('icon_cart_order');
+            if (stored_User.user.vaiTro === 'admin') {
+                elementAdmin_button.style.display = 'block';
+                elementIcon_cart_order.style.display = 'none';
+            }
+            else {
+                elementAdmin_button.style.display = 'none';
+                elementIcon_cart_order.style.display = 'block';
+            }
+        }
+    </script>
+    <script src="src/js/components/avatar.js"></script>
 </body>
 
 </html>
