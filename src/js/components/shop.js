@@ -8,7 +8,7 @@ Products.forEach(product => {
 
   const cardContent = `
       <div class="card" data-product-id="${product.id}" style="margin-bottom: 15px;margin-top: 5px; border-radius: 8px;">
-        <img src="${product.anhBia}" class="card-img-top" alt="${product.ten}">
+        <img src="${product.anhBia}" class="card-img-top" alt="${product.ten}" style="height: 250px;">
         <div class="card-body">
           <h5 class="card-title">${product.ten}</h5>
           <p class="card-text">${product.moTa}</p>
