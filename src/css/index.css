@@ -1,3 +1,8 @@
+body {
+    position: relative;
+    top: 25px
+}
+
 section>a {
     text-decoration: none;
 }
@@ -13,6 +18,7 @@ body>main {
     padding: 0px 15% 0px;
     /* background-color: #eeeae6; */
 }
+
 footer {
     margin-top: 0px;
     /* background-color: #eeeae6; */
@@ -24,17 +30,19 @@ footer {
     height: auto;
     max-height: 800px;
     overflow: hidden;
+    border-radius: 8px;
 }
 
 .slide {
     width: 100%;
     height: 100%;
     float: left;
+    transition: all 1s ease-in-out;
 }
 
 .flickity-button {
     position: absolute;
-    top: 60%;
+    top: 25%;
     width: auto;
     margin-top: -22px;
     padding: 10px 20px;
@@ -68,6 +76,7 @@ footer {
 /* Phần css vài địa điểm nổi bật */
 .container_Locations {
     display: flex;
+    justify-content: space-between;
 }
 
 .image-container {
@@ -93,4 +102,18 @@ footer {
     font-size: 24px;
     /* background: rgba(0, 0, 0, 0.5); */
     padding: 10px;
+}
+
+#comment {
+    display: flex;
+    justify-content: space-between;
+}
+
+.items {
+    flex: 1;
+    text-align: center;
+    width: 200px;
+}
+#ten1, #ten2, #ten3 {
+    color: white;
 }

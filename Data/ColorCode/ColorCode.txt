@@ -1,5 +1,0 @@
-Nút bấm: 	màu nút: rgba(214,77,104,255) / #d64d68
-		màu chữ của nút rgba(238,234,230,255) / #eeeae6
-
-Màu Nền: 	rgba(238,234,230,255) / #eeeae6
-Màu chữ: 	rgba(36,29,26,255) / #241d1a

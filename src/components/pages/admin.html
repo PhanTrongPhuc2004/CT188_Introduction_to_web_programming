@@ -11,6 +11,11 @@
     <script src="../../../jquery-3.7.1/jquery-3.7.1.min.js"></script>
     <script src="../../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../css/styles.css" />
+    <style>
+        main {
+            background-image: url(/Data/Images/4/1/7.jpg);
+        }
+    </style>
 </head>
 
 <body>
@@ -18,19 +23,19 @@
     <main class="d-flex">
         <!-- Sidebar -->
         <div id="sidebar" class="bg-light border-right" style="width: 250px; height: 100vh">
-            <h5 class="p-3">DANH MỤC QUẢN LÝ</h5>
+            <h2 class="p-3"><b>DANH MỤC QUẢN LÝ</b></h2>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a href="/src/components/pages/userManagement.html" class="nav-link active" id="userManagement">Người dùng</a>
+                    <button style="color: #eeeae6; background-color: #d64d68; border-radius: 8px; border: 0px;"><a style="color: #eeeae6;" href="/src/components/pages/userManagement.html" class="nav-link active" id="userManagement">Người dùng</a></button>
                 </li>
                 <li class="nav-item">
-                    <a href="/src/components/pages/productManagement.html" class="nav-link" id="productManagement">Dịch vụ</a>
+                    <button style="color: #eeeae6; background-color: #d64d68; border-radius: 8px; border: 0px;"><a style="color: #eeeae6;" href="/src/components/pages/productManagement.html" class="nav-link" id="productManagement">Dịch vụ</a></button>
                 </li>
                 <li class="nav-item">
-                    <a href="/src/components/pages/orderManagement.html" class="nav-link" id="orderManagement">Đơn hàng</a>
+                    <button style="color: #eeeae6; background-color: #d64d68; border-radius: 8px; border: 0px;"><a style="color: #eeeae6;" href="/src/components/pages/orderManagement.html" class="nav-link" id="orderManagement">Đơn hàng</a></button>
                 </li>
                 <li class="nav-item">
-                    <a href="/src/components/pages/analysis.html" class="nav-link" id="analysis">Thống kê</a>
+                    <button style="color: #eeeae6; background-color: #d64d68; border-radius: 8px; border: 0px;"><a style="color: #eeeae6;" href="/src/components/pages/analysis.html" class="nav-link" id="analysis">Thống kê</a></button>
                 </li>
             </ul>
         </div>
@@ -41,6 +46,7 @@
     <script src="../../components/common/header.js"></script>
     <script src="../../components/common/footer.js"></script>
     <script src="../../js/components/main.js"></script>
+    <script src="src/js/components/avatar.js"></script>
 </body>
 
 </html>

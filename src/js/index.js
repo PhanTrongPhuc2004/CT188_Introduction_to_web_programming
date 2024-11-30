@@ -8,7 +8,7 @@ headerElement.innerHTML = headerHTML;
 const footerElement = document.getElementById('footer');
 footerElement.innerHTML = footerHTML;
 
-// Phần js cho 2 nút chuyển ảnh đầu trang chủ
+// Phần js chuyển ảnh đầu trang chủ
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -16,20 +16,19 @@ function plusSlides(n) {
   showSlides(slideIndex += n);
 }
 
-function
-  showSlides(n) {
+function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("slide");
-
   if (n > slides.length) { slideIndex = 1 }
   if (n < 1) { slideIndex = slides.length }
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
-
   }
-  slides[slideIndex - 1].style.display = "block";
+  slides[slideIndex - 1].style.display = "block"; 
 }
-
+setInterval(function () {
+  plusSlides(1);
+}, 3000);
 // Phần tạo biến loggedUser cho trang chủ nếu chưa có trong local storage
 // Kiểm tra xem đã tồn tại biến loggedUser trong localStorage chưa
 const storedUser = localStorage.getItem("loggedUser");
@@ -46,11 +45,20 @@ if (!storedUser) {
   localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
 }
 
+// Lưu dữ liệu vào localStorage nếu chưa có
+if (!localStorage.getItem('cartsList')) {
+  localStorage.setItem('cartsList', JSON.stringify(carts));
+}
+
+if (!localStorage.getItem('orders')) {
+  localStorage.setItem('orders', JSON.stringify(orders));
+}
+
 //Lấy danh sách sp ra và bỏ vào local stogare nếu chưa có trong local storage trước
 let Products = JSON.parse(localStorage.getItem("products"));
 // console.log(productList);
 if (!Products) {
-localStorage.setItem('products', JSON.stringify(products));
+  localStorage.setItem('products', JSON.stringify(products));
 }
 
 // Phần làm rỗng biến loggedUser khi chọn đăng xuất
