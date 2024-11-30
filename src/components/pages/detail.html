@@ -180,17 +180,18 @@
                             <h3 id="gia" class="product-price"></h3>
                             <hr>
                             <div class="add-inputs">
-                                <button id="add_to_cart" name="add_to_cart" type="button" class="btn btn-checkout mt-3 btn-outline-danger">Thêm vào giỏ hàng</button>
+                                <button id="add_to_cart" name="add_to_cart" type="button"
+                                    class="btn btn-checkout mt-3 btn-outline-danger">Thêm vào giỏ hàng</button>
                             </div>
                             <div class="add-inputs">
-                                <button id="add_to_order" name="add_to_order" type="button" class="btn btn-checkout mt-3 btn-danger">Thuê ngay</button>
+                                <button id="add_to_order" name="add_to_order" type="button"
+                                    class="btn btn-checkout mt-3 btn-danger">Thuê ngay</button>
                             </div>
                             <div style="clear:both"></div>
                             <hr>
                             <p class="product-title mt-4 mb-1">Giới thiệu về địa điểm:</p>
                             <p class="product-description mb-4">
-                                <b>Nơi kiến tạo những khoảnh khắc đáng nhớ</b><br>
-
+                                <i>Nơi kiến tạo những khoảnh khắc đáng nhớ: </i>
                                 Với không gian tổ chức tiệc cưới sang trọng, hiện đại, cùng hệ thống âm thanh, ánh sáng
                                 đẳng cấp, Nhà hàng tự hào là điểm đến lý tưởng để các cặp đôi tổ chức lễ cưới
                                 trong mơ. Thực đơn đa dạng, phong phú, được chế biến bởi đội ngũ đầu bếp tài năng, hứa
@@ -198,14 +199,64 @@
                             </p>
                             <hr>
                             <p class="product-title mt-4 mb-1">Thông số:</p>
-                            <p class="product-description mb-4"></p>
+                            <table class="product-description mb-4">
+                                <tr>
+                                    <th>
+                                        <li>Diện tích: </li>
+                                    </th>
+                                    <td id="kichThuoc"></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <li>Giờ mở cửa: </li>
+                                    </th>
+                                    <td id="gioMoCua"></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <li>Tiện ích kèm theo: </li>
+                                    </th>
+                                    <td id="tienIch"></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <li>Địa chỉ: </li>
+                                    </th>
+                                    <td id="diaChi"></td>
+                                </tr>
+                            </table>
+                            <!-- <p ></p> -->
                             <hr>
-                            <p class="product-title mt-4 mb-1">Đánh giá về địa điểm:</p>
-                            <ul class="social-list">
-                                <li><a href="#"><i class="fa-brands fa-facebook"></a></i></li>
-                                <li><a href="#"><i class="fa-brands fa-twitter"></a></i></li>
-                                <li><a href="#"><i class="fa-brands fa-square-instagram"></a></i></li>
-                            </ul>
+                            <p class="product-title mt-4 mb-1">Đánh giá về dịch vụ:</p>
+                            <table class="product-description mb-4">
+                                <tr>
+                                    <th>
+                                        <li>Điểm đánh giá: </li>
+                                    </th>
+                                    <td id="danhGia"></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <li>Tổng số lượng đánh giá: </li>
+                                    </th>
+                                    <td id="soLuongDanhGia"></td>
+                                </tr>
+                            </table>
+                            <p class="product-title mt-4 mb-1">Liên hệ để biết thêm thông tin: </p>
+                            <table>
+                                <tr>
+                                    <th>
+                                        <li>SĐT: </li>
+                                    </th>
+                                    <td id="soDienThoai"></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <li>Email: </li>
+                                    </th>
+                                    <td id="email"></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -219,10 +270,9 @@
 <script src="../../components/common/footer.js"></script>
 <script src="../../../Data/products.js"></script>
 <script src="../../js/components/main.js"></script>
+<script src="src/js/components/avatar.js"></script>
 <script>
 
-    // document.addEventListener('DOMContentLoaded', () => {
-    document.f
     // Lấy sp đã chọn trong local storage ra
     const Products = JSON.parse(localStorage.getItem("productSelected"));
 
@@ -238,6 +288,16 @@
     const SL_Ban = document.getElementById("quantityTable");
     const quantityTableCount = document.getElementById("quantityTableCount");
 
+    const kichThuoc = document.getElementById("kichThuoc");
+    const gioMoCua = document.getElementById("gioMoCua");
+    const tienIch = document.getElementById("tienIch");
+    const diaChi = document.getElementById("diaChi");
+    const danhGia = document.getElementById("danhGia");
+    const soLuongDanhGia = document.getElementById("soLuongDanhGia");
+    const soDienThoai = document.getElementById("soDienThoai");
+    const email = document.getElementById("email");
+
+    //Chèn thông tin
     loai.textContent = Products.loaiDiaDiem;
     ten.textContent = Products.ten;
     gia.textContent = Products.gia.toLocaleString() + 'đ';
@@ -246,15 +306,23 @@
     SL_Ban.min = 1;
     SL_Ban.max = Products.sucChua;
 
+    kichThuoc.textContent = Products.kichThuoc + ' m vuông';
+    gioMoCua.textContent = Products.gioMoCua;
+    tienIch.textContent = Products.tienIch;
+    diaChi.textContent = Products.diaChi;
+    danhGia.textContent = Products.danhGia.toFixed(1);
+    soLuongDanhGia.textContent = Products.soLuongDanhGia;
+    soDienThoai.textContent = Products.soDienThoai;
+    email.textContent = Products.email;
     // Lấy giá trị ban đầu từ ô input và gán vào biến Number
     let Number = SL_Ban.value;
 
     // Thêm sự kiện lắng nghe khi giá trị trong ô input thay đổi
     SL_Ban.addEventListener('input', () => {
         Number = SL_Ban.value;
+        saveQuantity()
         quantityTableCount.textContent = 'Số bàn còn lại có thể đặt (' + (Products.sucChua - SL_Ban.value) + '/' + Products.sucChua + '):';
-        console.log('Số lượng hiện tại:', Number);
-
+        // console.log('Số lượng hiện tại:', Number);
     });
 
     // Phần js cho 2 nút chuyển ảnh sản phẩm
@@ -290,6 +358,7 @@
         if (Number >= 2) {
             Number--;
             SL_Ban.value = Number;
+            saveQuantity()
             quantityTableCount.textContent = 'Số bàn còn lại có thể đặt (' + (Products.sucChua - SL_Ban.value) + '/' + Products.sucChua + '):';
         }
     });
@@ -299,22 +368,78 @@
         if (Number < Products.sucChua) {
             Number++;
             SL_Ban.value = Number;
+            saveQuantity()
             quantityTableCount.textContent = 'Số bàn còn lại có thể đặt (' + (Products.sucChua - SL_Ban.value) + '/' + Products.sucChua + '):';
         }
     });
 
+    function getCurrentTime() {
+    const now = new Date();
+
+    // Lấy giờ, phút, giây và đảm bảo chúng có định dạng 2 chữ số
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    // Trả về chuỗi thời gian theo định dạng HH:MM:SS
+    return `${hours}:${minutes}:${seconds}`;
+}
+
     // Phần js cho 2 nút thêm vào giỏ hàng và thêm vào đơn hàng
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
     const add_to_cart = document.getElementById("add_to_cart");
     const add_to_order = document.getElementById("add_to_order");
+    const cartsList = JSON.parse(localStorage.getItem("cartsList"));
+    const orders = JSON.parse(localStorage.getItem("orders"));
 
-    add_to_cart.addEventListener('click', () => { 
-        let Product = JSON.parse(localStorage.getItem("productSelected"));
-        
+    add_to_cart.addEventListener('click', () => {
+        let product = Products;
+        product.id = cartsList.length > 0 ? cartsList[cartsList.length - 1].id + 1 : 1; // Tạo ID tự động
+        product.maKhachHang = loggedUser.user.id;
+        cartsList.push(product);
+        localStorage.setItem("cartsList", JSON.stringify(cartsList));
+        alert("Đơn hàng của bạn đã được tạo thành công!");
+        // console.log(Products.id);
+        if (confirm("Bạn muốn xem giỏ hàng ngay ?")) {
+            window.location.href = "/src/components/pages/cart.html";
+        } else {
+            window.location.href = "/src/components/pages/shop.html";
+        }
     });
-    add_to_order.addEventListener('click', () => { 
-        
+    add_to_order.addEventListener('click', () => {
+        // thêm vào thời điểm bắt đầu thêm trên máy
+        const currentDateTime = new Date();
+        var ngayDangKy = currentDateTime.toLocaleDateString("en-CA");
+        // Lấy và in thời gian hiện tại
+        const currentTime = getCurrentTime();
+        console.log(currentTime);  // Ví dụ kết quả: 14:30:45
+        // Tạo đơn hàng mới
+        let product = Products;
+        product.id = cartsList.length > 0 ? cartsList[cartsList.length - 1].id + 1 : 1; // Tạo ID tự động
+        product.maKhachHang = loggedUser.user.id;
+        const newOrder = {
+            id: Date.now(), // ID duy nhất cho đơn hàng
+            maKhachHang: loggedUser.user.id,
+            sanPham: [product],
+            gioDatHang: currentTime,
+            ngayDatHang: ngayDangKy,
+            tongTien: product.soLuong*product.gia,
+            trangThaiDonHang: "Đang chờ xử lý",
+            trangThaiThanhToan: "Đã thanh toán",
+        };
+        orders.push(newOrder);
+        localStorage.setItem("orders", JSON.stringify(orders));
+        alert("Đơn hàng của bạn đã được tạo thành công!");
+        window.location.href = "src/components/pages/order.html";
     });
-    // });
+
+    //hàm lưu SL_Ban vào biến ProductSelected để thêm vào cart/order
+    function saveQuantity() {
+        Products.soLuong = parseInt(SL_Ban.value);
+        localStorage.setItem("productSelected", JSON.stringify(Products));
+        // console.log( typeof Products.soLuong);
+    }
+
 </script>
 
 </html>

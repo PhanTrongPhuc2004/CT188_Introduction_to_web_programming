@@ -98,7 +98,7 @@ const headerHTML = `
                 }
             });
         </script>
-        <div style="width: 100%; height: 120px; "></div>
+        <div style="width: 100%; height: 130px; "></div>
     </body>
 </header>
 `;

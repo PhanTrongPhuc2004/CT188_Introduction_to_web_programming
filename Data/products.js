@@ -10,7 +10,6 @@ const products = [
     gioMoCua: "8:00 - 22:00",
     danhGia: 4.5,
     soLuongDanhGia: 100,
-    // soDienThoai: "0123456789",
     soDienThoai: "0934567890",
     email: "abc@gmail.com",
     moTa: "Mô tả chi tiết về địa điểm, tiện ích, không gian",

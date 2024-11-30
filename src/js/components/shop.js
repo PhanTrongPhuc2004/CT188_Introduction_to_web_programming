@@ -7,13 +7,13 @@ Products.forEach(product => {
   card.classList.add('col-md-4');
 
   const cardContent = `
-      <div class="card" data-product-id="${product.id}">
+      <div class="card" data-product-id="${product.id}" style="margin-bottom: 15px;margin-top: 5px; border-radius: 8px;">
         <img src="${product.anhBia}" class="card-img-top" alt="${product.ten}">
         <div class="card-body">
           <h5 class="card-title">${product.ten}</h5>
           <p class="card-text">${product.moTa}</p>
-          <p class="card-text">Giá: ${product.gia} VNĐ</p>
-          <button class="btn btn-primary">Xem chi tiết</button>
+          <p class="card-text">Giá thuê: <b>${product.gia.toLocaleString()}</b> đ/bàn</p>
+          <button class="btn btn-primary" style="color: #eeeae6; background-color: #d64d68; border: 0px;">Xem Chi Tiết</button>
         </div>
       </div>
     `;
