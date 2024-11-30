@@ -43,12 +43,12 @@ loginForm.addEventListener('submit', function (e) {
     const loginPassword = document.getElementById('loginPassword').value;
 
     // Lấy danh sách tài khoản từ LocalStorage
-    let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    let accounts = JSON.parse(localStorage.getItem('users')) || [];
     let accounts2 = JSON.parse(localStorage.getItem('users')) || [];
 
     // Kiểm tra tài khoản và mật khẩu từ đăng ký đã lưu vào localstorage
     const user = accounts.find(acc =>
-        acc.username === loginUsername && acc.password === loginPassword
+        acc.email === loginUsername && acc.matKhau === loginPassword
     );
     // Kiểm tra tài khoản và mật khẩu từ file json đã lưu vào localstorage
     const user2 = accounts2.find(acc =>
@@ -74,4 +74,3 @@ loginForm.addEventListener('submit', function (e) {
         alert('Sai tên người dùng hoặc mật khẩu!');
     }
 });
-

@@ -77,7 +77,7 @@ form.addEventListener('submit', function (e) {
                     diaChi: "",
                     vaiTro: "user",
                     email: email,
-                    matkhau: matkhau,
+                    matKhau: matkhau,
                     soDienThoai: "",
                     anhDaiDien: "",
                     trangThai: ""
