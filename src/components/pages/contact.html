@@ -20,12 +20,12 @@
     <main id="main">
       <div class="container mt-4">
         <h2>Thông tin liên hệ</h2>
-        <p>Điện thoại: 0123456789</p>
-        <p>Email: example@weddingplanning.com</p>
-        <p>Địa chỉ: Số 1, Đường ABC, Quận XYZ</p>
+        <p>Điện thoại: 0911 522 929</p>
+        <p>Email: weddingplanning@gmail.com</p>
+        <p>Địa chỉ: 3/2 Xuân Khánh, Ninh Kiều, Cần Thơ</p>
 
-        <h3>Gửi câu hỏi hoặc yêu cầu</h3>
-        <form>
+        <h3>Mời bạn gửi câu hỏi hoặc yêu cầu</h3>
+        <form id="contact-form">
           <div class="mb-3">
             <label for="name" class="form-label">Họ và tên</label>
             <input
@@ -55,13 +55,19 @@
           </div>
           <button type="submit" class="btn btn-primary">Gửi</button>
         </form>
+
         <!-- Bản đồ chỉ đường -->
-        <h4 class="mt-5">Chỉ đường đến công ty</h4>
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe
-            class="embed-responsive-item"
-            src="https://www.google.com/maps/embed?pb=..."
-          ></iframe>
+        <div class="container mt-4">
+          <h4 class="mt-5">Bản đồ đến công ty</h4>
+          <div class="ratio ratio-16x9" style="max-width: 800px">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15715.309587995818!2d105.76918000000002!3d10.031098!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0883d2192b0f1%3A0x4c90a391d232ccce!2zVHLGsOG7nW5nIEPDtG5nIE5naOG7hyBUaMO0bmcgVGluIHbDoCBUcnV54buBbiBUaMO0bmcgKENUVSk!5e0!3m2!1svi!2sus!4v1732944118657!5m2!1svi!2sus"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
       </div>
     </main>
@@ -72,4 +78,52 @@
     <script src="../../js/components/main.js"></script>
     <script src="src/js/components/avatar.js"></script>
   </body>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("contact-form");
+
+      // Kiểm tra nếu có dữ liệu đã lưu trong localStorage, phục hồi thông tin vào form
+      const savedUser = JSON.parse(localStorage.getItem("loggedUser"));
+      if (savedUser && savedUser.user) {
+        document.getElementById("name").value = savedUser.user.hoTen || "";
+        document.getElementById("email").value = savedUser.user.email || "";
+      }
+
+      // Xử lý khi người dùng gửi form
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Ngừng hành động mặc định của form (gửi đi)
+
+        // Lấy giá trị từ các trường trong form
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        // Lấy thông tin loggedUser từ localStorage
+        let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+        // Nếu loggedUser chưa tồn tại, khởi tạo mới
+        if (!loggedUser) {
+          loggedUser = {
+            status: false,
+            user: null,
+            cart: [],
+            order: [],
+          };
+        }
+
+        // Tạo đối tượng contact mới và thêm vào loggedUser
+        loggedUser.contact = {
+          name,
+          email,
+          message,
+        };
+
+        // Lưu lại loggedUser vào localStorage
+        localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+
+        alert("Thông tin liên hệ của bạn đã được lưu!");
+      });
+    });
+  </script>
 </html>
